@@ -1,0 +1,678 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<!-- <app-header></app-header> -->
+<ng-container>
+  <div class="product-detail-main">
+    <section class="detail-main my-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="detail-left">
+              <div class="image-main product-outer text-center">
+                <span class="dis-rib" *ngIf=" productInfo && !loadingObj['isProductDataLoading'] &&
+                    productInfo['discount'] &&
+                    !productInfo['isQuote'] &&
+                    productInfo['isSale']
+                  ">{{ productInfo['discount'] }}%</span>
+
+                <img [src]="productImageView"
+                  onError="this.src = 'https://lumier32.s3.ap-southeast-1.amazonaws.com/product/1602470264516_noimage_336_290.jpg'"
+                  alt="product image" *ngIf="!loadingObj['isProductDataLoading']" />
+                <ngx-skeleton-loader appearance="circle" [theme]="{
+                    width: '300px',
+                    height: '350px',
+                    'border-radius': '10px'
+                  }" *ngIf="loadingObj['isProductDataLoading']"> </ngx-skeleton-loader>
+              </div>
+              <div class="image-tiles">
+                <ng-container *ngFor="let item of productInfo['productImage']; i as index">
+                  <img [src]="item['image']" [ngClass]="{ thumbnailActive: item['active'] }" alt=""
+                    *ngIf="!loadingObj['isProductDataLoading']"
+                    onError="this.src = 'https://lumier32.s3.ap-southeast-1.amazonaws.com/product/1602470264516_noimage_336_290.jpg'"
+                    (click)="chanageMainImage(index, item['image'])" />
+                </ng-container>
+                <ngx-skeleton-loader appearance="circle" [count]="productInfo['productImage'].length" [theme]="{
+                  width: '90px',
+                  height: '90px',
+                  'border-radius': '10px'
+                }" *ngIf="loadingObj['isProductDataLoading']"> </ngx-skeleton-loader>
+                <div *ngIf="productInfo['ribbenText']" class="container" [attr.data-ribbon]="productInfo['ribbenText']"
+                  style="--d: 15px; --c: purple; z-index: 11111"></div>
+              </div>
+              <!-- <div class="btns d-flex align-items-center" *ngIf="!productInfo['productVariants'].length">
+                                <form [formGroup]="cartForm">
+                                     <button class="custom-button">Buy Now</button>
+                                    <ng-container formArrayName="quantities">
+                                        <ng-container *ngFor="let quantity of quantities().controls; let index=index" [formGroupName]="index">
+                                            <button class="custom-button mr-1" [disabled]="quantities()['controls'][0]['value']['quantity'] == 0"
+                                             (click)="addProductToCart(index)">Add to Swetank</button>
+                                            <div class="add-cart-input ml-1">
+                                                <button type="button" (click)="removeQty(index)"><i class="fas fa-minus"></i></button>
+                                                <input type="text" formControlName="quantity" (keypress)="_utility.numberOnly($event)" value="0" name="" id="">
+                                                <button type="button" (click)="addQty(index)"><i class="fas fa-plus"></i></button>
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </form>
+                            </div> -->
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="detail-right">
+              <div class="detail-name">
+                <div class="inner">
+
+                  <h3 *ngIf="!loadingObj['isProductDataLoading'] && productInfo" [title]="productInfo['productName']">
+                    {{ productInfo['productName'] }}
+                  </h3>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <app-loader></app-loader>
+                  </span>
+
+                  <p
+                    *ngIf="productInfo && productInfo['shortDescription'] != null && !loadingObj['isProductDataLoading']">
+                    <!-- stylish, Light, Compact, Portable, Easy to use top loading Autoclaves -->
+                    <ng-container>
+                      {{ productInfo['shortDescription'] }}
+                    </ng-container>
+                  </p>
+                </div>
+                <!-- <a href="#" class="share-btn"><i class="fa fa-share" aria-hidden="true"></i> Share</a> -->
+              </div>
+              <div class="price-outer">
+                <span class="dis-amt" *ngIf="
+                !loadingObj['isProductDataLoading'] && productInfo &&
+                    productInfo['discount'] != 0 && authService.loginFlag &&
+                    !productInfo['isQuote'] && productInfo.isSale
+                  ">{{ productInfo['discount'] }}% off</span>
+
+                <span class="del-amt" *ngIf="
+                !loadingObj['isProductDataLoading'] &&
+                    productInfo['discount'] != 0 &&
+                    authService.loginFlag && !productInfo['isQuote'] &&
+                    productInfo.isSale">
+                  <del>{{ service.curr }} {{ productInfo['sellPrice'] | number: '1.2-2' }}</del>
+                </span>
+
+                <span
+                  *ngIf="authService.loginFlag && productInfo && !productInfo['isQuote'] && !loadingObj['isProductDataLoading']"
+                  class="selling-amt">
+                  <span *ngIf="productInfo['productVariants'].length > 0"
+                    style="display: inline-block; font-size: 22px;">
+                    <span class="start-at" style="font-size: 22px;"> Starting at :</span>
+                    {{ service.curr }} {{ productInfo['MRPDisplayLabel'] | number: '1.2-2'}}
+                  </span>
+                  <span *ngIf="productInfo['productVariants'].length == 0" style="font-size: 22px;">{{ service.curr }}
+                    {{ productInfo['MRP'] | number: '1.2-2' }}
+                  </span>
+                </span>
+
+                <span *ngIf="authService.loginFlag && !productInfo['isQuote'] && loadingObj['isProductDataLoading']"
+                  class="selling-amt">
+                  <ngx-skeleton-loader [theme]="{ width: '220px', height: '30px' }">
+                  </ngx-skeleton-loader>
+                </span>
+
+                <span *ngIf="!authService.loginFlag && !loadingObj['isProductDataLoading']">
+                  <button class=" btn btn-sm btn-primary"
+                    (click)="goToLogin(productInfo['productName'], productInfo['id'])">
+                    View Price
+                  </button>
+                </span>
+                <span *ngIf="!authService.loginFlag && loadingObj['isProductDataLoading']">
+                  <ngx-skeleton-loader [theme]="{ width: '220px', height: '30px' }">
+                  </ngx-skeleton-loader>
+                </span>
+              </div>
+              <div class="estimate-and-discount">
+                <div>
+                  <div class="estimate-time py-2" *ngIf="productInfo && !productInfo['isQuote'] 
+                  && !loadingObj['isProductDataLoading']">
+                    <i class="fas fa-truck"></i>
+                    Estimated Delivery ({{ productInfo['sellerProducts'][0].deliveryTime
+                    ? productInfo['sellerProducts'][0].deliveryTime + " days" : "7 days"}})
+                  </div>
+
+                  <div class="first-section-wrapper"
+                    *ngIf="!productInfo['isQuote'] && loadingObj['isProductDataLoading']">
+                    <div>
+                      <ngx-skeleton-loader appearance="circle" [theme]="{ width: '20px', height: '20px' }">
+                      </ngx-skeleton-loader>
+                    </div>
+                    <div>
+                      <ngx-skeleton-loader
+                        [theme]="{ width: '150px', 'border-radius': '0', height: '15px' , 'margin-top': '5px'}">
+                      </ngx-skeleton-loader>
+                    </div>
+                  </div>
+
+                  <div *ngIf="authService.loginFlag && productInfo && productInfo['productVariants'].length == 0 && 
+                    !loadingObj['isProductDataLoading']">
+                    <div *ngFor="let item of productInfo['mainProductQtyDiscountLabels'] ; let i = index">
+                      <p class="variant-tbl" *ngIf="(productInfo['mainProductQtyDiscountLabels'].length - 1) !== i ">
+                        Buy {{ item.minQuantity }} - {{ item.maxQuantity }} for
+                        {{ service.curr }} {{ item.productDiscountMRP | number : '1.2-2' }}
+                      </p>
+                      <p class="variant-tbl" *ngIf="(productInfo['mainProductQtyDiscountLabels'].length - 1) === i">Buy
+                        {{item.minQuantity}} or more for
+                        {{ service.curr }} {{ item.productDiscountMRP | number : '1.2-2' }}</p>
+                    </div>
+                  </div>
+
+                  <span
+                    *ngIf="authService.loginFlag && productInfo['productVariants'].length == 0 && loadingObj['isProductDataLoading']">
+                    <app-loader [count]="productInfo['mainProductQtyDiscountLabels'].length"></app-loader>
+                  </span>
+
+                  <div
+                    *ngIf=" !loadingObj['isProductDataLoading'] && (!authService.loginFlag || (authService.loginFlag && productInfo['productVariants'].length > 0) )">
+                    <div *ngFor="let item of productInfo['quantityDiscounts'] ; let i = index">
+                      <p class="variant-tbl"
+                        *ngIf="productInfo['isQuantityDiscount'] && (productInfo['quantityDiscounts'].length - 1) !== i">
+                        Buy {{item.minQuantity}} {{item.maxQuantity}} to
+                        get {{item.price}}% Discount </p>
+                      <p class="variant-tbl"
+                        *ngIf="productInfo['isQuantityDiscount'] && (productInfo['quantityDiscounts'].length - 1) === i">
+                        Buy {{item.minQuantity}} or more
+                        to get {{item.price}}% Discount</p>
+                    </div>
+                  </div>
+
+                  <span
+                    *ngIf="loadingObj['isProductDataLoading'] && (!authService.loginFlag || (authService.loginFlag && productInfo['productVariants'].length > 0) )">
+                    <app-loader [count]="productInfo['quantityDiscounts'].length"></app-loader>
+                  </span>
+
+                  <!-- <div class="mt-3" *ngFor="let item of productInfo['productVariants']">
+                    <h6 style="font-size: 20px;">{{item.productName}}</h6>
+                     <span style="font-size: 16px; font-weight: 450;">{{ service.curr }} {{item.MRP}}    </span> <strike><span style="font-size: 12px;">{{ service.curr }} {{item.sellPrice}}</span></strike>
+                    <h6 style="font-size: 12px;">Buy and get {{item.discount}}% Discount</h6>
+                    <hr>
+                  </div> -->
+                  <!-------------------------------- newly added close (discuss later don't remove)----------------------->
+                </div>
+                <div class="request-btns">
+                  <div class="btns d-flex align-items-center" *ngIf="!productInfo['productVariants'].length">
+                    <form [formGroup]="cartForm" *ngIf="authService.loginFlag">
+                      <!-- <button class="custom-button">Buy Now</button> -->
+                      <ng-container formArrayName="quantities">
+                        <ng-container *ngFor="
+                            let quantity of quantities().controls;
+                            let index = index
+                          " [formGroupName]="index">
+                          <button class="custom-button cart-btn mr-1" [disabled]="
+                              quantities()['controls'][0]['value']['quantity'] == 0
+                            " (click)="addProductToCart(index,productInfo['productName'],productInfo['id'])" *ngIf="outStockDisplay && productInfo && !productInfo['isQuote'] &&
+                            !loadingObj['isProductDataLoading']">
+                            Add to Cart
+                          </button>
+                          <span
+                            *ngIf="outStockDisplay && !productInfo['isQuote'] && loadingObj['isProductDataLoading']">
+                            <ngx-skeleton-loader [theme]="{ width: '250px', height: '45px' }">
+                            </ngx-skeleton-loader>
+                          </span>
+
+                          <div class="add-cart-input ml-1" *ngIf="outStockDisplay && !productInfo['isQuote'] 
+                          && !loadingObj['isProductDataLoading']">
+                            <button type="button" (click)="removeQty(index)">
+                              <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="text" formControlName="quantity" (keypress)="_utility.numberOnly($event)"
+                              value="1" name="" id="" />
+                            <button type="button" (click)="addQty(index, productInfo.sellerProducts[0].quantity)">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+
+                          <div class="ml-1"
+                            *ngIf="!outStockDisplay && !productInfo['isQuote'] && !loadingObj['isProductDataLoading']">
+                            <span style="color: crimson">Out Of Stock</span>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                    </form>
+                  </div>
+                  <br />
+                  <!--------------------------------------------------------------------- newly added -->
+                  <button class="custom-button cart-btn mr-1" style="scroll-behavior: smooth" (click)="cartTableShow()"
+                    *ngIf="productInfo['productVariants'].length > 0 && authService.loginFlag
+                    && !loadingObj['isProductDataLoading']">
+                    Add to Cart
+                  </button>
+                  <span *ngIf=" productInfo['productVariants'].length > 0 && authService.loginFlag
+                    && loadingObj['isProductDataLoading']">
+                    <app-loader></app-loader>
+                  </span>
+                  <!-----------------------------------------------------------------newly added close -->
+
+                  <button class="custom-button" type="button" *ngIf="productInfo && !productInfo['isQuote']
+                  && !loadingObj['isProductDataLoading']" (click)="showAskMoreDialog('sample')">
+                    Request for Sample
+                  </button>
+                  <span *ngIf="!productInfo['isQuote'] && loadingObj['isProductDataLoading']">
+                    <app-loader></app-loader>
+                  </span>
+
+                  <button class="custom-button" type="button"
+                    *ngIf="productInfo && productInfo['isQuote'] && !loadingObj['isProductDataLoading']"
+                    (click)="showAskMoreDialog('quote')">
+                    Request for Quote
+                  </button>
+                  <span *ngIf="productInfo['isQuote'] && loadingObj['isProductDataLoading']">
+                    <app-loader></app-loader>
+                  </span>
+
+                  <div class="btns">
+                    <button type="button" class="custom-button" *ngIf="!loadingObj['isProductDataLoading']"
+                      (click)="showAskMoreDialog('ask More')">
+                      Ask More
+                    </button>
+                    <span *ngIf="loadingObj['isProductDataLoading']">
+                      <ngx-skeleton-loader [theme]="{ width: '190px', height: '30px' }">
+                      </ngx-skeleton-loader>
+                    </span>
+
+                    <button type="button" class="custom-button secondary"
+                      *ngIf="productInfo && productInfo['catelogue'] && !loadingObj['isProductDataLoading']"
+                      (click)="openPdf()">
+                      Catalogue
+                    </button>
+                    <span *ngIf="productInfo['catelogue'] && loadingObj['isProductDataLoading']">
+                      <app-loader></app-loader>
+                    </span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-outer variant-table addcard" id="cartTable">
+      <div class="container">
+        <form [formGroup]="cartForm" *ngIf="showVariant">
+
+          <p-table [value]="productInfo['productVariants']" [responsive]="false"
+            *ngIf="!loadingObj['isProductDataLoading']">
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Variant Name</th>
+                <th style="text-align: center;">Package Contents</th>
+                <th>Price</th>
+                <th class="text-center">Quantity</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-variant let-index="rowIndex">
+              <ng-container formArrayName="quantities">
+                <tr [formGroupName]="index">
+                  <td>
+                    <div class="name-outer">
+                      <p>{{ variant['productName'] }}</p>
+                      <!-- <p><span>- {{variant['no']}}</span><span class="supplier-name">{{variant['supplier']}}</span></p> -->
+                    </div>
+                  </td>
+                  <td style="text-align: center;">
+                    {{ variant['packageContent'] ? variant['packageContent'] : "Package"}}
+                  </td>
+                  <td>
+                    <div class="price-outer" *ngIf="authService.loginFlag">
+                      <span class="dis-amt" *ngIf="variant['discount'] != 0 && !variant['isQuote']">{{
+                        variant['discount'] }}%
+                        off </span>
+                      <span class="del-amt" *ngIf="variant['discount'] != 0 && !variant['isQuote']">
+                        <del> {{ service.curr }} {{ variant['sellPrice'] | number }} </del></span>
+
+                      <span class="selling-amt" *ngIf="!variant['isQuote']">
+                        {{ service.curr }} {{ variant['MRP'] | number : '1.2-2' }} </span>
+
+                      <div *ngIf="!variant['isQuote']">
+                        <div class="mt-1"
+                          *ngFor="let item of variant['variantProductQtyDiscountLabels'] ; let i = index">
+                          <p class="variant-tbl" *ngIf="(variant['variantProductQtyDiscountLabels'].length - 1) !== i">
+                            Buy {{item.minQuantity}} - {{item.maxQuantity}} for {{ service.curr }}
+                            {{item.productDiscountMRP | number: '1.2-2'}}
+                          </p>
+                          <p class="variant-tbl" *ngIf="(variant['variantProductQtyDiscountLabels'].length - 1) === i">
+                            Buy {{item.minQuantity}} or more
+                            for {{ service.curr }} {{item.productDiscountMRP | number: '1.2-2'}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="price-outer" *ngIf="authService.loginFlag && variant['isQuote']">
+                      <span>Not Available</span>
+                    </div>
+                    <span *ngIf="!authService.loginFlag && !loadingObj['isProductDataLoading']"><button
+                        class="btn btn-sm btn-primary" (click)="
+                          goToLogin(productInfo['productName'], productInfo['id'])
+                        ">
+                        View Price
+                      </button></span>
+                  </td>
+                  <td class="text-center">
+                    <div class="add-cart-input" *ngIf="variant.showDisplay && !variant['isQuote']">
+                      <button type="button" (click)="removeQty(index)">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <input type="text" formControlName="quantity" (keypress)="_utility.numberOnly($event)" name=""
+                        id="" />
+                      <button type="button" (click)="
+                          addQty(index, variant.sellerProducts[0].quantity)
+                        ">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                    <div class="add-cart-btn-new" *ngIf="authService.loginFlag && variant['isQuote']">
+                      <button class="custom-button" type="button" (click)="showAskMoreDialog('quote')">
+                        Request for Quote
+                      </button>
+                    </div>
+                    <div class="ml-1" *ngIf="!variant.showDisplay && !variant['isQuote']">
+                      <span style="color: crimson" *ngIf="!variant['isQuote']">Out Of Stock</span>
+                    </div>
+                    <div *ngIf="variant.showDisplay">
+                      <button type="button" class="custom-button add-cart-btn" *ngIf="
+                          quantities()['controls'][index]['value']['quantity'] != 0 &&
+                          !variant['isQuote'] " (click)=" addProductToCart(index,
+                            productInfo['productName'],
+                            productInfo['id'])">
+                        Add to cart
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-template>
+          </p-table>
+
+        </form>
+
+        <p-table [value]="productInfo['productVariants']" [responsive]="false"
+          *ngIf="loadingObj['isProductDataLoading']">
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center">Varia nt Name</th>
+              <th class="text-center">Package Contents</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body">
+            <ngx-skeleton-loader [theme]="{ width: '1300px', height: '25px' }">
+            </ngx-skeleton-loader>
+          </ng-template>
+
+        </p-table>
+
+      </div>
+    </section>
+
+    <section class="overview-tabs my-5">
+      <div class="container">
+        <p-tabView>
+          <p-tabPanel header="Overview">
+            <div class="overview-tab-inner" *ngIf="!loadingObj['isProductDataLoading']">
+              <div [innerHtml]="productInfo['description'] | sanitizeHtml"></div>
+              <div [innerHtml]="productInfo['video'] | sanitizeHtml"></div>
+            </div>
+
+            <div *ngIf="loadingObj['isProductDataLoading']">
+              <app-loader></app-loader>
+            </div>
+
+          </p-tabPanel>
+          <p-tabPanel header="Features">
+            <div class="overview-tab-inner">
+              <div [innerHtml]="productInfo['features'] | sanitizeHtml"></div>
+              <!-- <table>
+                                <tr>
+                                    <td>Category</td>
+                                    <td>Gloves/Masks/Protection Apparel</td>
+                                </tr>
+                                <tr>
+                                    <td>Brand</td>
+                                    <td>Titan</td>
+                                </tr>
+                                <tr>
+                                    <td>Stock</td>
+                                    <td>448</td>
+                                </tr>
+                            </table> -->
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Warranty">
+            <div class="overview-tab-inner">
+              <div [innerHtml]="productInfo['warranty'] | sanitizeHtml"></div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </section>
+
+    <section class="getan-equipment carousel-outer mb-5" *ngIf="productInfo['productsRelated'].length">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="heading-wrapper">
+              <h2 class="underline-heading">Related Products</h2>
+            </div>
+          </div>
+        </div>
+        <div class="product-slide-block mt-4">
+          <ngx-slick-carousel class="carousel medical-slide-wrapper" [config]="productSlideConfig"
+            #slickModal="slick-carousel">
+            <div ngxSlickItem *ngFor="let slide of productInfo['productsRelated']" class="slide bordr-left"
+              [routerLink]="[
+                '/' +
+                  counrtyIso.getCountryCode() +
+                  '/p/' +
+                  counrtyIso.convertToSlug(slide['itemName'])
+              ]" [queryParams]="{
+                pid: slide['relatedProduct'].parentId
+                  ? slide['relatedProduct'].parentId
+                  : slide['relatedId']
+              }">
+              <a href="javascript:;">
+                <span class="bookmark-icon">
+                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                </span>
+
+                <div class="text-center prod-item-img">
+                  <div *ngIf="slide.relatedProduct.ribbenText" class="containerr"
+                    [attr.data-ribbon]="slide.relatedProduct.ribbenText" style="--d: 15px; --c: purple; z-index: 11111">
+                  </div>
+                  <img [src]="slide['productImage'][0]['image']"
+                    onError="this.src = 'https://lumier32.s3.ap-southeast-1.amazonaws.com/product/1602470264516_noimage_336_290.jpg'"
+                    alt="carousel image" />
+                </div>
+                <h3 class="product-name" [title]="slide['itemName']">
+                  {{ slide['relatedProduct']['productName'] }}
+                </h3>
+                <s></s>
+                <div class="product-price" *ngIf="
+                    authService.showPrice &&
+                    authService.loginFlag &&
+                    !slide['relatedProduct']['isQuote']
+                  ">
+                  <p class="discount-price text-center">
+                    {{ service.curr }}
+                    {{ slide['relatedProduct'].MRP | number : '1.2-2' }}
+                  </p>
+                  <p class="original-price text-center" *ngIf="slide['relatedProduct'].discount != 0">
+                    <del>{{ service.curr }}
+                      {{ slide['relatedProduct'].sellPrice | number : '1.2-2'}}
+                    </del>
+                  </p>
+                </div>
+                <p class="requestfq" type="button" *ngIf="
+                    authService.showPrice &&
+                    authService.loginFlag &&
+                    slide['relatedProduct']['isQuote']
+                  ">
+                  Request for Quote
+                </p>
+              </a>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="getan-equipment carousel-outer mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="heading-wrapper">
+                            <h2 class="underline-heading">Hot Selling</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-slide-block mt-4">
+                    <ngx-slick-carousel class="carousel medical-slide-wrapper" [config]="productSlideConfig" #slickModal="slick-carousel">
+                        <div ngxSlickItem *ngFor="let slide of productSlides" class="slide bordr-left">
+                            <span class="bookmark-icon">
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                            </span>
+                            <div class="text-center prod-item-img">
+                                <img src="{{ slide?.img }}" alt="carousel image"/>
+                            </div>
+                            <h3 class="product-name">
+                                {{slide?.name}}
+                            </h3>
+                            <div class="product-price">
+                                <p class="discount-price">{{ slide?.discountprice }}</p>
+                                <p class="original-price"> <del>{{ slide?.originalprice }} </del></p>
+                            </div>
+                            <div class="wallet-price">
+                                <p> <img src="assets/images/medical-product/wallet.png" alt="carousel image"/>{{ slide?.walletprice }}</p>
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+            </div>
+        </section> -->
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!productInfo && showErrorPage">
+  <div class="no-data-text">
+    <div class="container boxes">
+      <div style="display: flex; justify-content: center">
+        <img class="errimg" src="assets/images/404.jpg" alt="none" />
+      </div>
+      <div style="font-size: 12px">
+        <p style="text-align: center">
+          Your search
+          <span style="color: #63c7db"> </span> does not match any
+          products/brands.
+        </p>
+        <div>
+          <p class="textlike">Try somthing like</p>
+          <ol class="lists">
+            <li>Using more general terms</li>
+            <li>Checking your spelling</li>
+          </ol>
+          <p style="text-align: center">
+            Or kindly drop us a message on
+            <span class="contactE"><a target="_blank" href="mailto:connect@lumiere32.my">connect@lumiere32.my</a></span>
+            with details
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<app-footer></app-footer>
+
+<p-dialog [(visible)]="showAskMore" (onHide)="hideForm($event)" [baseZIndex]="10000"
+  styleClass="ask-more-main mydialogQuote">
+  <div class="quote-box">
+    <button class="close-icon" (click)="showAskMore = false">
+      <span class="material-icons"> clear </span>
+    </button>
+    <p-header>
+      <div class="ask-more-header">
+        <h4>{{ modalHeading }}</h4>
+        <p>Please fill all the details</p>
+      </div>
+    </p-header>
+    <div class="ask-more-form">
+      <form [formGroup]="askMoreForm" (ngSubmit)="askMoreFromSubmit()">
+        <div class="form-control-outer form-group">
+          <input type="text" placeholder="Enter Product" formControlName="productName" class="form-control" readonly />
+          <div class="error-msg" *ngIf="
+              askMoreForm.controls.productName.errors &&
+              (askMoreForm.controls.productName.dirty ||
+                askMoreForm.controls.productName.touched)
+            ">
+            <p>Product Name is required</p>
+          </div>
+        </div>
+        <div class="form-control-outer form-group">
+          <input type="text" placeholder="Enter Your Name" formControlName="name" class="form-control"
+            [readonly]="fieldDisable" />
+          <div class="error-msg" *ngIf="
+              askMoreForm.controls.name.errors &&
+              (askMoreForm.controls.name.dirty ||
+                askMoreForm.controls.name.touched)
+            ">
+            <p>Name is required</p>
+          </div>
+        </div>
+        <div class="form-control-outer form-group">
+          <input type="text" placeholder="Enter Your Email ID" class="form-control" formControlName="emailId"
+            [readonly]="fieldDisable" />
+          <div class="error-msg" *ngIf="
+              askMoreForm.controls.emailId.errors &&
+              (askMoreForm.controls.emailId.dirty ||
+                askMoreForm.controls.emailId.touched)
+            ">
+            <p *ngIf="askMoreForm.controls.emailId.errors.required">
+              Email Id is required
+            </p>
+            <p *ngIf="askMoreForm.controls.emailId.errors.email">
+              Email Id is invalid
+            </p>
+          </div>
+        </div>
+        <div class="form-control-outer mobile-no form-group">
+          <p-dropdown formControlName="countryCode" filter="true" [options]="phoneCodes" optionLabel="name"
+            optionValue="name" styleClass="form-control p-0 code code-select">
+          </p-dropdown>
+
+          <input type="text" placeholder="Enter Your Mobile Number" formControlName="mobileNo"
+            style="width: max-content; width: 24vh" (keypress)="_utility.numberOnly($event)" class="form-control"
+            [readonly]="fieldDisable" />
+          <div class="error-msg" *ngIf="
+              askMoreForm.controls.mobileNo.errors &&
+              (askMoreForm.controls.mobileNo.dirty ||
+                askMoreForm.controls.mobileNo.touched)
+            ">
+            <p>Mobile No is required</p>
+          </div>
+        </div>
+        <div class="form-control-outer form-group">
+          <textarea type="text" placeholder="Enter Your Comment" formControlName="comment"
+            class="form-control"></textarea>
+          <div class="error-msg" *ngIf="
+              askMoreForm.controls.comment.errors &&
+              (askMoreForm.controls.comment.dirty ||
+                askMoreForm.controls.comment.touched)
+            ">
+            <p>Comment is required</p>
+          </div>
+        </div>
+        <div class="text-center mt-2">
+          <button type="submit" class="custom-button btn-primary">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</p-dialog>

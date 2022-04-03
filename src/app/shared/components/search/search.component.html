@@ -1,0 +1,84 @@
+<!-- <input type="text" class="inputSearch" placeholder="Search for products and Categories"> -->
+
+<ais-instantsearch [config]="config">
+  <ais-search-box
+    placeholder="Search for products"
+    [searchAsYouType]="true"
+    (keydown.esc)="removeSearch($event)"
+    (keyup)="searchedKey($event)"
+    (keyup.enter)="addInput($event)"
+    (blur)="onBlur($event)"
+  >
+  </ais-search-box>
+
+  <div *ngIf="display">
+    <ais-hits id="ais-hits">
+      <ng-template #hits let-hits="hits">
+        <div *ngFor="let hit of hits" class="list">
+          <ul style="list-style-type: none">
+            <li class="cursor-pointer" (click)="navigate(hit)">
+              <ais-highlight
+                attribute="name"
+                [hit]="hit"
+                class="cursor-pointer"
+                (click)="navigate(hit)"
+              ></ais-highlight>
+            </li>
+            <li class="cursor-pointer" *ngIf="hit.categoryName != ''">
+              <small>in</small>
+              <a
+                class="link"
+                (click)="
+                  getProductByCategory(
+                    hit.parentCategoryName,
+                    hit.categoryName,
+                    hit.categoryId
+                  )
+                "
+                ><small> {{ hit.categoryName }}</small></a
+              >
+              <a class="link" (click)="navigate(hit)"><small> </small></a>
+            </li>
+          </ul>
+        </div>
+        <div class="list" *ngIf="!hits || !hits.length">No Result Found</div>
+      </ng-template>
+    </ais-hits>
+  </div>
+</ais-instantsearch>
+
+<!-- new try -->
+
+<!-- <div class="ais-InstantSearch">
+  <ais-instantsearch [config]="config">
+    <div class="left-panel">
+      <ais-refinement-list attribute="brand"></ais-refinement-list>
+      <ais-configure [searchParameters]="{ hitsPerPage: 8 }"></ais-configure>
+    </div>
+    <div class="right-panel">
+      <div>
+        <ais-search-box 
+          placeholder="Search for products"
+          [searchAsYouType]="true"
+          (keydown.esc)="removeSearch($event)"
+          (keyup)="searchedKey($event)"
+          (keyup.enter)="addInput($event)"
+          (blur)="onBlur()"></ais-search-box>
+      </div>
+    </div>
+
+    <div *ngIf="display">
+      <ais-hits id="ais-hits" >
+        <ng-template let-hits="hits">
+          <ul class="ais-Hits-list" class="row">
+            <ul *ngFor="let hit of hits" class="ais-Hits-item col-md-12" >              
+              <label class="hit-name">
+                <ais-highlight attribute="name" [hit]="hit"></ais-highlight>
+              </label>
+            </ul>
+          </ul>
+        </ng-template>
+      </ais-hits>
+    </div>
+  </ais-instantsearch>
+</div> -->

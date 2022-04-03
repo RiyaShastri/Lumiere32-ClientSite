@@ -1,0 +1,163 @@
+
+.billing-container {
+    padding-bottom: 10px;
+    .box {
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 6.5px 5px rgba(0, 0, 0, 0.06), 0 6px 5px rgba(0, 0, 0, 0.034), 0 3px 3px rgba(0, 0, 0, 0.006),
+            0 6px 5px rgba(0, 0, 0, 0.12);
+    }
+
+    .section-title {
+        color: #ffffff;
+        background-color: #63c7db;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+    }
+    label {
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 0;
+        font-family: "Poppins";
+    }
+    select input {
+        height: 35px;
+        border: 2px solid #ccc;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: #034995;
+        border: none;
+    }
+    .ppbox{
+        max-width: 100%;
+        display: block;
+        padding: 0px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        overflow: scroll;
+        outline: 0;
+        width: 106%;
+        height: 100%;
+        min-height: inherit;
+        max-height: inherit;
+    }
+}
+
+
+.mydialog {
+    width: 50vw;
+}
+
+.firstaccordion .ui-accordion-content {
+    background-color: green !important; //your choice colour
+}
+
+#firstaccordion .ui-accordion-content {
+    background-color: green !important; //your choice colour
+}
+
+@media screen and (max-width: 40em) {
+    .mydialog {
+        width: 75vw;
+    }
+}
+
+
+.box {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 6.5px 5px rgba(0, 0, 0, 0.06),
+        0 6px 5px rgba(0, 0, 0, 0.034), 0 3px 3px rgba(0, 0, 0, 0.006), 0 6px 5px rgba(0, 0, 0, 0.12);
+}
+
+#firstaccordion .ui-accordion-content {
+    background-color: green !important; //your choice colour
+}
+.btn-primary {
+    border: none;
+    background-color: #63c7db;
+    max-width: 250px;
+    // margin-left: 17vw;
+}
+.pointerCursor {
+    cursor: pointer;
+}
+
+.card-body {
+    padding: 10px 20px;
+    .address-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-left: -20px;
+        text-transform: capitalize;
+    }
+    .address-body {
+        font-size: 14px;
+        font-weight: 500;
+        color: #506d85;
+        padding-left: 37px;
+    }
+    .radio-box {
+        padding-right: 0;
+        flex: 5%;
+        max-width: 7%;
+    }
+    .radio-inline {
+        margin-bottom: 0;
+        input {
+            // height: 17px;
+            // width: 17px;
+        }
+    }
+    .edit-btn {
+        span {
+            color: #63c7db;
+            font-size: 16px;
+            font-weight: 500;
+            margin-right: 20px;
+            text-decoration: underline;
+            // text-transform: uppercase;
+        }
+    }
+}
+
+.card {
+    border: none;
+}
+
+.info-card {
+    border: none;
+    border-top: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 0;
+    .info-title {
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+    .delivery {
+        border: 1px solid #ccc;
+        border-radius: 0;
+        width: 100%;
+        margin-inline: 15px;
+        margin-top: 10px;
+    }
+    .add-title {
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .card-body {
+        display: flex;
+    }
+    textarea {
+        min-height: 80px;
+        border: 2px solid #ccc;
+        margin-top: 12px;
+        border-radius: 3px;
+    }
+}

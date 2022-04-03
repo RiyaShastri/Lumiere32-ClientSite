@@ -1,0 +1,106 @@
+
+.plb{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+}
+.headingName{
+    background: #63C7DB;
+    color: white;
+    padding: 10px;
+}
+.box{
+    box-shadow: 
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 
+    0 6.5px 5px rgba(0, 0, 0, 0.06), 
+    0 6px 5px rgba(0, 0, 0, 0.034), 
+    0 3px 3px rgba(0, 0, 0, 0.006), 
+    0 6px 5px rgba(0, 0, 0, 0.12);
+}
+.mright{
+    margin-right: 30px;
+
+}
+.ptb{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    cursor: pointer;
+
+}
+.brdr{
+    border: 1px solid
+    !important;
+    font-size: 18px;
+    padding: 0 7px !important;
+    cursor: pointer;
+}
+.addIcon{
+    padding-right: 5px;
+    padding-bottom: 2px;
+    font-size: 23px;
+}
+.editProfile{
+    background-color: #63C7DB;
+    color: white;
+    border-radius: 0;
+}
+.buttonEdit{
+    padding-top: 20px;
+}
+.edit{
+    color: #506DB5;
+    // color: #007bff;
+    cursor: pointer;
+    padding-left: 20px;
+}
+.disable{
+    cursor: not-allowed !important;
+} 
+.text-grey{
+    color: #506DB5;
+}
+.blue{
+    background-color: rgba(99, 199, 219, 0.13);
+    border-color: #63C7DB
+}
+@media only screen and (max-width: 660px) {
+    .pl{
+        padding-bottom: 10px !important;
+        margin-left: 0px;
+        
+    }
+    .mright{
+        padding-right: 0px;
+    }
+    .pt{
+        padding-top: 20px;
+    }
+    .d-flex {
+        display: block !important;
+    }
+    .pb{
+        padding-bottom: 20px;
+    }
+}
+body .pi {
+    font-size: 10px;
+}
+::ng-deep .assign-group-dropdown {
+    width: 100%;
+    .ui-dropdown {
+        &.form-control {
+            padding: 0 !important;
+        }
+        .ui-inputtext {
+            text-transform: capitalize;
+            letter-spacing: 0px;
+        }
+    }
+}
+::ng-deep .ui-dropdown-label-container {
+    width: 100%;
+}
+// .assign-group-dropdown {
+//     width: 100%;
+// }

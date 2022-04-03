@@ -1,0 +1,62 @@
+<!-- <app-header></app-header> -->
+<div class="profile-wrapper">
+    
+      <div class="container">
+   
+         
+        <div class="profile-user-wrapper">
+            
+            <div class="media align-items-center">
+                <div class="media-left profile-user-image">
+                    <img src="assets/images/post-login-user.svg" alt="post login image wrapper" />
+                </div>
+                <div class="media-body text-white">
+                    <h4 class="media-heading">
+                        {{profileDetails.firstName}} {{profileDetails.lastName}}
+                    </h4>
+                    <p>
+                        {{profileDetails.Email}}
+                    </p> 
+                </div>
+                <div class="row breadcrum-container">
+                    <ul class="d-flex container col-sm-12 row">
+                        <li>
+                            <a style="color: #D1D1D1;">Home</a>
+                        </li>
+                        <li style="margin : 2px 9px 0 9px" class="fa fa-angle-right">
+                        </li>
+                        <li>
+                            <a (click)="navigateFromBreadcrum()" style="cursor: pointer;">{{countryIso.breadcrum | titlecase}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="profile-links-wrapper">
+                <ul class="list-unstyled" fxShow fxHide.lt-md>
+                    <li class="profile-text-wrapper" [ngClass]="{'underline-text-wrapper' : routerUrl === '/user/dashboard'}">
+                        <a (click)="dashboard()" style="cursor: pointer;">Dashboard</a> 
+                    </li>
+
+                    <li class="profile-text-wrapper" [ngClass]="{'underline-text-wrapper' : routerUrl === '/user/profile'}">
+                        <a (click)="profile()" style="cursor: pointer;">Profile</a> 
+
+                    </li>
+                    <li class="profile-text-wrapper" [ngClass]="{'underline-text-wrapper' : routerUrl === '/user/orders'}">
+                        <a (click)="orders()" style="cursor: pointer;">Orders</a> 
+
+                    </li>
+                    <li class="profile-text-wrapper" [ngClass]="{'underline-text-wrapper' : routerUrl === '/user/wishlist'}">
+                        <a (click)="wishList()" style="cursor: pointer;">Wish List</a> 
+                    </li>
+                    <li class="profile-text-wrapper">
+                        <a style="cursor: pointer;" (click)="quotation()" style="cursor: pointer;">Quotations</a> 
+                    </li>
+                    <li class="profile-text-wrapper">
+                        <a style="cursor: pointer;">Notification</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+<br />
+
+<div class="row container checkout" #customLoadingTemplate>
+
+  <div class="container col-md-4 order-sm-12 summary-container">
+    <div class="card" style="position: -webkit-sticky; position: sticky; margin-top: 14px ; margin-bottom: 30px;">
+      <div class="card-body">
+        <div class="row">
+          <strong class="mb-3 ml-1">ORDER SUMMARY</strong>
+          <br />
+          <table class="table table-borderless table-responsive table-wrapper-scroll-y
+              col-md-12" *ngIf="!loadingObj['isProductDataLoading']">
+            <thead>
+              <tr style="background-color: #def3f8">
+                <th scope="col" class="product-section">Product</th>
+                <th scope="col" class="price-section">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of checkoutService.orderProductByCustomer">
+                <td>
+                  {{ item.product.productName }}<br />{{ item.quantity + " x " + item.product.MRP }}
+                </td>
+                <td>{{ item.total | number: "1.2-2" }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-borderless table-responsive table-wrapper-scroll-y
+              col-md-12" *ngIf="loadingObj['isProductDataLoading']">
+            <thead>
+              <tr style="background-color: #def3f8">
+                <th scope="col" class="product-section">Product</th>
+                <th scope="col" class="price-section">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of checkoutService.orderProductByCustomer">
+                <td>
+                  <ngx-skeleton-loader> </ngx-skeleton-loader>
+                  <br />
+                  <ngx-skeleton-loader> </ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader> </ngx-skeleton-loader>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card total-section" style="width: 100%">
+            <div class="card-body">
+              <div class="row">
+                <table style="width: 100%">
+                  <tr>
+                    <th>
+                      <span *ngIf="!loadingObj['isProductDataLoading']">
+                        Discount
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '250px',
+                          height: '20px',
+                          'border-radius': '10px',
+                          'margin-left' : '3px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </th>
+                    <td>
+                      <span *ngIf="!loadingObj['isProductDataLoading']">
+                        {{ (checkoutService['promoDiscount'] ? checkoutService['promoDiscount'] : 0) | number: "1.2-2"}}
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '100px',
+                          height: '20px',
+                          'border-radius': '10px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="checkoutService.deliveryDisplay">
+                    <th>
+                      <span *ngIf="!loadingObj['isProductDataLoading']"> Delivery Charge </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '250px',
+                          height: '20px',
+                          'border-radius': '10px',
+                          'margin-right' : '6px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </th>
+                    <td>
+                      <span *ngIf="!loadingObj['isProductDataLoading']">
+                        {{ checkoutService['delieveryPrice'] ? checkoutService['delieveryPrice'] : 0 | number: "1.2-2"}}
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '100px',
+                          height: '20px',
+                          'border-radius': '10px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span *ngIf="!loadingObj['isProductDataLoading'] && checkoutService['taxData']">
+                        {{ checkoutService['taxData']['taxCode'] | uppercase }} &nbsp;
+                        ({{ checkoutService['taxData']['taxRate'] }} %)
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '250px',
+                          height: '20px',
+                          'border-radius': '10px',
+                          'margin-right' : '6px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </th>
+                    <td>
+                      <span *ngIf="!loadingObj['isProductDataLoading']">
+                        {{ checkoutService['TAXAMOUNT'] | number: "1.2-2" }}
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '100px',
+                          height: '20px',
+                          'border-radius': '10px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span *ngIf="!loadingObj['isProductDataLoading']" class="final-amount">
+                        Total Amount
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '250px',
+                          height: '20px',
+                          'border-radius': '10px',
+                          'margin-right' : '6px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </th>
+                    <td>
+                      <span *ngIf="!loadingObj['isProductDataLoading']" class="final-amount">
+                        {{ checkoutService['orderTotal'] | number: "1.2-2" }}
+                      </span>
+                      <span *ngIf="loadingObj['isProductDataLoading']">
+                        <ngx-skeleton-loader [theme]="{
+                          width: '100px',
+                          height: '20px',
+                          'border-radius': '10px'
+                        }"> </ngx-skeleton-loader>
+                      </span>
+                    </td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="col-md-7 order-sm-1">
+    <div>
+      <app-mobile-updates></app-mobile-updates>
+      <br />
+    </div>
+    <div>
+      <app-common-address></app-common-address>
+    </div>
+    <br />
+    <div>
+      <app-delivery-address></app-delivery-address>
+    </div>
+    <br />
+    <div class="mb-5">
+      <app-payment-method></app-payment-method>
+    </div>
+  </section>
+</div>
+
+<ngx-loading [show]="displayfullloader" [config]="{ backdropBorderRadius: '3px' ,fullScreenBackdrop: true }"
+  [template]="customLoadingTemplate">
+</ngx-loading>

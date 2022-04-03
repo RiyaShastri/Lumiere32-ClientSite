@@ -1,0 +1,23 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+.list {
+  height: auto;
+  padding: 3px 5px 6px 20px;
+  // margin: 0 10px;
+  ul {
+    padding-left: 0;
+    margin-bottom: 0px;
+  }
+}
+.list:hover {
+  background-color: rgba(204, 204, 204, 0.452);
+  height: auto;
+  padding: 3px 5px 6px 20px;
+}
+
+.link {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,22 @@
+<!-- {{model.filterValue | json}} -->
+<div *ngFor="let filterItem of model.options | slice:0:model.showMoreAfter" class="custom-control custom-checkbox">
+  <!-- {{model.filterValue.includes(filterItem.id)}}
+  {{filterItem.id}} -->
+  <input 
+  type="checkbox" 
+  class="custom-control-input" 
+  id="checkbox-{{model.identifier}}-{{filterItem.id}}" 
+  [checked]="model.filterValue.includes(filterItem.id)"
+  #checkbox 
+  (change)="checkChanged(filterItem?.id, $event, checkbox.checked)"
+  >
+  <label for="checkbox-{{model.identifier}}-{{filterItem.id}}" class="custom-control-label text-capitalize">{{ filterItem?.title }} 
+  </label>
+  <span class="product-count" *ngIf="filterItem?.productCount">({{filterItem?.productCount}})</span>
+</div>
+<div *ngIf="model.showMoreAfter !== undefined">
+  <a class="show-more-link" data-toggle="modal" href="#{{model.identifier}}-show-more-modal" (click)="showMoreModal.initModal(model.filterValue)">show more</a>
+</div>
+<div *ngIf="model.showMoreAfter !== undefined">
+  <app-show-more-modal id="{{model.identifier}}-show-more-modal" [title]="model?.title" [options]="model?.options" (apply)="onApply($event)" ></app-show-more-modal>
+</div>

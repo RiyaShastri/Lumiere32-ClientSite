@@ -1,0 +1,924 @@
+.main-medical-eq {
+    background: #faf9fa;
+}
+.landing-wrapper {
+    background-color: #1B4791;
+    min-height: 270px;
+    position: relative; 
+    .card-absolute-wrapper {
+        bottom: -55%;
+        position: absolute;
+        min-height: 200px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        max-width: 1094px;
+        margin: 0 auto;
+        .card-blue {
+            background-color:  #63C7DB;
+            min-height: 373px;
+            padding: 25px 25px 0;
+        }
+    }
+}
+::ng-deep app-header {
+    .iconCategory{
+        display: unset;
+        padding: 7px;
+        padding-right: 25px !important;
+    }
+    .iconsAll.col-md-4 {
+        justify-content: space-around !important;
+    }
+}
+.header-absolute-wrapper {
+    position: absolute;
+    .header-card-icon {
+        padding-right: 14px;
+    }
+    .header-text {
+        font-size: 25px;
+    }
+}
+@media screen and( max-width: 653px){
+    .header-text {
+        font-size: 14px;
+    }
+}
+
+.header-button-wrapper {
+    padding-top: 28px;
+    .custom-button {
+        min-width: auto;
+    }
+}
+::ng-deep .custom-home-carousel {
+    .slick-slide {
+        img {
+            width: 100%;
+            height: 373px;
+            object-fit: cover;
+        }
+    }
+    .fa-chevron-left {
+        transform: translate(0, 0);
+        bottom: 1px;
+        left: 0px;
+        position: absolute;
+        z-index: 1;
+        top: inherit !important;
+        background: #1b4791;
+        color: #fff;
+        padding: 8px 12px;
+    }
+    .fa-chevron-right {
+        left: 35px;
+        bottom: 1px;
+        top: inherit !important;
+        position: absolute;
+        z-index: 1;
+        background: #63C7DB;
+        color: #fff;
+        padding: 8px 12px;
+    }
+}
+.select-padding {
+    padding: 0 16px 0 0 !important;
+}
+
+.slider-relative-wrapper {
+    .dot-absolute-wrapper {
+        top: -7%;
+        position: absolute;
+        right: -11%;
+        z-index: 0;
+    }
+}
+.deliver-wrapper {
+    margin-top: 10em;
+    padding-bottom: 6em;
+    position: relative;
+    .triangle-absolute-wrapper {
+        position: absolute;
+        right: 45px;
+    }
+}
+
+.underline-text-medical:before {
+    content: "";
+    position: absolute;
+    width: 51px;
+    height: 1px;
+    bottom: -15px;
+    left: 0;
+    border-bottom: 4px solid #63C7DB;
+}
+.underline-text-medical {
+    color: #000000;
+    font-size: 25px;
+    position: relative;
+    font-weight: 700;
+    margin-left: 5px;
+}
+.medical-heading{
+    font-family: Poppins;
+    font-size: 23px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.48;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+.medical-text {
+    font-family: Poppins;
+    font-size: 16px;
+    line-height: 1.56;
+    text-align: left;
+    color: #ffffff;
+    padding-bottom: 20px;
+}
+.medical-eq-header-text {
+    font-family: Poppins;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    color: #ffffff;
+}
+.medical-eq-header-text-bold {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #ffffff;
+    
+}
+.medical-button {
+    padding: 8px 10px;
+    background-color: #1b4791;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.medical-eq-category-card {
+    display: flex;
+    justify-content: space-between;
+    .single-card {
+        margin-top: 50px;
+    }
+    .categories-card {
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #ffffff;
+    }
+    .card-image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        //height: 100px;
+    }
+    .card-name {
+        font-family: Poppins;
+        font-size: 15px;
+        line-height: 1.27;
+        font-weight: 600;
+        letter-spacing: 0.75px;
+        color: #000000;
+        padding-top: 20px;
+    }
+}
+ 
+.surgical-card {
+    margin: 30px 0;
+}
+.surgical-eq-card {
+    // background-image: url(assets/images/supplier-card-one.png);
+    background-color: #63d6c7;
+    object-fit: contain;
+    border-radius: 5px;
+    background-size: cover;
+    padding: 20px;
+h2 {
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: left;
+    color: #ffffff;
+}
+p {
+    width: 189px;
+    height: 62px;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.7px;
+    text-align: left;
+    color: #ffffff;
+}
+.shop-button {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.21;
+    text-align: left;
+    color: #278fa4;
+    padding: 8px 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+}
+.supplier-card-three{
+    width: 159px;
+    position: absolute;
+    right: 28px;
+    bottom: 13px;
+}
+.supplier-card-two{
+    width: 159px;
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+}
+.underline-pay-later:before {
+    content: "";
+    position: absolute;
+    width: 51px;
+    height: 1px;
+    bottom: -5px;
+    left: 16px;
+    border-bottom: 4px solid #63C7DB;
+}
+.underline-pay-later {
+    font-family: Poppins;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.66;
+    text-align: left;
+    color: #000000;
+}
+
+::ng-deep .medical-slide-wrapper {
+    .fa-chevron-left {
+        transform: translate(0, 0);
+        left: -2%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        padding: 10px 12px;
+        box-shadow: 0px 3px 6px #c1c1c1;
+        top: 50%;
+
+        &.slick-disabled {
+            pointer-events: none;
+            color: #bbbbbb;
+            opacity: 0.3;
+         }
+    }
+    .fa-chevron-right {
+        right: -2%;
+        top: 50%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        padding: 10px 12px;
+        box-shadow: 0px 3px 6px #c1c1c1;
+
+        &.slick-disabled {
+            pointer-events: none;
+            color: #bbbbbb;
+            opacity: 0.3;
+         }
+    }
+
+    .slick-dots {
+        // bottom:-95px;
+         li {
+             margin: 0 0;
+             button {
+                border-radius: 50%;
+
+                &::before {
+                    font-size: 13px;
+                    color:#161c1d00;
+                }
+             }
+
+             &.slick-active {
+                 button {
+                     &::before {
+                        color: #161c1d00;
+                        opacity: 1;
+                     }
+                 }
+             }
+         }
+    }
+}
+
+.featured-heading {
+    padding-top: 64px;
+}
+
+.product-slide-block {
+    margin-top: 1em;
+    padding: 25px 0 1px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+}
+
+::ng-deep .medical-slide-wrapper {
+    .slick-slide img {
+        margin: 0 auto;
+    }
+    
+    .slick-track {
+        display:flex;
+        align-items: center;
+    }
+}
+.product-name {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.61;
+    color: #000000;
+    padding-top: 20px;
+    margin: 0px 0 0 40px;
+}
+.product-price {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+}
+.discount-price {
+    font-family: Poppins;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.63;
+    color: #000000;
+}
+.original-price {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.63;
+    color: #506d85;
+    padding-left: 20px;
+}
+
+.wallet-price {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    p{
+    display: flex;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.62;
+    text-align: left;
+    color: #000000;
+    }
+    img {
+        margin: 0;
+        padding-right: 10px;
+    }
+}
+.bordr-left {
+    border-right: 2px solid #ececec;
+    .slick-dots {
+        display: none;
+    }
+}
+.triangl-absolute-wrapper {
+    padding-top: 35px;
+    padding-left: 38px;
+}
+.deel-of-week {
+    margin: 60px 0;
+    position: relative;
+}
+.discount-image{
+    margin: 0 0 0 15px !important;
+}
+.time-hour {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: left;
+    color: #f6f8fb;
+    background-color: #58d8c4;
+    margin-left: 17px;
+    padding: 6px;
+}
+.deals {
+    display: flex;
+    padding-top: 55px;
+}
+.deals-slide-block {
+    margin-top: 1em;
+    padding: 20px 0 1px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+}
+.deals-img {
+    width: 150px;
+    height: 150px;
+}
+.categor {
+    margin-top: 55px;
+}
+.dashboard-progress {
+    margin: 15px 50px 0;
+}
+.bg-avail {
+    background-color: #1b4791 !important;
+}
+.deals-status {
+    display: flex;
+    margin: 5px 45px 0;
+    justify-content: space-between;
+}
+span.available {
+    font-family: Poppins;
+    font-size: 14px;
+    line-height: 1.21;
+    text-align: left;
+    color: #5d5d5d;
+}
+span.sold {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.21;
+    text-align: left;
+    color: #000;
+    padding-left: 5px;
+}
+.popular-slide-block {
+    margin-top: 2em;
+    padding: 20px 0 1px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+}
+.product-popular h3 {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.64;
+    letter-spacing: 0.7px;
+    text-align: left;
+    color: #060606;
+    margin: 3px 0 0 40px;
+}
+.shop-slide-block {
+    // margin-top: 2em;
+    // padding: 20px 0 1px;
+    border-radius: 8px;
+}
+.discountpercent h3 {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.63;
+    color: #58d8c4;
+    padding-top: 10px;
+}
+.discountpercent {
+    width: 201px;
+    height: 81px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    text-align: center;
+}
+.popular-img {
+    width: 175px;
+    height: 150px;
+}
+
+::ng-deep .shop-slide-wrapper {
+    .fa-chevron-left {
+        transform: translate(0, 0);
+        left: -2%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        padding: 10px 12px;
+        box-shadow: 0px 3px 6px #c1c1c1;
+        top: 50%;
+
+        &.slick-disabled {
+            pointer-events: none;
+            color: #bbbbbb;
+            opacity: 0.3;
+         }
+    }
+    .fa-chevron-right {
+        right: -2%;
+        top: 50%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        padding: 10px 12px;
+        box-shadow: 0px 3px 6px #c1c1c1;
+        &.slick-disabled {
+            pointer-events: none;
+            color: #bbbbbb;
+            opacity: 0.3;
+        }
+    }
+
+    .slick-dots {
+        bottom:-85px;
+         li {
+            margin: 0 0;
+            button {
+                border-radius: 50%;
+                &::before {
+                    font-size: 13px;
+                    color:#8e9092;
+                }
+            }
+            &.slick-active {
+                button {
+                     &::before {
+                        color: #1b4791
+                        ;
+                        opacity: 1;
+                     }
+                }
+             }
+         }
+    }
+}
+
+
+::ng-deep .shop-slide-wrapper {
+    .slick-slide img {
+        margin: 0 auto;
+    }
+
+    .slick-track {
+        display:flex;
+        align-items: center;
+    }
+}
+
+.group-product-contain {
+    h3 {
+        width: 227px;
+        font-family: Poppins;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.61;
+        text-align: left;
+        color: #000000;
+    }
+}
+.fa.fa-star.checked {
+    color: #ffca01;
+    font-size: 17px;
+    padding-left: 5px;
+}
+.fa.fa-star {
+    color: #e5e8ee;
+    font-size: 17px;
+    padding-left: 5px;
+}
+.one-group-product {
+    display: flex;
+    margin-left: 35px;
+}
+.ended-on {
+    display: flex;
+}
+.group-slide-block{
+    margin-top: 2em;
+    padding: 35px 0px 1px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+}
+.group-product-price {
+    display: flex;
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+.group-product-contain {
+    margin-left: 25px;
+}
+.ratings {
+    padding: 4px 0 0px;
+}
+.ended-text {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.69;
+    color: #1b4791;
+    padding-right: 5px;
+}
+.ended-date {
+    width: 187px;
+    height: 26px;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.69;
+    color: #000000;
+}
+.shop-seller {
+    background-color: #1b4791;
+    padding: 40px 20px;
+}
+.pharmacy-image {
+    display: flex;
+    height: 506px;
+    justify-content: center;
+    align-items: center;
+}
+
+::ng-deep .seller-slide-wrapper {
+    .fa-chevron-left {
+        transform: translate(0, 0);
+        left: -3%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        padding: 10px 12px;
+        box-shadow: 0px 3px 6px #c1c1c1;
+        top: 50%;
+
+        &.slick-disabled {
+            pointer-events: none;
+            color: #bbbbbb;
+            opacity: 0.3;
+         }
+    }
+    .fa-chevron-right {
+        right: -3%;
+        top: 50%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        padding: 10px 12px;
+        box-shadow: 0px 3px 6px #c1c1c1;
+
+        &.slick-disabled {
+            pointer-events: none;
+            color: #bbbbbb;
+            opacity: 0.3;
+         }
+    }
+
+    .slick-dots {
+        // bottom:-95px;
+         li {
+             margin: 0 0;
+             button {
+                border-radius: 50%;
+
+                &::before {
+                    font-size: 13px;
+                    color:#161c1d00;
+                }
+             }
+
+             &.slick-active {
+                 button {
+                     &::before {
+                        color: #161c1d00;
+                        opacity: 1;
+                     }
+                 }
+             }
+         }
+    }
+}
+
+::ng-deep .seller-slide-wrapper {
+    .slick-slide img {
+        margin: 0 auto;
+    }
+
+    .slick-track {
+        display:flex;
+        align-items: center;
+    }
+}
+
+.seller-slide-block{
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+}
+.seller-img {
+    width: 220px;
+    height: 100px;
+}
+.seller-name {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.63;
+    text-align: center;
+    color: #000000;
+    padding: 16px 0 0 0;
+}
+.seller-popular h3{
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.64;
+    text-align: center;
+    color: #58d8c4;
+    padding: 6px 0 0 0;
+}
+.seller-button {
+    width: 116px;
+    height: 34px;
+    border-radius: 5px;
+    background-color: #1b4791;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.63;
+    color: #ffffff;
+}
+.two-part {
+    padding: 25px 0;
+}
+.seller-button-wrapper {
+    margin: 16px 0;
+}
+.main-seller-box {
+    width: 100%;
+    display: flex;
+    margin-top: 3em;
+}
+.blue-box {
+    width: 43%;
+}
+.slider-box {
+    width: 57%;
+}
+.two-part {
+    width: 300px;
+}
+.bordr-both{
+    border-right: 2px solid #ececec;
+    border-bottom: 2px solid #ececec;
+}
+.discount-absolute-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 20%;
+}
+.getan-equipment {
+    position: relative;
+}
+.deel-absolute-wrapper {
+    position: absolute;
+    left: 0;
+    bottom: -6%;
+}
+.groupbuy-absolute-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: -36%;
+}
+.sellerbuy-absolute-wrapper {
+    position: absolute;
+    left: 0;
+}
+.discount-price-back-image {
+    position: absolute;
+    top: 0px;
+}
+.mat-menu-item {
+    line-height: 22px;
+    height: 22px;
+    padding: 0 17px;
+}
+@media (max-width: 991px)
+{
+    .surgical-eq-card {
+        margin-bottom: 20px;
+    }
+    .display-mobile-none {
+        display: none;
+    }
+    .main-seller-box {
+        width: 100%;
+        display: block;
+    }
+    .blue-box {
+        width: 100%;
+    }
+    .slider-box {
+        width: 100%;
+    }
+}
+@media (max-width: 767px)
+{
+.landing-wrapper .card-absolute-wrapper {
+    bottom: auto;
+    position: relative;
+    min-height: 200px;
+    left: 0%;
+}
+.deliver-wrapper {
+    margin-top: 0em;
+    padding-bottom: 2em;
+    position: relative;
+}
+::ng-deep .medical-slide-wrapper {
+    .fa-chevron-right {
+        right: -2%;
+    }
+}
+.one-group-product {
+    margin-left: 5px;
+}
+::ng-deep .shop-slide-wrapper {
+    .fa-chevron-right {
+        right: -2%;
+    }
+}
+::ng-deep .seller-slide-wrapper {
+    .fa-chevron-right {
+        right: 0%;
+    }
+}
+.main-seller-box {
+    width: 100%;
+    display: block;
+}
+.blue-box {
+    width: 100%;
+}
+.slider-box {
+    width: 100%;
+}
+}
+
+.pointer {cursor: pointer;}
+@media(max-width:575px){
+    .medical-slide-wrapper .fa-chevron-right {
+        right: 2%;
+    }
+    .one-group-product {
+        margin-left: 5px;
+        display: block;
+    }
+    .group-product-contain {
+         width: 100%;
+    }
+    .shop-slide-wrapper .fa-chevron-right {
+        right: 2%;
+    }
+
+}
+@media(max-width:480px){
+    .time-hour {
+        line-height: 1.7;
+        margin-left: 5px;
+        padding: 2px;
+    }
+    .underline-text-medical {
+        font-size: 21px;
+    }
+
+}
+@media(max-width:420px){
+    
+}
+

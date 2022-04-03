@@ -1,0 +1,189 @@
+<div>
+  <img src="https://www.lumiere32.sg/media/front/img/easy-finance.png" alt="" class="w-100" />
+</div>
+<div class="mt-5">
+  <h4 class="want-a">Want a safe and secure mobile wallet payment solution?</h4>
+  <h1 class="check">Check out PAY32</h1>
+  <h3 class="lumiere">
+    Lumiere32's enterprising e-wallet allows you to
+    <span>pay for your purchase with ease and convenience. </span><br />
+    Top-up your wallet anytime and anywhere you want.
+  </h3>
+</div>
+<!-- carousel start -->
+<div class="container top-up-pack">
+  <div class="d-flex justify-content-between pt-5">
+    <h6 class="top-text">Top Up Packs</h6>
+  </div>
+  <div class="under-line">
+    <span class="line-1">
+      <h6>line</h6>
+    </span>
+  </div>
+  <div class="container">
+    <div class="row" style="margin-top: 2%; margin-bottom: 1%">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let promo of promoData" class="slide">
+          <div class="top-amount slider">
+            <div class="item col-md-12">
+              <div class="top-white">
+                <h6>{{ promo?.title }}</h6>
+              </div>
+              <div>
+                <div class="blue-border">..</div>
+                <div class="top-gray">
+                  <div>
+                    <h6>RM {{ promo?.cashbackAmount }} Cashback</h6>
+                  </div>
+                  <div class="alignbtn">
+                    <button (click)="buy(promo)" class="btn">
+                      {{
+                      authService.loginFlag ? "Top-up Now" : "Login To Top-up"
+                      }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+
+      <div class="payment-wrapper" *ngIf="cardDisplay">
+        <div class="chevron-icon">
+          <a (click)="closePaymentIframe()"><i class="fa fa-times"></i></a>
+        </div>
+        <form #cardForm="ngForm">
+          <div class="container" *ngIf="cardDisplay">
+            <div style="margin-top: 15px">
+              <div class="row">
+                <div class="form-group col-md-6" [class.has-error]="
+                    namecardControl.invalid && namecardControl.touched
+                  " [class.has-success]="namecardControl.valid">
+                  <label for="exampleInputEmail1" class="control-label">Card Holder Name</label>
+                  <input type="text" class="form-control" id="name" required name="month" #namecardControl="ngModel"
+                    [(ngModel)]="checkout.card.name" aria-describedby="nameHelp" />
+
+                  <span class="help-block" style="color: red"
+                    *ngIf="namecardControl.invalid && namecardControl.touched">
+                    Name is required
+                  </span>
+                </div>
+
+                <div class="form-group col-md-6" [class.has-error]="
+                    cardNumberControl.invalid && cardNumberControl.touched
+                  " [class.has-success]="cardNumberControl.valid">
+                  <label for="exampleInputEmail1">Card Number</label>
+                  <input type="text" class="form-control" id="name" required name="cardnumber"
+                    #cardNumberControl="ngModel" [(ngModel)]="checkout.card.cardNumber" minlength="16"
+                    (ngModelChange)="checkNumberValidation($event)" maxlength="16" (ngModelChange)="verifyCard($event)"
+                    aria-describedby="nameHelp" />
+                  <span class="help-block" style="color: red" *ngIf="
+                      cardNumberControl.invalid && cardNumberControl.touched
+                    ">
+                    Card Number is required
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-3" [class.has-error]="
+                    cardMonthControl.invalid && cardMonthControl.touched
+                  " [class.has-success]="cardMonthControl.valid">
+                  <label for="monthname" class="control-label">Month</label>
+                  <br />
+                  <select name="cars" id="cars" class="form-control" [(ngModel)]="checkout.card.expirationMonth"
+                    required name="cardname" #cardMonthControl="ngModel">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-3" [class.has-error]="
+                    cardYearControl.invalid && cardYearControl.touched
+                  " [class.has-success]="cardYearControl.valid">
+                  <label for="yearname" class="control-label">Expiry Year</label>
+                  <br />
+                  <select name="year" id="year" class="form-control" required name="year" #cardYearControl="ngModel"
+                    [(ngModel)]="checkout.card.expirationYear">
+                    <option></option>
+                    <option *ngFor="let item of expireYears" value="{{ item }}">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6" [class.has-error]="
+                    cardcvvControl.invalid && cardcvvControl.touched
+                  " [class.has-success]="cardcvvControl.valid">
+                  <label for="exampleInputEmail1">CVV</label>
+                  <input type="password" class="form-control" id="cvv" minlength="3" maxlength="3"
+                    (ngModelChange)="checkChar($event, 'cvv')" required name="cvv" #cardcvvControl="ngModel"
+                    [(ngModel)]="checkout.card.cvv" aria-describedby="cvvhelp" />
+
+                  <span class="help-block" style="color: red" *ngIf="
+                      cardcvvControl.errors?.pattern &&
+                      cardcvvControl.invalid &&
+                      cardcvvControl.touched
+                    ">
+                    CVV is required
+                  </span>
+                  <span *ngIf="cardErrorDisplay && checkout.card.cvv.length > 0" style="color: red">
+                    Characters are not allowed
+                  </span>
+                </div>
+                <div class="form-group col-md-6">
+                  <button type="button" (click)="submit()"
+                    [disabled]="cardForm.invalid && cardErrorDisplay == true || disabledBtn" class="btn btn-info">
+                    PAY {{ payBtnValue }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5">
+  <div class="row info">
+    <div class="col-md-6 p-5">
+      <div class="pt-3 pl-1 mt-3 mb-3">
+        <div class="col-md-12">
+          <h5 class="doct_Text">
+            Pay32 wallet helps the Clinics to <span>save more than 20%</span>
+          </h5>
+        </div>
+        <hr />
+        <div class="col-md-12">
+          <h5 class="doct_Text">
+            Get <span>Assured Cashback</span> up to RM 200
+          </h5>
+        </div>
+        <hr />
+        <div class="col-md-12">
+          <h5 class="doct_Text">
+            It is <span>simple, secure</span> & you enjoy
+            <span>Instant Cashback</span>
+          </h5>
+        </div>
+        <hr />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/images/top_up_image.jpg" class="top_img" alt="" />
+    </div>
+  </div>
+</div>
+
+<br />

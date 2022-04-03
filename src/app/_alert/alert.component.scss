@@ -1,0 +1,22 @@
+.alert {
+  position: relative;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-info {
+  color: white;
+  background-color: #1b4791;
+  border-color: #1b4791;
+}
+
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: white;
+  cursor: pointer;
+}

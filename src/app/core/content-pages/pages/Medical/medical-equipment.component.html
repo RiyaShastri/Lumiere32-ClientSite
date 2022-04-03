@@ -1,0 +1,542 @@
+<div>
+<!-- <app-header></app-header> -->
+<div class="main-medical-eq">
+    <div class="landing-wrapper">
+        <!-- half circle wrapper -->  
+        <!-- <div class="circle-absolute-wrapper">
+            <img src="assets/images/circle.svg" alt="circle image wrapper" />
+        </div> -->
+        <div class="container card-absolute-wrapper">
+            <div class="row d-flex">
+                <div class="col-lg-4 col-sm-12 p-0">
+                    <div class="card card-blue">
+                        <!-- images wrapper -->
+                        <div class="circle-image-wrapper">
+                            <img src="assets/images/medical-back.png" alt="landing image" class="img-fluid" />
+                        </div> 
+                        <div class="header-absolute-wrapper">
+                          <h3 class="medical-heading">Medical Equipment Needs</h3>
+                          <p class="medical-text">Use Pay32. Pay Smarter</p>
+                            <div class="d-flex align-items-center repayment">
+                                <div class="header-card-icon">
+                                    <img src="assets/images/medical-slider-one.png" alt="truck image" class="img-fluid" />
+                                </div>
+                                <div class="header-card-icon">
+                                    <span class="medical-eq-header-text">Re-Payment</span>
+                                    <p class="medical-eq-header-text-bold">12 Monthly Installments</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center padding-top-15">
+                                <div class="header-card-icon">
+                                    <img src="assets/images/medical-slider-two.png" alt="return image" class="img-fluid" />
+                                </div>
+                                <div class="header-card-icon">
+                                    <span class="medical-eq-header-text">Re-Payment</span>
+                                    <p class="medical-eq-header-text-bold">12 Monthly Installments</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center padding-top-15">
+                                <div class="header-card-icon">
+                                    <img src="assets/images/medical-slider-two.png" alt="shape image" class="img-fluid" />
+                                </div>
+                                <div class="header-card-icon">
+                                    <span class="medical-eq-header-text">Re-Payment</span>
+                                    <p class="medical-eq-header-text-bold">12 Monthly Installments</p>
+                                </div>
+                            </div>
+                            <div class="header-button-wrapper">
+                                <button type="button" class="medical-button">
+                                    Explore Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-sm-12 p-0">
+                    <div class="slider-relative-wrapper">
+                        <div class="dot-absolute-wrapper display-mobile-none">
+                            <img src="assets/images/home-dot-image.svg" alt="dot image wrapper" />
+                        </div>
+                        <ngx-slick-carousel class="carousel custom-home-carousel" [config]="slideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                                <img src="{{ slide.img }}" alt="" width="100%">
+                            </div>
+                        </ngx-slick-carousel>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="deliver-wrapper">
+        <!-- triangle wrapper -->
+        <div class="triangle-absolute-wrapper display-mobile-none">
+            <img src="assets/images/triangle.svg" alt=" landing triangle image" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-wrapper categor">
+                        <h3 class="underline-text-medical">Categories</h3>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="medical-eq-category-card row">
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-one.png"
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name" 
+                            > Speciality</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-two.png"
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Instruments & Hollowares</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-three.png"
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Equipment</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-four.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Consumables</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-five.png"
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Disinfectants & Chemicals</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-six.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Mobility Aids</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-one.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Speciality</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-two.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Instruments & Hollowares</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-three.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Equipment</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-four.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Consumables</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-five.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Disinfectants & Chemicals</h3>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-6 single-card">
+                            <div class="categories-card">
+                                <div class="card-image">
+                                    <img src="assets/images/medi-eq-cat-six.png" 
+                                    class="pointer"
+                                    (click)=routePage()
+                                    alt=" category card image" />
+                                </div>
+                            </div>
+                            <h3 class="card-name"> Mobility Aids</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="getan-equipment">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-wrapper">
+                        <h2 class="underline-pay-later">Get an Equipment Today | Pay Later</h2>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="view-link-wrapper text-right">
+                        <a href="javasctipt:void(0)" [routerLink]="[ '/medical/product-listing']" class="view-link"> View All </a>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product-slide-block">
+                <ngx-slick-carousel class="carousel medical-slide-wrapper" [config]="productSlideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                    <div ngxSlickItem *ngFor="let slide of productSlides" class="slide bordr-left">
+                        <div class="discount-price-back-image">
+                            <img class="discount-image" src="{{ slide.discountimage }}" alt="discount image"/>
+                        </div>
+                        <div>
+                            <img src="{{ slide.img }}" alt="carousel image"/>
+                        </div>
+                        <h3 class="product-name">
+                            {{slide.name}}
+                        </h3>
+                        <div class="product-price">
+                            <p class="discount-price">{{ slide.discountprice }}</p>
+                            <p class="original-price"> <del>{{ slide.originalprice }} </del></p>
+                        </div>
+                        <div class="wallet-price">
+                            <p> <img src="assets/images/medical-product/wallet.png" alt="carousel image"/>{{ slide.walletprice }}</p>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+                <div class="discount-absolute-wrapper display-mobile-none">
+                    <img src="assets/images/landing-dot.svg" alt="landing dot wrapper">
+                </div>
+            </div>
+            
+        </div>
+        <div class="triangl-absolute-wrapper display-mobile-none">
+            <img src="assets/images/landing-dot-image.svg" alt=" landing dot image">
+        </div>
+    </section>
+    <section class="surgical-card">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-4">
+                    <div class="surgical-eq-card" style=" background-image: url(assets/images/supplier-card-one.png)">
+                        <h2>SURGICAL Instruments</h2>
+                        <p>Surgical instruments are made of high quality stainless steel.</p>
+                        <div class="header-button-wrapper">
+                            <button type="button" class="shop-button"> Shop Now! </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="surgical-eq-card" style=" background-image: url(assets/images/supplier-card-two.png)">
+                        <h2>GYNECOLOGY Instruments</h2>
+                        <p>Surgical instruments are made of high quality stainless steel.</p>
+                        <div class="header-button-wrapper">
+                            <button type="button" class="shop-button"> Shop Now! </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="surgical-eq-card" style=" background-image: url(assets/images/supplier-card-three.png)">
+                        <h2>Surgical Instruments</h2>
+                        <p>Surgical instruments are made of high quality stainless steel.</p>
+                        <div class="header-button-wrapper">
+                            <button type="button" class="shop-button"> Shop Now! </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="deel-of-week">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-wrapper deals">
+                        <h3 class="underline-text-medical">Deals Of The Week</h3>
+                        <p class="time-hour">02</p>
+                        <p class="time-hour">59</p>
+                        <p class="time-hour">32</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="view-link-wrapper text-right">
+                        <a href="javasctipt:void(0)" class="view-link"> View All </a>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="deals-slide-block">
+                <ngx-slick-carousel class="carousel medical-slide-wrapper" [config]="dealsSlideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                    <div ngxSlickItem *ngFor="let slide of dealsSlides" class="slide bordr-left">
+                        <div class="discount-price-back-image">
+                            <img class="discount-image" src="{{ slide.discountimage }}" alt="discount image"/>
+                        </div>
+                        <div>
+                            <img class="deals-img" src="{{ slide.img }}" alt="carousel image"/>
+                        </div>
+                        <h3 class="product-name">
+                            {{slide.name}}
+                        </h3>
+                        <div class="product-price">
+                            <p class="discount-price">{{ slide.discountprice }}</p>
+                            <p class="original-price"> <del>{{ slide.originalprice }}</del></p>
+                        </div>
+                        <div class="dashboard-progress">
+                            <ngb-progressbar [value]="250"></ngb-progressbar>
+                        </div>
+                        <div class="deals-status">
+                            <p>
+                                <span class="available">Available:</span> <span class="sold">30</span>
+                            </p>
+                            <p>
+                                <span class="available">sold:</span> <span class="sold">6</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+                <div class="deel-absolute-wrapper display-mobile-none">
+                    <img src="assets/images/landing-dot.svg" alt="landing dot wrapper">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="deel-of-week">
+        <div class="container">
+            <!-- <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-wrapper deals">
+                        <h3 class="underline-text-medical">Group Buy Products</h3>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="view-link-wrapper text-right">
+                        <a href="javasctipt:void(0)" class="view-link"> View All </a>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div> -->
+           <!-- <div class="group-slide-block">
+                <ngx-slick-carousel class="carousel shop-slide-wrapper" [config]="groupSlideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                    <div ngxSlickItem *ngFor="let slide of groupSlides" class="slide bordr-left">
+                        <div class="discount-price-back-image">
+                            <img class="discount-image" src="{{ slide.discountimage }}" alt="discount image"/>
+                        </div>
+                        <div class="one-group-product">
+                            <div class="group-product-img">
+                                <img class="discount-main-img" src="{{ slide.img }}" alt="carousel image"/>
+                            </div>
+                            <div class="group-product-contain">
+                                <h3>Swiss Medical Tools and Dental Equipment</h3>
+                                <div class="ratings">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>   
+                                </div>
+                                <div class="group-product-price">
+                                    <p class="discount-price">$ 50.00</p>
+                                    <p class="original-price"> <del>$ 100.00</del></p>
+                                </div>
+                                <div class="ended-on">
+                                    <p class="ended-text">Ended on:</p>
+                                    <p class="ended-date">Jun 26, 2020</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+                <div class="groupbuy-absolute-wrapper display-mobile-none">
+                    <img src="assets/images/landing-dot.svg" alt="landing dot wrapper">
+                </div>
+            </div>-->
+        </div>
+    </section>
+    <section class="deel-of-week">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-wrapper deals">
+                        <h3 class="underline-text-medical">Shop By Brand</h3>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="view-link-wrapper text-right">
+                        <a href="javasctipt:void(0)" class="view-link"> View All </a>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="shop-slide-block">
+                <ngx-slick-carousel class="carousel shop-slide-wrapper" [config]="shopSlideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                    <div ngxSlickItem *ngFor="let slide of shopslides" class="slide">
+                        <!-- <div>
+                            <img class="discount-main-img" src="{{ slide.logo }}"
+                            style="width:150px;height:150px"
+                            alt="carousel image"/>
+                        </div> -->
+                        <div class="discountpercent">
+                            <img class="discount-img" 
+                            (click)="navigateToCategiry(slide.id,slide.manufacturerName)"
+                            style="width:150px;height:150px"
+                            src="{{ slide.logo }}" alt="carousel image"/>
+                            <h3>{{slide.discountpercent}}</h3>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+        </div> 
+    </section>
+    
+    <section class="deel-of-week">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-wrapper deals">
+                        <h3 class="underline-text-medical">Popular Categories</h3>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="view-link-wrapper text-right">
+                        <a href="javasctipt:void(0)" class="view-link"> View All </a>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="popular-slide-block">
+                <ngx-slick-carousel class="carousel medical-slide-wrapper" [config]="popularSlideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                    <div ngxSlickItem *ngFor="let slide of popularSlides" class="slide bordr-left">
+                        <div>
+                            <img class="popular-img" src="{{ slide.img }}" alt="carousel image"/>
+                        </div>
+                        <h3 class="product-name">
+                            {{slide.name}}
+                        </h3>
+                        <div class="product-popular">
+                            <h3>{{slide.product}}</h3>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+        </div>
+    </section>
+    <section class="deel-of-week">
+        <div class="container">
+            <div class="row">
+                <div class="sellerbuy-absolute-wrapper display-mobile-none">
+                    <img src="assets/images/landing-dot.svg" alt="landing dot wrapper">
+                </div>
+                <!-- <div class="col-md-12">
+                    <div class="heading-wrapper deals">
+                        <h3 class="underline-text-medical">Shop by Seller</h3>
+                    </div>
+                </div> -->
+            <!--    <div class="main-seller-box">
+                    <div class="blue-box">
+                        <div class="shop-seller">
+                            <div class="shop-seller-box"  style=" background-image: url(assets/images/medical-product/seller-box-back.png); height: 498px;">
+                                
+                                <div class="pharmacy-image">
+                                    <img src="assets/images/medical-product/seller-box.png" alt="Seller Box image" class="box-image">
+                                </div> 
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="slider-box">
+                        <div class="seller-slide-block">
+                            <ngx-slick-carousel class="carousel seller-slide-wrapper" [config]="sellerSlideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                                <div ngxSlickItem *ngFor="let slide of sellerSlides" class="slide bordr-both">
+                                    <div class="two-part">   
+                                        <div> 
+                                            <img class="seller-img" src="{{ slide.img }}" alt="carousel image"/>
+                                        </div>
+                                        <h3 class="seller-name">
+                                            {{slide.name}}
+                                        </h3>
+                                        <div class="seller-popular">
+                                            <h3>{{slide.discountpercent}}</h3>
+                                        </div>
+                                        <div class="seller-button-wrapper text-center">
+                                            <button type="button" class="seller-button"> Shop Now! </button>
+                                        </div>
+                                    </div>
+                                    <div class="two-part">   
+                                        <div> 
+                                            <img class="seller-img" src="{{ slide.image }}" alt="carousel image"/>
+                                        </div>
+                                        <h3 class="seller-name">
+                                            {{slide.name}}
+                                        </h3>
+                                        <div class="seller-popular">
+                                            <h3>{{slide.discountpercent}}</h3>
+                                        </div>
+                                        <div class="seller-button-wrapper text-center">
+                                            <button type="button" class="seller-button"> Shop Now! </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-slick-carousel>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+<!-- <app-footer></app-footer> -->

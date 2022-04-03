@@ -1,0 +1,420 @@
+<div class="main-container" #customLoadingTemplate>
+    <div class="row">
+        <div class="alert alert-danger w-100 my-0 mx-3" role="alert">
+            <i class="fa fa-info-circle " aria-hidden="true" style=" margin-right: 10px; font-size: 15px;"></i>
+            Please do not refresh/reload the page.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="my-2" *ngIf="countryWisePaymentMethods && countryWisePaymentMethods.length  > 0">
+                <div class="panel panel-primary cards-container mb-4">
+                    <div class="card border box" style="padding: 15px">
+                        <div *ngIf="countryWisePaymentMethods.includes('Pay32 Wallet')">
+                            <div class="section-title w-100 p-2 my-3"> Pay32 balance </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div *ngIf="userCurrentWalletBalance > 0">
+
+                                        <div class="mt-2">
+                                            <input type="checkbox" id="wallet-checkbox" name="wallet" class="mx-2"
+                                                style="cursor: pointer;" [(ngModel)]="isWalletSelected"
+                                                (ngModelChange)="selectWallet($event)" />
+                                            <span>
+                                                Use your <b> {{userService.curr}} {{userCurrentWalletBalance | number :
+                                                    '1.2-2'}}
+                                                </b> Pay32 wallet balance
+                                                <button (click)="paymentWiaWallet()"
+                                                    [disabled]="dissabledBtn['wallet'] ? true :  false"
+                                                    class="payBtn btn btn-primary btn-blue top-up-BTN"
+                                                    *ngIf="isWalletSelected && (userCurrentWalletBalance >= checkoutService['orderTotal'])">
+                                                    Pay {{ userService.curr }} {{checkoutService['orderTotal'] | number
+                                                    :
+                                                    '1.2-2'}}
+                                                </button>
+                                                <button (click)="goTopUpPage()"
+                                                    class="payBtn btn btn-primary btn-blue top-up-BTN"
+                                                    *ngIf="(userCurrentWalletBalance < checkoutService['orderTotal'])">
+                                                    Top-up Now </button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="userCurrentWalletBalance <= 0">
+                                        <span> <b> Top-up and Get Instant Cashback </b>
+                                            <button (click)="goTopUpPage()"
+                                                class="payBtn btn btn-primary btn-blue top-up-BTN">
+                                                Top-up Now </button>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            *ngIf="saveUserCards && saveUserCards.length > 0 && countryWisePaymentMethods.includes('stripe')">
+                            <div class="section-title w-100 p-2 my-3"> Your saved card(s)</div>
+                            <div class="mt-2">
+                                <div class="new-payment-option">
+                                    <div class="npayment-option">
+                                        <div class="payment-item">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- <form id="form1" name="form1" #form="ngForm"> -->
+                                                    <div *ngFor="let card of saveUserCards">
+                                                        <div class="radio-option">
+                                                            <input type="radio" class="pointerCursor" name="cards"
+                                                                [value]="card.id" [(ngModel)]="selectedCard"
+                                                                [disabled]="isWalletSelected && paymentTypeWithAmount['card'] <= 0 ? true : false"
+                                                                (change)="onItemChange(card)" />&nbsp;
+                                                            <label for="saveCards" class="radioOpt"
+                                                                [value]="card.creditCard.last4">
+                                                                **** **** ****{{ card.creditCard.last4 }}</label>
+
+                                                            <button class="payBtn btn btn-primary btn-blue top-up-BTN"
+                                                                [disabled]="dissabledBtn['savedCard'] ? true :  false"
+                                                                *ngIf="selectedCard == card.id && paymentType == 'saveCard' && paymentTypeWithAmount['card'] > 0"
+                                                                (click)="paySavedCard(card)">
+                                                                Pay {{ userService.curr }}
+                                                                {{paymentTypeWithAmount['card'] | number : '1.2-2'}}
+                                                            </button>
+
+                                                            <!-- <input type="text" minlength="3" maxlength="3" required
+                                                                    type="text"
+                                                                    class="cvvNo ng-pristine ng-invalid ng-star-inserted ng-touched"
+                                                                    placeholder="CVV" /> -->
+
+                                                            <input *ngIf="selectedCard == card['id'] && paymentType == 'saveCard' && 
+                                                                paymentTypeWithAmount['card'] > 0 " [(ngModel)]="cvvNo"
+                                                                name="cvvNo1" minlength="3" maxlength="3" required
+                                                                [ngClass]="isCvvErr == true ? 'cvvErr' : 'cvvNo'"
+                                                                type="password" placeholder="CVV"
+                                                                (keyup)="checkCvvNo()">
+                                                            <hr />
+                                                        </div>
+                                                    </div>
+                                                    <!-- </form> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="section-title w-100 p-2 my-3">Other payment option(s)</div>
+                            <div class="new-payment-option">
+                                <div class="npayment-option">
+                                    <div class="payment-item" *ngIf="countryWisePaymentMethods.includes('stripe')">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="radio-option">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="cards" class="pointerCursor"
+                                                            [(ngModel)]="paymentType" value="Stripe"
+                                                            [disabled]="isWalletSelected && paymentTypeWithAmount['card'] <= 0"
+                                                            (ngModelChange)="selectPaymentType('Stripe')" />
+                                                        <p> <b> Credit Card / Debit Card </b> </p>
+                                                        <div class="paymnet-icon">
+                                                            <div class="col-md-1">
+                                                                <div class="img-wrap">
+                                                                    <img src="assets/images/visa.svg" alt="Card logo">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <div class="img-wrap">
+                                                                    <img src="assets/images/mastercard.svg"
+                                                                        alt="Card logo">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                    <div class="ml-2 p-2" style="width: 80%;">
+                                                        <small style="font-size: 70%;">
+                                                            Visa, MasterCard and UnionPay
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="row"
+                                                    *ngIf="paymentType === 'Stripe' && paymentTypeWithAmount['card'] > 0 ">
+                                                    <div class="col-md-12 card-col">
+                                                        <hr />
+
+                                                        <form class="paymentForm" [formGroup]="cardDetailForm"
+                                                            (ngSubmit)="saveCard(cardDetailForm.valid)">
+                                                            <div style="margin-top: 15px">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="exampleInputEmail1"
+                                                                            class="control-label">Card Holder
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="cardholderName" />
+                                                                        <div
+                                                                            *ngIf="submitted && f.cardholderName.errors">
+                                                                            <div *ngIf="f.cardholderName.errors.required"
+                                                                                class="validation-error mt-1">
+                                                                                Card holder name is required
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="exampleInputEmail1"
+                                                                            class="control-label">Card
+                                                                            Number</label>
+                                                                        <input type="text" class="form-control"
+                                                                            (input)="verifyCard()" name="cardNumber"
+                                                                            autocomplete="new-password"
+                                                                            formControlName="cardNumber" minlength="16"
+                                                                            maxlength="16" />
+
+                                                                        <div *ngIf="submitted && f.cardNumber.errors">
+                                                                            <div *ngIf="f.cardNumber.errors.required"
+                                                                                class="validation-error mt-1">
+                                                                                Card number is required
+                                                                            </div>
+                                                                            <div *ngIf="f.cardNumber.errors.pattern"
+                                                                                class="validation-error mt-1">
+                                                                                Enter number only
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-3">
+                                                                        <label for="clinicname"
+                                                                            class="control-label">Month</label>
+                                                                        <select name="cars" id="cars"
+                                                                            formControlName="expirationMonth"
+                                                                            class="form-control" name="month">
+                                                                            <option value="01">01</option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="03">03</option>
+                                                                            <option value="04">04</option>
+                                                                            <option value="05">05</option>
+                                                                            <option value="06">06</option>
+                                                                            <option value="07">07</option>
+                                                                            <option value="08">08</option>
+                                                                            <option value="09">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                        </select>
+
+                                                                        <div
+                                                                            *ngIf="submitted && f.expirationMonth.errors">
+                                                                            <div *ngIf="f.expirationMonth.errors.required"
+                                                                                class="validation-error mt-1">
+                                                                                Month is required
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="clinicname">Expiry Year</label>
+                                                                        <select name="year" id="year"
+                                                                            formControlName="expirationYear"
+                                                                            class="form-control">
+                                                                            <option *ngFor="let item of expireYears"
+                                                                                value="{{ item }}">
+                                                                                {{ item }}
+                                                                            </option>
+                                                                        </select>
+                                                                        <div
+                                                                            *ngIf="submitted && f.expirationYear.errors">
+                                                                            <div *ngIf="f.expirationYear.errors.required"
+                                                                                class="validation-error mt-1">
+                                                                                Year is required
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-5">
+                                                                        <label for="exampleInputEmail1">CVV</label>
+                                                                        <input type="password" class="form-control"
+                                                                            autocomplete="new-password" name="cvv"
+                                                                            formControlName="cvv" minlength="3"
+                                                                            maxlength="3" />
+
+                                                                        <div *ngIf="submitted && f.cvv.errors">
+                                                                            <div *ngIf="f.cvv.errors.required"
+                                                                                class="validation-error mt-1">
+                                                                                CVV is required
+                                                                            </div>
+                                                                            <div *ngIf="f.cvv.errors.pattern"
+                                                                                class="validation-error mt-1">
+                                                                                Enter number only
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3 mt-2">
+                                                                <span class="checkSavedCard">
+                                                                    <input type="checkbox" name="isActive"
+                                                                        formControlName="saveCardForUser" />&nbsp;
+                                                                    Saved Card For Future Payments</span>
+                                                            </div>
+                                                            <div class="col-md">
+                                                                <button
+                                                                    [disabled]="dissabledBtn['card'] ? true :  false"
+                                                                    class="btn btn-primary submit-btn mt-3 w-100 btn-blue"
+                                                                    type="submit">
+                                                                    Pay {{ userService.curr }}
+                                                                    {{paymentTypeWithAmount['card'] | number :
+                                                                    '1.2-2'}}
+                                                                </button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="payment-item" *ngIf="countryWisePaymentMethods.includes('iPay88')">
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <div class="radio-option">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="cards" [(ngModel)]="paymentType"
+                                                            class="radio-input iPay pointerCursor" value="ipay88"
+                                                            (ngModelChange)="selectPaymentType('ipay88' )"
+                                                            [disabled]="paymentTypeWithAmount['card'] > 5000 || (isWalletSelected && paymentTypeWithAmount['card'] <= 0)"
+                                                            [ngStyle]="paymentTypeWithAmount['card'] && paymentTypeWithAmount['card'] > 5000 ? {'cursor': 'not-allowed'} : '' " />
+                                                        <p>
+                                                            <b> iPay88 </b>
+                                                        </p>
+
+                                                        <div class="paymnet-icon">
+                                                            <img src="https://www.ipay88.com/wp-content/uploads/2019/12/iPay88_WideNTT_HighRes-putih-160x69-1.png"
+                                                                style="width: 80px;" />
+                                                        </div>
+
+                                                    </label>
+
+                                                    <div class="ml-2 p-2" style="width: 80%;">
+                                                        <small style="font-size: 70%;">
+                                                            iPay88 provides payment methods like Online banking ,
+                                                            E-wallet (GrabPay, ShopeePay & more)
+                                                        </small>
+                                                    </div>
+
+                                                    <div style="width: 80%; color: #63c7db;" class="mt-1"
+                                                        *ngIf="paymentTypeWithAmount['card'] && paymentTypeWithAmount['card'] > 5000">
+                                                        <small
+                                                            style="font-size: 70%; display: flex; align-items: center;">
+                                                            <i class="fa fa-info-circle text-danger" aria-hidden="true"
+                                                                style=" margin-right: 10px; font-size: 15px;"></i>
+                                                            <b style="font-weight: 600;"> This payment option will
+                                                                only
+                                                                be available for payment amounts
+                                                                up to RM 5,000.</b>
+                                                        </small>
+                                                    </div>
+                                                </div>
+
+                                                <div *ngIf="paymentType === 'ipay88' ">
+                                                    <div class="col-md"
+                                                        *ngIf="paymentTypeWithAmount['card'] && paymentTypeWithAmount['card'] <= 5000">
+                                                        <button class="btn btn-primary submit-btn mt-3 w-100 btn-blue"
+                                                            (click)="payWithIpay88()">
+                                                            Pay {{ userService.curr }}
+                                                            {{paymentTypeWithAmount['card'] | number : '1.2-2'}}
+                                                        </button>
+                                                    </div>
+                                                    <!-- <div class="col-md">
+                                                        <button class="btn btn-primary submit-btn mt-3 w-100">
+                                                            Pay {{ userService.curr }} {{paymentTypeWithAmount['card']}}
+                                                        </button>
+                                                    </div> -->
+                                                    <div style="display: none;" *ngIf="previewIpay88HTML">
+                                                        <span
+                                                            [innerHTML]="convertHTML.bypassSecurityTrustHtml(previewIpay88HTML)">
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="payment-item" *ngIf="countryWisePaymentMethods.includes('Paypal')">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="radio-option">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" class="cursor-pointer" name="cards"
+                                                            [(ngModel)]="paymentType" value="paypal"
+                                                            [disabled]="isWalletSelected && paymentTypeWithAmount['card'] <= 0"
+                                                            (ngModelChange)="selectPaymentType('paypal' )" />
+                                                        <p>
+                                                            <b> PayPal </b>
+                                                        </p>
+                                                        <div class="paymnet-icon">
+                                                            <img src="assets/images/icon/paypal.png" alt="paypal logo"
+                                                                style="height: 22px;">
+                                                        </div>
+                                                    </label>
+
+                                                    <div class="ml-2 p-2" style="width: 80%;">
+                                                        <small style="font-size: 70%;">
+                                                            Pay with PayPal. Safe and Secure
+                                                        </small>
+                                                    </div>
+
+                                                    <div
+                                                        *ngIf="paymentType === 'paypal' && paymentTypeWithAmount['card'] > 0">
+                                                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="sticky-menu mb-4">
+                <div class="panel panel-primary cards-container">
+                    <div class="card border box" style="padding: 15px">
+                        <div class="section-title w-100 p-2">Payment Detail</div>
+                        <!-- <div class="row ">
+                            <div class="col-md" style="font-size: 12px; font-weight: 500;">
+                                <div class="text-danger">
+                                    Please don't refresh this page.
+                                </div>
+                                Safe and Secure Payments
+                            </div>
+                        </div> -->
+                        <div class="row mt-2">
+                            <div class="col-md-6" style="font-size: 20px;
+                            color: #056a1c;font-weight: 600;">
+                                Order Total :
+                            </div>
+                            <div class="col-md-6" style="font-size: 20px;
+                             color: #056a1c; font-weight: 600;">
+                                {{userService.curr}} {{checkoutService['orderTotal'] | number : '1.2-2'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<ngx-loading [show]="fullPageLoader" [template]="customLoadingTemplate"
+    [config]="{ backdropBorderRadius: '3px' ,fullScreenBackdrop: true }">
+</ngx-loading>

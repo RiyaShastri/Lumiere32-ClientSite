@@ -1,0 +1,502 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="register-wrapper">
+  <div *ngIf="initialButton">
+    <div class="login-signup-text">
+      <a
+        style="
+          color: #63c7db;
+          border-bottom: 3px solid;
+          text-decoration: none;
+          cursor: pointer;
+        "
+        (click)="login()"
+      >
+        Login</a
+      >
+      <a (click)="signup()" routerLinkActive="active">Sign Up</a>
+    </div>
+  </div>
+  <div *ngIf="!initialButton">
+    <div class="login-signup-text">
+      <a (click)="login()"> Login</a>
+      <a
+        style="
+          color: #63c7db;
+          border-bottom: 3px solid;
+          text-decoration: none;
+          cursor: pointer;
+        "
+        (click)="signup()"
+        routerLinkActive="active"
+        >Sign Up</a
+      >
+    </div>
+  </div>
+
+  <ng-container *ngIf="emailFormFlag">
+    <form
+      [formGroup]="emailForm"
+      class="email-wrapper"
+      (ngSubmit)="onSubmitEmailForm()"
+    >
+      <div class="form-wrapper form-email-wrapper">
+        <div class="padding-top-20">
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              style="text-transform: lowercase"
+              formControlName="email"
+              placeholder="Enter Your Email"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': isSubmittedEmailForm && emailControls.email.errors
+              }"
+            />
+            <div
+              *ngIf="isSubmittedEmailForm && emailControls.email.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="emailControls.email.errors.required">
+                Email is required
+              </div>
+              <div *ngIf="emailControls.email.errors.pattern">
+                Please enter valid email (xyz@abc.com)
+              </div>
+            </div>
+          </div>
+          <div class="register-button-wrapper">
+            <button type="submit" class="custom-button">Continue</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="registerFormFlag">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()">
+      <div class="form-wrapper">
+        <div class="col-sm-12 p-0">
+          <input
+            type="email"
+            placeholder="Email"
+            class="form-control"
+            value="{{ registerSecreen1Data }}"
+            disabled
+          />
+        </div>
+        <div class="padding-top-20">
+          <div class="d-flex justify-content-between display-mobile-block">
+            <div class="col-lg-6 col-sm-6 p-0">
+              <div class="d-flex padding-right-20">
+                <div class="dropdown-wrapper">
+                  <select
+                    formControlName="title"
+                    class="form-control p-0"
+                    style="width: 55px"
+                    [ngClass]="{
+                      'is-invalid':
+                        isSubmittedRegisterForm && signUpControls.title.errors
+                    }"
+                  >
+                    <option value="">Title</option>
+                    <option value="{{ _title }}" *ngFor="let _title of titles">
+                      {{ _title }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      isSubmittedRegisterForm && signUpControls.title.errors
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="signUpControls.title.errors.required">
+                      Required
+                    </div>
+                  </div>
+                </div>
+                <div style="width: 100%">
+                  <input
+                    type="text"
+                    formControlName="fname"
+                    class="form-control"
+                    placeholder="First Name"
+                    [ngClass]="{
+                      'is-invalid':
+                        isSubmittedRegisterForm && signUpControls.fname.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      isSubmittedRegisterForm && signUpControls.fname.errors
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="signUpControls.fname.errors.required">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 padding-mobile-20 p-0">
+              <input
+                type="text"
+                formControlName="lname"
+                placeholder="Last Name"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    isSubmittedRegisterForm && signUpControls.lname.errors
+                }"
+              />
+              <div
+                *ngIf="isSubmittedRegisterForm && signUpControls.lname.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="signUpControls.lname.errors.required">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              d-flex
+              justify-content-between
+              padding-top-20
+              display-mobile-block
+            "
+          >
+            <div class="col-lg-6 p-0">
+              <div class="padding-right-20">
+                <input
+                  type="text"
+                  formControlName="clinicName"
+                  placeholder="Clinic Name"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      isSubmittedRegisterForm &&
+                      signUpControls.clinicName.errors
+                  }"
+                />
+                <div
+                  *ngIf="
+                    isSubmittedRegisterForm && signUpControls.clinicName.errors
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="signUpControls.clinicName.errors.required">
+                    Clinic Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 padding-mobile-20 padding-mobile-20 p-0">
+              <div class="d-flex">
+                <!-- <div class="dropdown-wrapper select-country-code">
+                                <p-dropdown [options]="codes" formControlName="code" filter="true" (onChange)="onChange($event)"  placeholder="+64" styleClass="form-control p-0 code" [ngClass]="{ 'is-invalid': isSubmittedRegisterForm && signUpControls.code.errors }">
+                                </p-dropdown>
+                                <div *ngIf="isSubmittedRegisterForm && signUpControls.code.errors" class="invalid-feedback">
+                                    <div *ngIf="signUpControls.code.errors.required">Required</div>
+                                </div>
+                                <p style="color:red">{{errorMessage}}</p>
+                            </div> -->
+                <div style="width: 100%">
+                  <input
+                    type="number"
+                    formControlName="contactNo"
+                    placeholder="Mobile No."
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid':
+                        isSubmittedRegisterForm &&
+                        signUpControls.contactNo.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      isSubmittedRegisterForm && signUpControls.contactNo.errors
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="signUpControls.contactNo.errors.required">
+                      Mobile No. is required
+                    </div>
+                    <div *ngIf="signUpControls.contactNo.errors.pattern">
+                      Mobile No. must be between 5 to 15 digits
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              d-flex
+              justify-content-between
+              padding-top-20
+              display-mobile-block
+            "
+          >
+            <div class="col-lg-6 p-0">
+              <div class="padding-right-20">
+                <select
+                  formControlName="practiceType"
+                  placeholder="Practice Type"
+                  class="form-control p-0"
+                  [ngClass]="{
+                    'is-invalid':
+                      isSubmittedRegisterForm &&
+                      signUpControls.practiceType.errors
+                  }"
+                >
+                  <option value="">Practice Type</option>
+                  <option
+                    value="{{ _practise }}"
+                    *ngFor="let _practise of practises"
+                  >
+                    {{ _practise }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    isSubmittedRegisterForm &&
+                    signUpControls.practiceType.errors
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="signUpControls.practiceType.errors.required">
+                    Practice Type is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 padding-mobile-20 p-0">
+              <p-dropdown
+                [options]="specialities"
+                formControlName="speciality"
+                filter="true"
+                placeholder="Select Speciality"
+                styleClass="form-control p-0 code"
+                class="select-speciality"
+                [ngClass]="{
+                  'is-invalid':
+                    isSubmittedRegisterForm && signUpControls.speciality.errors
+                }"
+              >
+              </p-dropdown>
+              <div
+                *ngIf="
+                  isSubmittedRegisterForm && signUpControls.speciality.errors
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="signUpControls.speciality.errors.required">
+                  Speciality is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              d-flex
+              justify-content-between
+              padding-top-20
+              display-mobile-block
+            "
+          >
+            <div class="col-lg-6 p-0">
+              <div class="padding-right-20">
+                <input
+                  type="password"
+                  formControlName="password"
+                  placeholder="Password"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      isSubmittedRegisterForm && signUpControls.password.errors
+                  }"
+                  [type]="hide ? 'password' : 'text'"
+                />
+                <mat-icon class="eye" matSuffix (click)="hide = !hide">
+                  {{ hide ? "visibility_off" : "visibility" }}
+                </mat-icon>
+                <div
+                  *ngIf="
+                    isSubmittedRegisterForm && signUpControls.password.errors
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="signUpControls.password.errors.required">
+                    Password is required
+                  </div>
+                  <div *ngIf="signUpControls.password.errors.pattern">
+                    Please choose a password that contains a minimum of 8
+                    characters, must have 1 letter and 1 number.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="full-width form-width-wrapper padding-mobile-20">
+              <input
+                type="password"
+                formControlName="rePassword"
+                placeholder="Repeat Password"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    isSubmittedRegisterForm && signUpControls.rePassword.errors
+                }"
+                [type]="hide1 ? 'password' : 'text'"
+              />
+              <mat-icon class="eye" matSuffix (click)="hide1 = !hide1">
+                {{ hide1 ? "visibility_off" : "visibility" }}
+              </mat-icon>
+              <div
+                *ngIf="
+                  isSubmittedRegisterForm && signUpControls.rePassword.errors
+                "
+                class="invalid-feedback"
+              >
+                <div
+                  style="margin-top: 5px"
+                  *ngIf="signUpControls.rePassword.errors.required"
+                >
+                  Confirm Password is required
+                </div>
+                <div
+                  style="margin-top: 5px"
+                  *ngIf="signUpControls.rePassword.errors.mustMatch"
+                >
+                  Passwords must match
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="
+            d-flex
+            justify-content-between
+            padding-top-20
+            display-mobile-block
+            terms-block-wrapper
+          "
+        >
+          <mat-checkbox
+            formControlName="termCondition"
+            class="text-blue"
+            [ngClass]="{
+              'is-invalid':
+                isSubmittedRegisterForm && signUpControls.termCondition.errors
+            }"
+          >
+            I accept Terms of use</mat-checkbox
+          >
+          <div
+            *ngIf="
+              isSubmittedRegisterForm && signUpControls.termCondition.errors
+            "
+            class="invalid-feedback trmsuse"
+          >
+            <div
+              class="termsconditnmessage"
+              *ngIf="signUpControls.termCondition.errors.required"
+            >
+              Please accept Terms of use
+            </div>
+          </div>
+          <mat-checkbox formControlName="signupNewsletter" class="text-blue"
+            >Sign Up to the Newsletter</mat-checkbox
+          >
+        </div>
+
+        <div class="text-center button-wrapper">
+          <button
+            type="submit"
+            class="custom-button"
+            [disabled]="!ButtonDisbaled"
+          >
+            Sign up
+          </button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <!-- <ng-container *ngIf="otpFlag">
+    <div class="verify-email-wrapper">
+      <div class="heading-wrapper">
+        <h1>Verifying Email</h1>
+      </div>
+      <div class="paragraph-wrapper">
+        <p>We have sent 6 digit OTP on your Email</p>
+      </div>
+      <div class="verify-mobile-input-wrapper padding-top-20">
+        <ng-otp-input
+          (onInputChange)="onOtpChange($event)"
+          [config]="{ length: 6 }"
+        ></ng-otp-input>
+      </div>
+      <div
+        class="padding-top-20 paddingRight"
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+        "
+      >
+        <p (click)="onChangeEmail()" class="text-blue dis">Change Email</p>
+        <a (click)="onResendOtp()" id="resendOtp" class="paddingLeft"
+          ><span>Resend OTP in 30 sec</span></a
+        >
+      </div>
+      <div class="text-center button-wrapper padding-top-20">
+        <button
+          type="submit"
+          class="custom-button verifyBtn"
+          (click)="onSubmitOTP()"
+        >
+          Verify
+        </button>
+      </div>
+    </div>
+  </ng-container> -->
+
+  <ng-container *ngIf="otpFlag">
+    <div class="verify-email-wrapper">
+      <div class="heading-wrapper">
+        <h1 class="text-center">Verifying Email</h1>
+      </div>
+      <div class="paragraph-wrapper text-center">
+        <p>We have sent 6 digit OTP on your Email</p>
+      </div>
+      <div class="verify-mobile-input-wrapper padding-top-20">
+        <ng-otp-input
+          (onInputChange)="onOtpChange($event)"
+          [config]="{ length: 6 }"
+        ></ng-otp-input>
+      </div>
+      <div class="padding-top-20 paddingRight text-center centremail">
+        <p (click)="onChangeEmail()" class="text-blue dis">Change Email</p>
+        <a (click)="onResendOtp()" id="resendOtp" class="paddingLeft">
+          <span>
+            <b style="color: red">Resend OTP </b>
+            <span *ngIf="!clearTimer"> in {{ seconds$ | async }} sec</span>
+          </span>
+        </a>
+      </div>
+      <div class="text-center button-wrapper padding-top-20">
+        <button
+          type="submit"
+          class="custom-button verifyBtn"
+          (click)="onSubmitOTP()"
+        >
+          Verify
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

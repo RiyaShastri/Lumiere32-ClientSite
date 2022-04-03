@@ -1,0 +1,51 @@
+<app-post-login-header></app-post-login-header>
+<br>
+<div class="container">
+  <div class="col-md-12">
+    <input type="text" class="input-box" [(ngModel)]="searchQuoteNo" (ngModelChange)="Search()"
+      placeholder="Quote number" />
+    <input type="text" class="input-box" [(ngModel)]="searchQuoteDate" (ngModelChange)="SearchDate()"
+      placeholder="Select Date" />
+  </div>
+  <br>
+  <div class="card">
+    <table class="table table-striped">
+      <thead>
+        <tr style="background-color: #E8F7FA;">
+          <!-- <th *ngIf="cancelDisplay"></th> -->
+          <th scope="col">Quotation No</th>
+          <th scope="col">Date</th>
+          <th scope="col">Sub Total</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Total</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+      <tbody *ngFor='let item of quoteData'>
+        <tr>
+          <td>{{item.quotationNumber}}</td>
+          <td>{{item.quotationDate | date:'dd-MM-yyyy'}}</td>
+          <td>{{item.subTotal | number:'1.2-2'}}</td>
+          <td>{{item.discount | number:'1.2-2'}}</td>
+          <td>{{item.total | number:'1.2-2'}}</td>
+          <td>{{item.quotationStatus | uppercase }}</td>
+          <td>
+            <i class="fa fa-eye" aria-hidden="true" (click)="getSingleQuoteDetail(item.id)"
+              style="cursor: pointer;"></i>
+            <a href="{{this.baseService.baseUrlAdmin + 'quotationPdf/' + encodedId(item.id)}}">
+             <img class="print-image"
+            src="assets\images\icon\printer.svg"/>
+            </a>
+
+
+            <!-- <button (click)="getSingleQuoteDetail(item.id)" >Edit</button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<app-footer></app-footer>

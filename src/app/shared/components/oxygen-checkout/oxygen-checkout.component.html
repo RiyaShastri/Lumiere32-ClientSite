@@ -1,0 +1,45 @@
+<!-- <app-header></app-header> -->
+<div *ngIf='success==true'>
+    <div class="wrapper">
+        <section class="thank-you-wrapper mb-5 mt-5">
+            <div class="container">
+                <div class="card thank-layout-card">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-sm-22  text-center p-2">
+                            <i class="fas fa-check-circle mt-2" style="color: mediumseagreen;font-size: 60px;"></i>
+                            <h1 class="display-4 m-2">Thank You!</h1>
+                            <p class="lead p-5"><strong>We appreciate your bussiness! If you have any questions, please email
+                                <br>
+                                <a href="mailto:sales@lumiere32.sg">sales@lumiere32.sg</a>
+                             </strong> </p>
+                             <button class="btn btn-sm btn-primary mb-4" routerLink="/">GO TO HOME</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div *ngIf='success==false'>
+    <div class="wrapper">
+        <section class="thank-you-wrapper mb-5 mt-5">
+            <div class="container">
+                <div class="card thank-layout-card">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-sm-22  text-center p-2">
+                            <i class="fas fa-exclamation-square mt-2" style="color: red;font-size: 60px;"></i>
+                            <h1 class="display-4 m-2">Sorry!</h1>
+                            <p class="lead p-5"><strong>Forgot to add something to your cart? Shop around then come back to pay!
+
+                                </strong> </p>
+                            <button class="btn btn-sm btn-primary mb-4" routerLink="/">GO TO HOME</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- <app-footer></app-footer> -->

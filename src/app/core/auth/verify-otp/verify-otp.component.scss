@@ -1,0 +1,48 @@
+button.verifyBtn{
+    width: 65% !important;
+}
+.disabled{
+    opacity: 0.4;
+    cursor: not-allowed !important;
+} 
+#resendOtp{
+    color: red;
+}
+.paddingLeft{
+    padding-left: 15%;
+    cursor: pointer;
+}
+@media screen and (max-width: 360px){
+    .paddingLeft{
+        padding-left: 7%;
+    }
+}
+@media screen and (max-width: 375px){
+    .paddingRight{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+.paragraph-wrapper{
+    padding-top: 7%;
+}
+.dis{
+    display: contents;
+    cursor: pointer;
+}
+@media screen and (max-width: 420px){
+::ng-deep .otp-input {
+    width: 35px !important;
+    font-size: 18px !important;
+    height: 40px !important; 
+    }
+}
+@media screen and (max-width: 280px){
+    ::ng-deep .otp-input {
+        width: 31px !important;
+        font-size: 14px !important;
+        height: 35px !important; 
+        }
+    }

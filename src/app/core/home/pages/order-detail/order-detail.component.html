@@ -1,0 +1,232 @@
+<app-post-login-header></app-post-login-header>
+<div class="container" *ngIf="customerOrderData">
+  <div class="row">
+    <div class=" col-md-7" style="margin-bottom: 1.5vh;padding-right: 0px;">
+      <div class="card address-card h-100">
+        <h5 class="card-title">Order No: <span class="badge badge-secondary">{{customerOrderData[0].orderNo}}</span>
+        </h5>
+        <br>
+        <h5 class="card-title">Delivery Address</h5>
+        <h6 class="address-body">
+          {{customerOrderData[0].shippingBuildingName}}
+          {{customerOrderData[0].shippingBuildingName}} {{customerOrderData[0].shippingBlockNo}}
+          {{customerOrderData[0].shippingClinicName}},
+          Postal code- {{customerOrderData[0].shippingPostcode}}
+        </h6>
+        <br>
+        <div class="new1">
+          <h5 class="card-title" style="padding-top: 10px;">Order Status</h5>
+          <h6 class="address-body" style="color: #1ddc5e;">
+            {{customerOrderData[0].orderStatus}}
+          </h6>
+        </div>
+        <div class="row new1">
+          <div class="col-md-7 payment-mode">
+            <h6 class="card-title ">Payment Information</h6>
+            <ul class="list-group">
+              <div *ngFor="let item of customerOrderData[0].orderTransactions[0].methodOfPayment | keyvalue">
+                <li style="flex-direction: row; flex-wrap: wrap;"
+                  class="list-group-item d-flex justify-content-between align-items-center" *ngIf="item.value!=0">
+                  {{ item.key.toUpperCase() }}
+                  <span *ngIf="item.key.toUpperCase() == 'COD'"><button type="button" class="btn btn-warning btn-sm"
+                      (click)="codPay(customerOrderData[0].orderId)"><i class="far fa-credit-card"></i>&nbsp;Pay
+                      Now</button></span>
+                  <span class="badge badge-primary text-white">{{userService.curr}} {{ item.value | number :
+                    '1.2-2'}}</span>
+                </li>
+              </div>
+            </ul>
+          </div>
+          <div class="col-md-7">
+            <button type="button" class="btn btn-outline-info"
+              (click)="downloadInvoice(customerOrderData[0].orderId)"><i class="fas fa-file-invoice"></i>&nbsp;View
+              Invoice</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=" col-md-4" style="padding-right: 0px;">
+      <div class="card detail-card">
+        <div class="detail-title text-center">BILLING DETAILS</div>
+        <div class="card-body">
+          <table style="width:100%">
+            <tr>
+              <th>Subtotal Price in {{userService.curr}}
+              </th>
+              <td>{{customerOrderData[0].orderTransactions[0].productTotal}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>Delivery Charges
+              </th>
+              <td>{{customerOrderData[0].orderTransactions[0].delieveryCharge}}
+              </td>
+            </tr>
+
+            <tr>
+              <th>Discount
+
+              </th>
+              <td>{{ customerOrderData[0].orderTransactions[0].discount }}
+
+              </td>
+            </tr>
+
+            <tr>
+              <th>{{customerOrderData[0].orderTransactions[0].taxDetails[0].taxCode}}
+                ({{customerOrderData[0].orderTransactions[0].tax}}%)
+
+              </th>
+              <td>{{customerOrderData[0].orderTransactions[0].taxamount}}
+
+              </td>
+            </tr>
+
+            <tr class="total">
+              <th class="total">TOTAL AMOUNT</th>
+              <td class="total">{{customerOrderData[0].orderTransactions[0].totalAmountWithTax}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="card summary-card">
+    <div class="row">
+      <div class="col-md-4 payall-btn " *ngIf="showCancelOption">
+        <button (click)="cancelDisplayContorl()" class="btn btn-info m-2">Want to Cancel any
+          of the Product?</button>
+      </div>
+    </div>
+    <h5 class="card-title" style="padding: 20px;">Order Summary</h5>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr style="background-color: #E8F7FA;" class="table-heading">
+            <th scope="col" class="text-center">Product</th>
+            <th scope="col" class="text-center">QTY</th>
+            <th scope="col" class="text-center">PRICE</th>
+            <th scope="col" class="text-center">Status</th>
+            <th scope="col" class="text-center" *ngIf="cancelDisplay">Select option</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let item of productData;let i = index">
+          <tr>
+            <td class="prod-name">
+              <div class="row d-flex align-items-center listing">
+                <div class="col-md-2 orderImg">
+                  <img src="{{item.product.productImage[0].image}}" style="width: 100px;height:100px"
+                    alt="dashboard product image">
+                </div>
+                <span class="col-md-9 orderImg text-left text-justify">
+                  {{item.productName}}
+                </span>
+              </div>
+            </td>
+            <td class="text-center">{{item.quantity}}</td>
+            <td class="text-center">{{item.total}}</td>
+            <td class="text-center">{{item.orderProductStatus}}</td>
+            <td class="text-center" *ngIf="cancelDisplay">
+              <select [(ngModel)]="item.orderProductStatus" name="orderProductStatus{{i}}"
+                class="form-control border-primary"
+                *ngIf="!(item.orderProductStatus=='Delivered' || item.orderProductStatus=='Shipped')  ">
+                <option value="" >Select Product Status</option>
+                <option [value]="item.status" *ngFor="let item of productStatus">
+                  {{item.status}}
+                </option>
+              </select>
+              <span class="badge badge-danger"
+                *ngIf="(item.orderProductStatus=='Delivered' || item.orderProductStatus=='Shipped')">
+                Product cannot be cancelled
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        <p *ngIf="productData.length == 0" style="color: crimson;">
+          No In Stocks Products found
+        </p>
+      </table>
+      <button type="button" *ngIf="cancelDisplay" (click)="updateOrder()"
+        class="btn btn-outline-success m-2">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="cancelTableDisplay">
+  <div class="card summary-card">
+    <h5 class="card-title" style="padding: 20px; color:#00488A;">Cancelled Products </h5>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr style="background-color: #E8F7FA;">
+            <th scope="col">Product</th>
+            <th scope="col">QTY</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">Product Status</th>
+          </tr>
+        </thead>
+        <tbody *ngFor='let item of cancelUserData'>
+          <td>{{item.productName}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.orderProductStatus}}</td>
+        </tbody>
+      </table>
+
+      <h6 class="card-title mt-1" style="padding: 10px;" *ngIf="refundTableDisplay">Refunds</h6>
+      <table class="table table-striped" *ngIf="refundTableDisplay">
+
+        <thead>
+          <tr style="background-color: #E8F7FA;">
+            <th scope="col">Txn Id</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Type</th>
+            <th scope="col">Refund Status</th>
+            <th scope="col">Completed On</th>
+          </tr>
+        </thead>
+        <tbody *ngFor='let item of refundUserData'>
+          <td>{{item.refundTransactionId}}</td>
+          <td>{{item.amount}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.refundStatus == true ? "Refunded" : "Refund Initiated"}}</td>
+          <td>{{item.refundTimestamp | date:'dd/MM/yyyy'}}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5" *ngIf="outOfStockTableDisplay">
+  <div class="card summary-card">
+    <h5 class="card-title" style="padding: 20px; color:#00488A;">Out of Stock Products </h5>
+    <h5 class="card-title" style="padding: 20px;">Back Order No: <span
+        class="badge badge-secondary">{{customerOrderData[0].backOrder[0].orderNo}}</span></h5>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr style="background-color: #E8F7FA;">
+            <th scope="col">Product</th>
+            <th scope="col">QTY</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">Product Status</th>
+          </tr>
+        </thead>
+        <tbody *ngFor='let item of outOfStockUserData'>
+          <td>{{item.productName}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.orderProductStatus}}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

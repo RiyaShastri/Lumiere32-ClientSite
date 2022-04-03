@@ -1,0 +1,201 @@
+<!-- <app-header></app-header> -->
+<div class="wallet-container">
+    <div class="container header-image">
+        <div>
+            <div>
+                <img src="https://lumier32.s3.ap-southeast-1.amazonaws.com/banner/banner-pay32.png" style="width: 100%;" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--  -->
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-2 wallet-option"  style="display: flex; flex-direction: row; flex-wrap: wrap; align-content: flex-start; align-items: center; justify-content: center;">
+                <div *ngFor='let item of walletOptions'>
+                    <label class="radio-inline"
+                        [ngClass]="selectedvalue == item.name ?  'selected-radio': 'radio-inline'">
+                        <input type="radio" [value]="item.name" name="payment" [(ngModel)]="selectedvalue"
+                            class="radio-input" (ngModelChange)="viewTable($event)" checked />
+                        {{item.name}}
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="col-md-10" *ngIf="selectedvalue == 'My Wallet'">
+                <div class="row">
+                    <div class="col-md-6" *ngIf="display" style="margin-bottom: 3vh;">
+                        <div class="card wallet-balance-card">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card-title" style="width:160px;">Wallet Balance</div>
+                                    <div class="card-balance">{{service.curr}} {{(dashResponse.wallet.wallet < 0) ?  0.00 :  dashResponse.wallet.wallet | number:'1.2-2'}}</div>
+                                    <button class="btn-primary" (click)="navigateToAddMoney()">Add Money</button>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="card-title">Saving</div>
+                                    <div class="card-balance">{{service.curr}} {{dashResponse.wallet.savings | number:'1.2-2'}}</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card graph-card">
+                            <div>
+                                <select name="months" id="months" [(ngModel)]="userReqFilterForGraph"
+                                    (ngModelChange)="controlChartDays($event)">
+                                    <option *ngFor='let item of filterByDates' [value]="item.value">{{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div id="divChart">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-10" *ngIf="selectedvalue == 'Pay Later'">
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 3vh;">
+                        <div class="card payLater-card">
+                            <img src="assets\images\featured\payBg.png">
+                            <div class="payLater-logo"><img src="assets\images\aboutus\BNPL.png"></div>
+                            <!-- <button class="More-btn"></button> -->
+                            <div class="amount-box">
+                                <div class="title-balance">
+                                    <!-- <div class="box"></div>
+                                    <div>BNPL Balance</div> -->
+                                </div>
+                                <div class="card-title" style="font-weight: 500; font-size: 20px;">BNPL Balance</div>
+                                <div class="card-balance">{{service.curr}} {{dashResponse.wallet.wallet | number:'1.2-2'}}</div>
+                                <button class="btn-primary" (click)="navigateToContactUs()">Request More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 paylater-chart">
+                        <div class="card graph-card ">
+                            <select name="months" id="months" [(ngModel)]="userReqFilterForGraph"
+                                (ngModelChange)="controlChartDays($event)">
+                                <option *ngFor='let item of filterByDates' [value]="item.value">{{item.name}}
+                                </option>
+                            </select>
+                            <div class="graph-box">
+                                <div id="divChart">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-10 capital-section" *ngIf="selectedvalue == 'Working Capital'">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card wallet-balance-card" style="background-color: #63C7DB;">
+                            <div class="row">
+                                <div>
+                                    <div class="card-title">Total Amount Approved:</div>
+                                    <div class="card-balance">{{service.curr}} 16575.18</div>
+                                    <button class="btn-primary" (click)="navigateToAddMoney()">Request for Working
+                                        Capital</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card wallet-balance-card">
+                            <div class="row">
+                                <div>
+                                    <div class="card-title">Total Amount Disbursed:</div>
+                                    <div class="card-balance"> 16575.18</div>
+                                    <button class="btn-primary" (click)="navigateToAddMoney()">Request for Working
+                                        Capital</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 paylater-chart">
+                        <div class="card graph-card ">
+                            <select name="months" id="months" [(ngModel)]="userReqFilterForGraph"
+                                (ngModelChange)="controlChartDays($event)">
+                                <option *ngFor='let item of filterByDates' [value]="item.value">{{item.name}}
+                                </option>
+                            </select>
+                            <div class="graph-box">
+                                <div id="divChart">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+
+
+    <div class="container" [ngClass]="selectedvalue == 'Summary' ?  'summary-trasaction': ''">
+        <br>
+        <div class="transaction-table">
+            <div class="row">
+                <div class="col-md-6">
+                    <span>
+                        <strong>
+                            Transaction Summary
+                        </strong>
+                    </span>
+                </div>
+            </div>
+            <p-table #dt *ngIf="display" [value]="dashResponse.walletTxn" [paginator]="true" [rows]="10"
+                styleClass="p-datatable-responsive-demo" [globalFilterFields]="['order.orderNo','txnId']">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 15%;" pSortableColumn="txnId">Transaction ID
+                            <p-sortIcon field="txnId"> </p-sortIcon>
+                        </th>
+                        <th style="width: 13%;">Date</th>
+                        <th style="width: 13%;" pSortableColumn="order.orderNo">Order No.
+                            <p-sortIcon field="order.orderNo"> </p-sortIcon>
+                        </th>
+                        <th style="width: 10%;">Deposit(+)</th>
+                        <th style="width: 10%;">Withdrawal(-)</th>
+                        <!-- <th style="width: 10%;">Pay32</th> -->
+                        <th style="width: 25%;">Comment</th>
+                    </tr>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'txnId', 'contains')"
+                        placeholder="Search Transaction ID" class="p-column-filter order-filter" style='right:10px; width:175px;'>
+                    <input pInputText type="text"
+                        (input)="dt.filter($event.target.value, 'order.orderNo', 'contains')"
+                        placeholder="Search Order ID" class="p-column-filter order-filter" style='width:160px;right: 190px;'>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{product.txnId}}</td>
+                        <td>{{product.created_at | date:'short'}}</td>
+                        <td>{{product.order.orderNo}}</td>
+                        <!-- <td >{{product.order ? product.order.orderNo : 'N/A'}}</td> -->
+                        <td style="color: #E35C8E;">{{product.amountCredit | number:'1.2-2'}}</td>
+                        <td style="color: #06B962;">{{product.amountDebit | number:'1.2-2'}}</td>
+                        <!-- <td style="width: 10%;"><img src="assets\images\aboutus\BNPL.png"></td> -->
+                        <td>{{product.message}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+
+    <br>
+</div>
+<!-- <app-footer></app-footer> -->

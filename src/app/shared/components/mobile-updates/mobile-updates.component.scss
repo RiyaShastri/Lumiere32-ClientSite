@@ -1,0 +1,93 @@
+.pointerCursor {
+    cursor: pointer;
+}
+
+.box {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 6.5px 5px rgba(0, 0, 0, 0.06),
+        0 6px 5px rgba(0, 0, 0, 0.034), 0 3px 3px rgba(0, 0, 0, 0.006), 0 6px 5px rgba(0, 0, 0, 0.12);
+}
+
+.form-group {
+    label {
+        font-size: 13px;
+        font-weight: 500;
+    }
+    input {
+        height: 35px;
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 3px;
+    }
+    .code-input {
+        max-width: 79px;
+        min-width: 50px;
+
+        .code-select {
+            padding: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            padding-bottom: 4px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+    }
+    button {
+        height: 35px;
+        background-color: #63c7db;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        padding: 3px 25px;
+    }
+}
+
+.col {
+    padding: 3px;
+}
+
+.user-verified-card {
+    margin-top: 13px;
+    padding: 14px;
+    color: #8b8585;
+    font-size: 20px;
+    margin-bottom: 0;
+    .material-icons {
+        font-weight: 600;
+        font-size: 20px;
+        padding: 5px;
+    }
+    .col-md-4 {
+        padding-top: 10px;
+        text-align: right;
+    }
+    .mobileNumber {
+        font-size: 15px;
+    }
+}
+
+.btn-primary {
+    border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.error-msg{
+    color: red;
+    font-size: 12px;
+}
+
+@media (max-width:540px){
+    .sbmit{
+        margin-top: 2vh !important;
+    }
+}

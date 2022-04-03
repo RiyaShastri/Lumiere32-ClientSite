@@ -1,0 +1,151 @@
+.new1 {
+  border-top: 0.5px solid #ccc;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  // margin-bottom: 0;
+}
+.address-card {
+  margin: 30px 1px 0 45px;
+  padding: 45px 20px;
+  // max-height: 327px;
+  .address-body {
+    color: #637e94;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .col-md-5 {
+    padding: 50px 0px 0 120px;
+  }
+
+  .payment-mode {
+    padding: 10px 0;
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1ddc5e;
+    }
+  }
+  .row {
+    padding: 0 15px;
+    margin-top: 30px;
+  }
+}
+
+.detail-card {
+  margin: 30px 0 0 25px;
+  // max-height: 327px;
+  max-width: 348px;
+  padding: 15px;
+  .detail-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 -15px;
+    padding: 0 15px 8px 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  tr {
+    border-bottom: 1px dashed #ccc;
+  }
+  th {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 15px 0;
+  }
+  .card-body {
+    padding: 0;
+  }
+  .total {
+    font-size: 17px;
+    font-weight: 700;
+    border-bottom: none;
+  }
+}
+
+.btnPay {
+  background: #63c7db;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 4px 21px;
+  font-weight: 600;
+}
+
+.summary-card {
+  margin: 30px;
+  .card-body {
+    padding: 0 20px;
+    overflow: scroll;
+  }
+  .table-heading {
+    th {
+      padding-top: 0.75rem;
+      font-size: 15px;
+    }
+  }
+  tr {
+    background-color: #fff;
+  }
+  th {
+    border: none;
+    padding-top: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    img {
+      width: 90px;
+    }
+  }
+  .prod-name {
+    padding-top: 0.75rem;
+    width: 60%;
+    span {
+      margin-left: 20px;
+    }
+  }
+}
+.card {
+  box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 20%), 0px 0px 3px 0px rgb(0 0 0 / 14%), 0px 9px 4px -10px rgb(0 0 0 / 12%);
+  border: none;
+  border-radius: 8px;
+}
+
+@media (max-width: 991px) {
+  .address-card {
+    margin: 10px;
+    padding: 20px;
+    .row {
+      margin-top: 20px;
+    }
+    .payment-mode {
+      padding: 10px 0;
+      // max-width: 50%;
+    }
+    .col-md-5 {
+      padding: 30px 0px 0 45px;
+      max-width: 50%;
+    }
+  }
+
+  .detail-card {
+    // margin: 30px 0 0 25px;
+    max-height: 370px;
+    // max-width: 348px;
+    padding: 15px;
+    margin: 10px;
+    max-width: 100%;
+  }
+
+  .summary-card {
+    margin: 0;
+    .prod-name {
+      padding-left: 0;
+      // .orderImg {
+      //   img {
+      //     display: none;
+      //   }
+      // }
+    }
+  }
+}

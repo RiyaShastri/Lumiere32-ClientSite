@@ -1,0 +1,102 @@
+<app-post-login-header></app-post-login-header>
+<br>
+<div class="container" *ngIf="quotationProducts">
+    <div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quotation Summary </h5>
+                <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr style="background-color: #E8F7FA;" class="table-heading">
+                          <th scope="col">Product</th>
+                          <th scope="col">QTY</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Total</th>
+                        </tr>
+                      </thead>
+
+                      <tbody *ngFor = 'let item of quotationProducts'>
+                        <tr>
+                          <th>{{item.productName}}</th>
+                          <td>{{item.quantity}}</td>
+                          <td>{{item.price}}</td>
+                          <td>{{item.totalPrice}}</td>
+                        </tr>
+                        </tbody>
+                  </table>
+                  <div class="col-md-12">
+                    <table style="width:100%">
+                        <tr>
+                          <th>Subtotal</th>
+                          <td style="float: right;">{{quoteData.subTotal}}</td>
+                        </tr>
+                        <tr>
+                          <th>Discount</th>
+                          <td style="float: right;">{{quoteData.discount}}</td>
+                        </tr>
+                        <tr>
+                          <th>Total</th>
+                          <td style="float: right;">{{quoteData.total}}</td>
+                        </tr>
+
+                        <!-- <tr>
+                          <th>GST</th>
+                          <td>{{GST}} %</td>
+                        </tr> -->
+
+                      </table>
+                    <p>The above quotation is subject to <span>{{quoteData?.taxRate_details?.taxCode}} {{quoteData?.taxRate_details?.taxRate}}</span>%</p>
+                  </div>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div style="background-color: #FFFFFF;">
+                    <h5 class="card-title"style="background-color: #E8F7FA;">Billing/Shipping Details </h5>
+                </div>
+                <!-- <br>
+                <div>
+                    <h6 class="card-title"><strong>Shipping Details</strong>  </h6>
+
+                    {{quoteData.shippingClinicName}} {{quoteData.shippingBuildingName}}
+                    {{quoteData.shippingBlockNo}} {{quoteData.shippingFloorNo}}
+                    {{quoteData.shippingUnitNo}} {{quoteData.shippingStreetName}}
+                    {{quoteData.shippingPincode}}
+                    <br>
+                    <strong>Phone Number :</strong> {{quoteData.customerMobileNumber}}
+                </div> -->
+                <br>
+                <div>
+                    <h6 class="card-title"><strong>Billing Details</strong>  </h6>
+
+                    {{quoteData.billingClinicName}} {{quoteData.billingBuildingName}}
+                    {{quoteData.billingBlockNo}} {{quoteData.billingFloorNo}}
+                    {{quoteData.billingUnitNo}} {{quoteData.billingStreetName}}
+                    {{quoteData.billingState}}
+                    {{quoteData.billingPincode}}
+                    <br>
+                    <strong>Phone Number :</strong> {{quoteData.customerMobileNumber}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</div>
+<br>
+<div class="container">
+  <button type="button" class="btn btn-info"
+  (click)="back()"
+  >Back</button>
+</div>
+<br>
+<app-footer></app-footer>

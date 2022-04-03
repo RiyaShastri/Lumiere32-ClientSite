@@ -1,0 +1,200 @@
+<!-- <app-header></app-header> -->
+
+<!-- New Code -->
+
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left section -->
+      <div class="col">
+        <section *ngIf="featuredBrandArr && featuredBrandArr.length > 0">
+          <h5>Our Featured Brands</h5>
+          <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+
+          <div class="row" id="logoRow">
+            <div class="logohead" *ngFor="let item of featuredBrandArr">
+              <div class="images">
+                <a
+                  [routerLink]="[
+                    '/' +
+                      countryIso.getCountryCode() +
+                      '/brand/' +
+                      item.itemName
+                  ]"
+                  [queryParams]="{ manufactureId: item.id }"
+                >
+                  <img
+                    src="{{ item.logo }}"
+                    alt=""
+                    width="50px"
+                    height="50px"
+                    id="logoImg"
+                  />
+                </a>
+              </div>
+              <a
+                class="titles"
+                [routerLink]="[
+                  '/' + countryIso.getCountryCode() + '/brand/' + item.itemName
+                ]"
+                [queryParams]="{ manufactureId: item.id }"
+              >
+                <span class="featureBrand">{{
+                  item.itemName | titlecase
+                }}</span>
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- Left Side Sticky section -->
+
+        <section
+          style="border: 1px solid #f0f0f0; box-shadow: 0px 1px 5px gray"
+          *ngIf="!isLoading"
+        >
+          <div class="container" style="background-color: white">
+            <div class="row stickyHeader">
+              <div class="col-sm-12">
+                <br />
+                <h6>All Brands Catalogue</h6>
+                <br />
+                <div class="row alphaHead">
+                  <div class="col-sm-3 search-right">
+                    <div class="red-border">
+                      <button class="search-btn" type="button">
+                        <i class="fa fa-search"></i>
+                      </button>
+                      <input
+                        class="border-end-0"
+                        placeholder="Search for your favourite brands."
+                        [(ngModel)]="searchText"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    *ngIf="searchText ? false : true"
+                    class="alphabet col-sm-9"
+                  >
+                    <div
+                      style="display: flex"
+                      *ngFor="let alphabets of alphabetArr; let i = index"
+                      (click)="showBrandDiv(alphabets)"
+                    >
+                      <span class="alphabets" *ngIf="i == 0"
+                        >Alphabets Navigation</span
+                      >
+                      <div
+                        class="brandcat"
+                        [ngClass]="{ highLights: alphabetIndex == alphabets }"
+                      >
+                        <span class="brandcat-parent"> {{ alphabets }} </span>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="search_Text"
+                    *ngIf="
+                      searchText &&
+                      (allBrandArr | filter: searchText)?.length > 0
+                    "
+                  >
+                    Showing result for "{{ searchText }}"</span
+                  >
+                  <span
+                    class="not_found"
+                    #noResults
+                    *ngIf="(allBrandArr | filter: searchText)?.length == 0"
+                  >
+                    No Brands found for "{{ searchText }}"</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="row brandsList"
+              *ngFor="let iterator of allBrandArr | filter: searchText"
+            >
+              <div class="col-md-1 innerList" id="{{ iterator[0] }}">
+                <span
+                  class="leftSideAlpha"
+                  [ngClass]="{ highLight: brandIndex == iterator[0] }"
+                >
+                  {{ iterator[0] | titlecase }}</span
+                >
+              </div>
+              <div class="col-md-11">
+                <div class="row" id="allBrands">
+                  <div *ngFor="let item of iterator[1]" class="box">
+                    <div class="card">
+                      <a
+                        [routerLink]="[
+                          '/' +
+                            countryIso.getCountryCode() +
+                            '/brand/' +
+                            item.itemName
+                        ]"
+                        [queryParams]="{ manufactureId: item.id }"
+                      >
+                        <img
+                          src="{{ item.logo }}"
+                          class="card-img-top"
+                          alt="..."
+                          width="100px"
+                          height="75px"
+                        />
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a
+                        [routerLink]="[
+                          '/' +
+                            countryIso.getCountryCode() +
+                            '/brand/' +
+                            item.itemName
+                        ]"
+                        [queryParams]="{ manufactureId: item.id }"
+                      >
+                        <span class="card-text">{{
+                          item.itemName | titlecase
+                        }}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- Right Section -->
+      <!-- <div class="col-sm-3">
+        <div class="top stickyHeader" style="
+            background-color: #f1f3f6;
+            text-align: center;
+            padding-top: 10px;
+          ">
+          <div class="row">
+            <div class="col">
+              <img src="../assets/images/brandPageImage1.png" alt="" width="25px" height="25px" />
+              <p class="brandInfo">100+ Brands</p>
+            </div>
+            <div class="col">
+              <img src="../assets/images/brandPageImage2.png" alt="" width="25px" height="25px" />
+              <p class="brandInfo">2000+ products</p>
+            </div>
+            <div class="col">
+              <img src="../assets/images/brandPageImage3.png" alt="" width="25px" height="25px" />
+              <p class="brandInfo">100% genuine</p>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <img src="https://lumier32.s3.ap-southeast-1.amazonaws.com/banner/banner.jpg" alt="brand-image-banner" width="100%" />
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- <app-footer *ngIf="!isLoading"></app-footer> -->

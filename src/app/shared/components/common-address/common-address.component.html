@@ -1,0 +1,132 @@
+<form #empForm="ngForm">
+  <div class="container common-address">
+    <div class="panel panel-primary">
+      <div class="panel-heading pointerCursor" (click)="panelExpanded = !panelExpanded"
+        style="background-color: #63c7db">
+        <h6 class="panel-title" style="padding: 10px; color: white">
+          Billing Address
+        </h6>
+      </div>
+
+      <div class="card border box" style="padding: 15px"
+        *ngIf="panelExpanded && checkoutService['activeStep2'] && !checkoutService['userVerifiedDisplay']">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="firstname" name="sss" readonly
+              [(ngModel)]="checkoutService['userBillingAddress']['name']" aria-describedby="nameHelp" />
+          </div>
+
+          <div class="form-group col-md-6" [class.has-error]="
+              fullClinicNameControl['invalid'] && fullClinicNameControl['touched']"
+            [class.has-success]="fullClinicNameControl['valid']">
+            <label for="clinicname" class="control-label">Clinic Name <span style="color: red">*</span>
+            </label>
+            <input type="text" class="form-control" id="clinicname" name="clinic" required
+              #fullClinicNameControl="ngModel" [(ngModel)]="checkoutService['userBillingAddress']['clinicName']"
+              aria-describedby="clinicnameHelp" />
+            <span class="help-block" style="color: red" *ngIf="
+                fullClinicNameControl['invalid'] && fullClinicNameControl['touched']">
+              Clinic Name is required
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6" [class.has-error]="
+          fullPostalControl['invalid'] && fullPostalControl['touched']
+        " [class.has-success]="fullPostalControl.valid">
+            <label for="clinicname" class="control-label">Postal Code <span style="color: red">*</span>
+            </label>
+            <input type="text" class="form-control" id="postalname" name="postal" #fullPostalControl="ngModel" required
+              [(ngModel)]="checkoutService['userBillingAddress']['zip']" aria-describedby="postalnameHelp"
+              [attr.maxlength]="checkoutService['billingZipMaxLength']" (input)="checkPinCode($event , false)" />
+            <span class="help-block" style="color: red"
+              *ngIf="(fullPostalControl['invalid'] && showNullError) || (fullPostalControl['invalid'] && fullPostalControl['touched'])">
+              Postal Code is required
+            </span>
+            <span class="help-block" style="color: red"
+              *ngIf="checkoutService['userBillingAddress']['zip'] && checkoutService['userBillingAddress']['zip']['length'] > 0">
+              <div *ngIf="checkoutService['userBillingAddress']['zip'].length >
+                            checkoutService['billingZipMaxLength'] ||
+                          checkoutService['userBillingAddress']['zip'].length < checkoutService['billingZipMinLength'] ||
+                          (!checkoutService['billingZipIsAlpha'] &&
+                            checkoutService.validateIsAlpha(
+                            checkoutService['userBillingAddress']['zip']
+                            ))">
+                Postal Code is invalid
+              </div>
+            </span>
+          </div>
+
+          <div class=" form-group col-md-6">
+            <label for="clinicname">City</label>
+            <input type="text" class="form-control" id="cityname" name="city" readonly areaDetail
+              style="cursor: not-allowed;" #fullCityControl="ngModel" aria-describedby="citynameHelp"
+              [(ngModel)]="areaDetail['city']" />
+          </div>
+        </div>
+
+        <div class="row" style="cursor: not-allowed;">
+          <div class="form-group col-md-6">
+            <label for="clinicname" class="control-label">State </label>
+            <input type="text" class="form-control" id="state" name="state" aria-describedby="statenameHelp" readonly
+              #fullStateControl="ngModel" [(ngModel)]="areaDetail['state']" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="clinicname" class="control-label">Country </label>
+            <input type="text" class="form-control" id="country" name="country" aria-describedby="countryHelp" readonly
+              #fullCountryControl="ngModel" [(ngModel)]="areaDetail['country']" />
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label for="clinicname" class="control-label">Block No.</label>
+            <input type="text" class="form-control" id="blockno" name="block" #fullBlockControl="ngModel"
+              [(ngModel)]="checkoutService['userBillingAddress']['blockNo']" aria-describedby="blocknoHelp" />
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="clinicname" class="control-label">Floor No.</label>
+            <input type="text" class="form-control" id="floorno" #fullFloorControl="ngModel" name="floor"
+              [(ngModel)]="checkoutService['userBillingAddress']['floorNo']" aria-describedby="floornoHelp" />
+          </div>
+
+          <div class="form-group col-md-4" [class.has-error]="
+              fullUnitControl.invalid && fullUnitControl.touched
+            " [class.has-success]="fullUnitControl.valid">
+            <label for="clinicname" class="control-label">Unit No.</label>
+            <input type="text" class="form-control" id="unitno" name="unit" #fullUnitControl="ngModel"
+              [(ngModel)]="checkoutService['userBillingAddress']['unitNo']" aria-describedby="unitnoHelp" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="clinicname">Building Name</label>
+            <input type="text" class="form-control" id="buildingname" name="building"
+              [(ngModel)]="checkoutService['userBillingAddress']['buildingName']"
+              aria-describedby="builidingnameHelp" />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="clinicname">Street Name</label>
+            <input type="text" class="form-control" id="streetname" name="street"
+              [(ngModel)]="checkoutService['userBillingAddress']['streetName']" aria-describedby="streetnameHelp" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6"> </div>
+          <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-blue" [disabled]="empForm.invalid" (click)="saveAddress()">
+              Save Billing Address
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

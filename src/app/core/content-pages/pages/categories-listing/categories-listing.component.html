@@ -1,0 +1,389 @@
+<div class="banner-image">
+  <img class="discount-image" src="assets\images\medical-product/equipment-banner.png" alt="Banner image" />
+</div>
+
+<section class="get-equipment filter-section filter-product-container">
+  <div class="container main-page">
+    <div class="row" *ngIf="!loadingObj['categoryies']">
+      <ng-template [ngIf]="categoryFilters$ | async" let-filter>
+        <ng-template let-category [ngIf]="categoryies$ | async">
+          <ng-template [ngIf]="category && category?.data?.results.length">
+            <div class="col-md-3 equipment filter" [class.showFilter]="showFilter">
+              <div class="equipment-inner">
+                <div class="text-right close-filter">
+                  <span (click)="showFilter = false"><i class="fa fa-times" aria-hidden="true" style="
+                        font-size: 20px;
+                        margin-top: 5px;
+                        margin-right: 5px;
+                      "></i></span>
+                </div>
+                <div class="row filter-header-row">
+                  <div class="col-md-5 filter-title">FILTER</div>
+                  <button class="col-md-6 btn-clear" (click)="clearFilter()">
+                    Clear All
+                  </button>
+                </div>
+                <div *ngFor="let item of filter?.data?.filter; let i = index">
+                  <div class="FilterDirectory-titleBar main-search" *ngIf="item.showSearch">
+                    <input type="text" id="searchInput" (input)="searchCategory()"
+                      placeholder="{{ 'Search ' + item.title }}" class="FilterDirectory-searchInput" />
+                    <span class="close-search" (click)="clearFilter(); item.showSearch = false"><i class="fa fa-times"
+                        aria-hidden="true"></i></span>
+                  </div>
+
+                  <div class="card product-list-header" style="border: none">
+                    <span class="open-search" (click)="openMore(i); item.showSearch = true">
+                      <i class="fa fa-search"></i>
+                    </span>
+
+                    <mat-accordion class="filter-product-expansion">
+                      <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header style="background-color: #fff">
+                          <h5 class="float-left" style="
+                              padding-bottom: 12px;
+                              padding-top: 12px;
+                              font-size: 19px;
+                            ">
+                            {{ item.title }}
+                          </h5>
+                        </mat-expansion-panel-header>
+                        <span class="clearfix"></span>
+                        <ul id="searchUL">
+                          <div *ngFor="let items of item.value; let i = index">
+                            <li *ngIf="items.active">
+                              <a class="search-title">{{ items.title }}</a>
+                              <!-- <div class="expension-content" *ngFor='let items of item.value;let i = index'> -->
+                              <div class="card-body" style="padding: 1px; padding-left: 2px">
+                                <div class="form-group">
+                                  <div class="row">
+                                    <div class="col-md-10 filter-col" style="padding: 0;">
+                                      <label class="radio-inline">
+                                        <p-checkbox name="item.title" value="{{ items?.uuid }}"
+                                          label="{{ items.title }}" [(ngModel)]="selectedValues"
+                                          [checked]="selectedValues" (onChange)="
+                                            checkBoxEvent($event, items, item)
+                                          ">
+                                        </p-checkbox>
+                                        <!-- {{items.title}} -->
+                                      </label>
+                                    </div>
+                                    <div class="product-count">
+                                      <p>
+                                        ({{
+                                        items.productCount
+                                        ? items.productCount
+                                        : ""
+                                        }})
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- <h5 class="card-title">{{items.title}}</h5> -->
+                              </div>
+                            </li>
+                          </div>
+                        </ul>
+                        <div class="more-btn" *ngIf="getActiveFilterCount(item.value) > 5" (click)="openMore(i)"
+                          style="cursor: pointer">
+                          {{ getActiveFilterCount(item.value) - 5 }} MORE
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <div class="FilterDirectory-panel FilterDirectory-expanded" *ngIf="
+                        showPopup && popupIndex == i
+                      ">
+                      <div class="FilterDirectory-titleBar search-box">
+                        <input type="text" id="searchPopupInput" (input)="searchPopupCategory()"
+                          placeholder="{{ 'Search ' + item.title }}" class="FilterDirectory-searchInput search-box" />
+                        <span class = "close-search" (click)="showPopup = false; item.showSearch = false"><i class="fa fa-times" aria-hidden="true"></i></span>
+                      </div>
+                      <span class="clearfix"></span>
+                      <ul id="searchPopupList" class="FilterDirectory-list">
+                        <div *ngFor="let items of item.value; let i = index">
+                          <li *ngIf="items.active">
+                            <a class="search-title">{{ items.title }}</a>
+                            <div class="card-body" style="padding: 1px; padding-left: 2px">
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-9 filter-col">
+                                    <label class="radio-inline popup-lable">
+                                      <p-checkbox id="lable" name="item.title" value="{{ items.uuid }}"
+                                        label="{{ items.title }}" [(ngModel)]="selectedValues" (onChange)="
+                                          checkBoxEvent($event, items, item)
+                                        ">
+                                      </p-checkbox>
+                                    </label>
+                                    <span>
+                                      ({{
+                                      items.productCount
+                                      ? items.productCount
+                                      : ""
+                                      }})
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ng-template>
+      </ng-template>
+
+      <ng-template [ngIf]="categoryies$ | async" let-category>
+        <div class="col-md-9 get-equipment container product-container" style="padding-top: 10px" [ngClass]="{
+            fullWidth: category && category.data.results.length === 0
+          }">
+          <div class="row header-section" *ngIf="!countryIso.zeroResults">
+            <span style="cursor: pointer" (click)="homeNavigate()">Home&nbsp;</span>
+            >&nbsp;
+            <span> Search Results </span>
+          </div>
+          <div class="container" *ngIf="countryIso.zeroResults">
+            <div style="
+                display: flex;
+                justify-content: center;
+                margin-top: 10%;
+              ">
+              <img class="errimg" src="../../../../../assets/images/404.jpg" alt="none" />
+            </div>
+            <div style="font-size: 12px">
+              <p style="text-align: center">
+                Your search
+                <span style="color: #63c7db"> "{{ searchKey }}" </span> does
+                not match any products/brands.
+              </p>
+              <div>
+                <p class="textlike">Try somthing like</p>
+                <ol class="lists">
+                  <li>Using more general terms</li>
+                  <li>Checking your spelling</li>
+                </ol>
+                <p style="text-align: center">
+                  Or kindly drop us a message on
+                  <span class="contactE"><a target="_blank"
+                      href="mailto:connect@lumiere32.my">connect@lumiere32.my</a></span>
+                  with details
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="categoryies$ | async as categoryies">
+            <div *ngIf="categoryies?.data?.total > 0" class="col-md-7 product-container-heading">
+              Showing <span>{{ (pagination?.page + 1) * 12 - 11 }}-</span>
+              <span *ngIf="(pagination?.page + 1) * 12 < categoryies?.data?.total">{{ (pagination?.page + 1) * 12
+                }}</span>
+              <span *ngIf="(pagination?.page + 1) * 12 > categoryies?.data?.total">{{ categoryies?.data?.total }}</span>
+              of {{ categoryies?.data?.total }} results for
+              <span style="color: red">"{{ searchKey }}"</span>
+            </div>
+            <ng-template [ngIf]="categoryies$ | async" let-categoryies>
+              <div class="text-right col-md-5" *ngIf="categoryies && categoryies?.data?.results?.length">
+                <div class="filter-sort">
+                  <span>Sort by :</span>
+                  <p-dropdown [options]="dropDownOptions" [(ngModel)]="selectedSort" class="filter-checkbox"
+                    (onChange)="sortingChange($event)" placeholder="Select a filter" [showClear]="false">
+                  </p-dropdown>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+          <ng-template [ngIf]="categoryies$ | async" let-categoryies>
+            <div class="fitler-icon text-right" (click)="showFilter = true"
+              *ngIf="categoryies && categoryies?.data?.results?.length">
+              Filter :
+              <i class="fa fa-filter" aria-hidden="true" style="color: #63c7db; font-size: 24px"></i>
+            </div>
+          </ng-template>
+
+          <div class="row product-list" *ngIf="categoryies$ | async as categoryies">
+            <div class="col-lg-3 col-sm-4 col-6" *ngFor="let item of categoryies?.data?.results">
+              <div class="card product-detail product-outer" style="cursor: pointer"
+                (click)="navigateRoutes(item.productName, item?.id)">
+                <div *ngIf="item?.ribbenText" class="container" [attr.data-ribbon]="item.ribbenText"
+                  style="--d: 15px; --c: purple"></div>
+                <a [routerLink]="[
+                    '/' + countryISO.getCountryCode() + '/p/',
+                    countryISO.convertToSlug(item.productName)
+                  ]" [queryParams]="{ pid: item?.id }">
+                  <span class="dis-rib" *ngIf="item?.discount && item?.isSale">{{ item?.discount }}%</span>
+                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                  <img [src]="item?.productImage[0]?.image" style="cursor: pointer"
+                    onError="this.src = 'https://lumier32.s3.ap-southeast-1.amazonaws.com/product/1602470264516_noimage_336_290.jpg'"
+                    alt="product image" />
+                  <div class="product-material">
+                    <div>
+                      <h3 [title]="item?.productName">
+                        {{ item?.productName }}
+                      </h3>
+                    </div>
+                    <div class="product-price" *ngIf="authService.loginFlag && !item?.isQuote">
+                      <p class="discount-price" *ngIf="item?.discount != 0">
+                        {{ service.curr }} {{ item?.MRP | number: "1.2-2" }}
+                      </p>
+                      <p class="discount-price" *ngIf="item?.discount == 0">
+                        {{ service.curr }}
+                        {{ item?.MRP | number: "1.2-2" }}
+                      </p>
+                      <p class="original-price">
+                        <del *ngIf="item?.discount != 0 && item?.isSale">{{ service.curr }}
+                          {{ item?.sellPrice | number: "1.2-2" }}</del>
+                      </p>
+                    </div>
+                    <p class="requestfq" type="button" *ngIf="authService.loginFlag && item?.isQuote">
+                      Request for Quote
+                    </p>
+                    <div></div>
+                  </div>
+                </a>
+              </div>
+              <div class="container" *ngIf="categoryies?.data?.results.length == 0">
+                <div style="
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 10%;
+                  ">
+                  <img class="errimg" src="../../../../../assets/images/404.jpg" alt="none" />
+                </div>
+                <div style="font-size: 12px">
+                  <p style="text-align: center">
+                    Your search
+                    <span style="color: #63c7db"> "{{ searchKey }}" </span> does
+                    not match any products/brands.
+                  </p>
+                  <div>
+                    <p class="textlike">Try somthing like</p>
+                    <ol class="lists">
+                      <li>Using more general terms</li>
+                      <li>Checking your spelling</li>
+                    </ol>
+                    <p style="text-align: center">
+                      Or kindly drop us a message on
+                      <span class="contactE"><a target="_blank"
+                          href="mailto:connect@lumiere32.my">connect@lumiere32.my</a></span>
+                      with details
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center" *ngIf="!authService.loginFlag">
+                <button class="btn btn-sm btn-primary" (click)="goToLogin(item.productName, item?.id)">
+                  View Price
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <div class="paginator paginator-product mb-5" *ngIf="categoryies$ | async as categoryies">
+        <p-paginator [rows]="12" pageLinkSize="6" [alwaysShow]="false" [showCurrentPageReport]="true"
+          [totalRecords]="categoryies?.data?.total" #paginator (onPageChange)="onPageChange($event)">
+        </p-paginator>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="loadingObj['categoryies']">
+      <div class="col-4 p-3 loader-left">
+        <div class="filter-title mt-2">
+          <ngx-skeleton-loader appearance="circle" [theme]="{
+              width: '320px',
+              height: '30px',
+              'border-radius': '10px',
+              'margin-top': '5px'
+            }">
+          </ngx-skeleton-loader>
+          <!-- FILTER -->
+        </div>
+        <div *ngFor="let item of filterArrForLoader" style="border-bottom: 0.5px solid #ccc; margin-bottom: 4px">
+          <ngx-skeleton-loader appearance="circle" [theme]="{
+              width: '320px',
+              height: '30px',
+              'border-radius': '10px',
+              'margin-top': '5px'
+            }">
+          </ngx-skeleton-loader>
+          <div class="row" *ngFor="let item of filterArrForLoader">
+            <div class="count">
+              <ngx-skeleton-loader [theme]="{
+                  width: '20px',
+                  height: '20px',
+                  'border-radius': '10px'
+                }">
+              </ngx-skeleton-loader>
+              <ngx-skeleton-loader [theme]="{
+                  width: '100px',
+                  height: '20px',
+                  'border-radius': '10px'
+                }">
+              </ngx-skeleton-loader>
+            </div>
+            <div class="text-right">
+              <!-- Count -->
+              <ngx-skeleton-loader appearance="circle" [theme]="{
+                  width: '20px',
+                  height: '20px',
+                  'border-radius': '10px'
+                }">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8 loader-right">
+        <div class="mt-4">
+          <ngx-skeleton-loader [theme]="{
+              width: '700px',
+              height: '30px',
+              'border-radius': '10px'
+            }">
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader [theme]="{
+              width: '700px',
+              height: '30px',
+              'border-radius': '10px'
+            }">
+          </ngx-skeleton-loader>
+        </div>
+
+        <div class="row product-items">
+          <div class="col-lg-3 col-sm-4 col-6" *ngFor="let item of productArrForLoader">
+            <div class="card product-detail product-outer product-div">
+              <div>
+                <ngx-skeleton-loader [theme]="{
+                    width: '130px',
+                    height: '150px',
+                    'border-radius': '10px'
+                  }">
+                </ngx-skeleton-loader>
+              </div>
+              <div>
+                <ngx-skeleton-loader [theme]="{
+                    width: '130px',
+                    height: '20px',
+                    'border-radius': '10px'
+                  }">
+                </ngx-skeleton-loader>
+              </div>
+              <div class="mt-3">
+                <ngx-skeleton-loader [theme]="{
+                    width: '130px',
+                    height: '20px',
+                    'border-radius': '10px'
+                  }">
+                </ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

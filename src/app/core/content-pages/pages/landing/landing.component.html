@@ -1,0 +1,1728 @@
+<div>
+  <!-- <app-header></app-header> -->
+  <div class="landing-wrapper">
+    <div class="container card-absolute-wrapper">
+      <div class="row d-flex flex-wrap: wrap;">
+        <div class="col-lg-4 col-sm-12 p-0">
+          <div class="card card-blue">
+            <!-- images wrapper -->
+            <div class="circle-image-wrapper">
+              <img
+                src="assets/images/landing-image1.svg"
+                alt="landing image"
+                class="img-fluid"
+              />
+            </div>
+            <div
+              class="header-absolute-wrapper"
+              fxLayout="column"
+              fxLayoutAlign="start center"
+            >
+              <span>
+                <!-- <div class="align-items-center">
+                  <span class="header-card-icon truck1">
+                    <img
+                      src="assets/images/truck.svg"
+                      alt="truck image"
+                      class="img-fluid"
+                      style="width: 37px"
+                    />
+                  </span>
+                  <span class="text-white header-text"> Free Shipping </span>
+                </div> -->
+                <div class="align-items-center padding-top-20">
+                  <span class="header-card-icon">
+                    <img
+                      src="assets/images/return.svg"
+                      alt="return image"
+                      class="img-fluid"
+                    />
+                  </span>
+                  <span class="text-white header-text"> 7 Days Return </span>
+                </div>
+                <div class="align-items-center padding-top-20">
+                  <span class="header-card-icon">
+                    <img
+                      src="assets/images/Shape.svg"
+                      alt="shape image"
+                      class="img-fluid"
+                    />
+                  </span>
+                  <span class="text-white header-text">
+                    Unlimited Savings
+                  </span>
+                </div>
+                <div
+                  class="header-button-wrapper"
+                  *ngIf="!authService.loginFlag"
+                >
+                  <button
+                    type="button"
+                    class="custom-button"
+                    (click)="navigateSignUp()"
+                  >
+                    Sign Up Now
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-12 p-0">
+          <div class="slider-relative-wrapper">
+            <ngx-slick-carousel
+              class="carousel custom-home-carousel"
+              #slickModal="slick-carousel"
+              [config]="slideConfig1"
+            >
+              <div ngxSlickItem *ngFor="let slide of slidess" class="slide">
+                <a
+                  href="{{
+                    slide.hyperLink ? slide.hyperLink : 'javascript:;'
+                  }}"
+                  target="_blank"
+                >
+                  <img src="{{ slide.image }}" alt="" width="100%"
+                /></a>
+              </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="deliver-wrapper">
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div>
+            <div class="heading-wrapper">
+              <h3 class="underline-text-wrapper">We Deliver</h3>
+            </div>
+            <div class="deliver-para-text">
+              <p class="text-grey">
+                We understand healthcare professionals' needs, hence we want to
+                democratize data for them,
+                <strong>simplifying their procurement processes </strong> , and
+                helping medical device brands start the
+                <strong> journey of digitization.</strong>
+              </p>
+            </div>
+            <div class="deliver-button-wrapper">
+              <button
+                type="button"
+                (click)="navigateToAboutUs()"
+                class="custom-btn btn-blue font-weight-600"
+              >
+                Know More
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+         
+          <div class="card deliver-card">
+            <div class="deliver-image-wrapper">
+              <img
+                src="assets/images/deliver-image-1.svg"
+                alt="deliver image 1"
+              />
+            </div>
+            <div class="deliver-card-text">
+              <p class="font-weight-600 sub-heading-wrapper">250+ Brands</p>
+              <p class="text-grey font-size-14">
+                From Kavo Kerr to BBraun we have one of the largest product
+                catalogue in the Singapore & Malaysia markets providing more
+                than 20,000 products.
+              </p>
+            </div>
+          </div>
+         
+          <div class="card deliver-card">
+            <div class="deliver-image-wrapper">
+              <img
+                src="assets/images/deliver-image-2.svg"
+                alt="deliver image 2"
+              />
+            </div>
+            <div class="deliver-card-text">
+              <p class="font-weight-600 sub-heading-wrapper">
+                Convenience 24/7
+              </p>
+              <p class="text-grey font-size-14">
+                Superior quality products at one-stop makes your procurement
+                super efficient and convenient.
+              </p>
+            </div>
+          </div>
+         
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 deliver-card-spacing">
+         
+          <div class="card deliver-card">
+            <div class="deliver-image-wrapper">
+              <img
+                src="assets/images/deliver-image-1.svg"
+                alt="deliver image 1"
+              />
+            </div>
+            <div class="deliver-card-text">
+              <p class="font-weight-600 sub-heading-wrapper">
+                Ease of Procurement
+              </p>
+              <p class="text-grey font-size-14">
+                We have helped 2000+ clinics to digitize their procurement for
+                the Dental & Medical Supplies.
+              </p>
+            </div>
+          </div>
+         
+          <div class="card deliver-card">
+            <div class="deliver-image-wrapper">
+              <img
+                src="assets/images/deliver-image-2.svg"
+                alt="deliver image 2"
+              />
+            </div>
+            <div class="deliver-card-text">
+              <p class="font-weight-600 sub-heading-wrapper">
+                100+ Manufacturers & Dealers
+              </p>
+              <p class="text-grey font-size-14">
+                We connect dealers, manufacturers to bring quality and
+                innovative medical products to your practice.
+              </p>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div> -->
+    <!-- newly added categories --------------------------------------------------------------------------------->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-wrapper categor">
+            <h3 class="underline-text-medical">Categories</h3>
+          </div>
+          <div
+            class="medical-eq-category-card row medical-eq-div"
+            style="cursor: pointer"
+          >
+            <div
+              class="col-lg-2 col-xs-3 col-4 single-card"
+              (click)="
+                navigateToPage('Instruments', 'Surgical-Instruments', 61)
+              "
+            >
+              <div class="categories-card">
+                <div class="card-image">
+                  <img
+                    src="assets/images/surgical.svg"
+                    class="cat-image"
+                    alt="category card image"
+                  />
+                </div>
+              </div>
+              <h3 class="card-name">Surgical Instruments</h3>
+            </div>
+
+            <div
+              class="col-lg-2 col-xs-3 col-4 single-card"
+              style="cursor: pointer"
+              (click)="
+                navigateToPage('Instruments', 'Orthodontic-Instruments', 54)
+              "
+            >
+              <div class="categories-card">
+                <div class="card-image">
+                  <img
+                    src="assets/images/ortho.svg"
+                    alt="category card image"
+                    class="cat-image"
+                  />
+                </div>
+              </div>
+              <h3 class="card-name">Orthodontic Instruments</h3>
+            </div>
+
+            <div
+              class="col-lg-2 col-xs-3 col-4 single-card"
+              style="cursor: pointer"
+              (click)="
+                navigateToPage('Materials', 'Restorative-Materialss', 64)
+              "
+            >
+              <div class="categories-card">
+                <div class="card-image">
+                  <img
+                    src="assets/images/impression.svg"
+                    alt="category card image"
+                    class="cat-image"
+                  />
+                </div>
+              </div>
+              <h3 class="card-name">Restorative Materials</h3>
+            </div>
+
+            <div
+              class="col-lg-2 col-xs-3 col-4 single-card"
+              style="cursor: pointer"
+              (click)="
+                navigateToPage('Instruments', 'Diagnostic-Instruments', 48)
+              "
+            >
+              <div class="categories-card">
+                <div class="card-image">
+                  <img
+                    src="assets/images/equipment.svg"
+                    alt="category card image"
+                    class="cat-image"
+                  />
+                </div>
+              </div>
+              <h3 class="card-name">Diagnostic Instruments</h3>
+            </div>
+
+            <div
+              class="col-lg-2 col-xs-3 col-4 single-card"
+              style="cursor: pointer"
+              (click)="navigateToPage('Consumables', 'Dental-Miscellaneous', 4)"
+            >
+              <div class="categories-card">
+                <div class="card-image">
+                  <img
+                    src="assets/images/dental.svg"
+                    alt="category card image"
+                    class="cat-image"
+                  />
+                </div>
+              </div>
+              <h3 class="card-name">Dental Consumables</h3>
+            </div>
+
+            <div
+              class="col-lg-2 col-xs-3 col-4 single-card"
+              style="cursor: pointer"
+              (click)="navigateToPage('Consumables', 'PPE', 22)"
+            >
+              <div class="categories-card">
+                <div class="card-image">
+                  <img
+                    src="assets/images/medical.svg"
+                    alt="category card image"
+                    class="cat-image"
+                  />
+                </div>
+              </div>
+              <h3 class="card-name">Medical Consumables</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--newly added two images  -->
+  <section class="surgical-card">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div
+            class="surgical-eq-card"
+            style="
+              background-image: url(assets/images/dental_1.png);
+              max-height: 280px;
+              cursor: pointer;
+            "
+            (click)="navigateToDental1()"
+          >
+            <h2>&nbsp;</h2>
+            <p>&nbsp;</p>
+            <h1>&nbsp;</h1>
+            <h5>&nbsp;</h5>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            &nbsp; &nbsp; &nbsp;
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="surgical-eq-card"
+            style="
+              background-image: url(assets/images/dental_2_2.png);
+              max-height: 280px;
+              cursor: pointer;
+            "
+            (click)="navigateToDental2()"
+          >
+            <h2>&nbsp;</h2>
+            <p>&nbsp;</p>
+            <h1>&nbsp;</h1>
+            <h5>&nbsp;</h5>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            &nbsp; &nbsp; &nbsp;
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="surgical-eq-card"
+            style="
+              background-image: url(assets/images/shop01.png);
+              max-height: 280px;
+              cursor: pointer;
+            "
+            (click)="routePay32()"
+          >
+            <h2>&nbsp;</h2>
+            <p>&nbsp;</p>
+            <h1>&nbsp;</h1>
+            <h5>&nbsp;</h5>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            &nbsp; &nbsp; &nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- newly added for materials--------------------------------------------------------------->
+  <section class="getan-equipment">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-wrapper">
+            <h2 class="underline-pay-later">Buy More, Save More</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="view-link-wrapper text-right">
+            <a
+              style="cursor: pointer"
+              (click)="
+                navigateToViewAllQBD('buy-more-save-more', 'buy-more-save-more')
+              "
+              class="view-link"
+              [routerLink]="['/' + 'my' + '/c/Materials']"
+              [queryParams]="{ isQuantityDiscount: true }"
+            >
+              View All
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-slide-block">
+        <div *ngIf="!loadingObj['slides']">
+          <ngx-slick-carousel
+            class="carousel medical-slide-wrapper"
+            [config]="productSlideConfig"
+            #slickModal="slick-carousel"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let slide of qbdSlides"
+              class="slide bordr-left"
+            >
+              <div
+                (click)="navigateToMaterial(slide.productName, slide.id)"
+                style="cursor: pointer; padding: 18px"
+              >
+                <div
+                  *ngIf="slide?.ribbenText"
+                  class="container-ribbon"
+                  [attr.data-ribbon]="slide?.ribbenText"
+                ></div>
+                <div class="material">
+                  <img
+                    src="{{ slide.productImage[0].image }}"
+                    alt="carousel image"
+                  />
+                </div>
+                <h3 class="product-name">
+                  {{ slide.productName }}
+                </h3>
+
+                <div
+                  class="product-price"
+                  *ngIf="authService.loginFlag && !slide?.isQuote"
+                >
+                  <p class="discount-price col-6 text-center">
+                    {{ slide?.MRP | currency: " RM ":"code" }}
+                    <span
+                      class="original-price col-6 text-center"
+                      *ngIf="slide.isSale"
+                    >
+                      <del>
+                        {{ slide?.sellPrice | currency: " RM ":"code" }}
+                      </del></span
+                    >
+                  </p>
+                </div>
+                <p
+                  class="requestfq"
+                  type="button"
+                  *ngIf="authService.loginFlag && slide?.isQuote"
+                >
+                  Request for Quote
+                </p>
+                <div class="viewprice" *ngIf="!authService.loginFlag">
+                  <button
+                    class="btn btn-sm btn-info"
+                    (click)="goToLogin(slide.productName, slide?.id)"
+                  >
+                    View Price
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+
+        <div *ngIf="loadingObj['slides']">
+          <div class="slide bordr-left">
+            <div style="padding: 18px">
+              <div class="material">
+                <ngx-skeleton-loader
+                  appearance="circle"
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '150px',
+                    'border-radius': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+
+              <div class="mt-2">
+                <div>
+                  <ngx-skeleton-loader
+                    count="4"
+                    [theme]="{
+                      width: '250px',
+                      height: '30px',
+                      'border-radius': '10px',
+                      'margin-right': '10px'
+                    }"
+                  >
+                  </ngx-skeleton-loader>
+                </div>
+
+                <ngx-skeleton-loader
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '30px',
+                    'border-radius': '10px',
+                    'margin-right': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discount-absolute-wrapper display-mobile-none">
+          <img src="assets/images/landing-dot.svg" alt="landing dot wrapper" />
+        </div>
+      </div>
+    </div>
+    <div class="triangl-absolute-wrapper display-mobile-none">
+      <img src="assets/images/landing-dot-image.svg" alt=" landing dot image" />
+    </div>
+  </section>
+
+  <section class="getan-equipment">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-wrapper">
+            <h2 class="underline-pay-later">Materials</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="view-link-wrapper text-right">
+            <a
+              style="cursor: pointer"
+              (click)="navigateToViewAll('Materials', 4)"
+              class="view-link"
+              [routerLink]="['/' + 'my' + '/c/Materials']"
+              [queryParams]="{ cid: 4 }"
+            >
+              View All
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-slide-block">
+        <div *ngIf="!loadingObj['slides']">
+          <ngx-slick-carousel
+            class="carousel medical-slide-wrapper"
+            [config]="productSlideConfig"
+            #slickModal="slick-carousel"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let slide of materialSlides"
+              class="slide bordr-left"
+            >
+              <div
+                (click)="navigateToMaterial(slide.productName, slide.id)"
+                style="cursor: pointer; padding: 18px"
+              >
+                <div
+                  *ngIf="slide?.ribbenText"
+                  class="container-ribbon"
+                  [attr.data-ribbon]="slide?.ribbenText"
+                ></div>
+                <div class="material">
+                  <img
+                    src="{{ slide.productImage[0].image }}"
+                    alt="carousel image"
+                  />
+                </div>
+                <h3 class="product-name">
+                  {{ slide.productName }}
+                </h3>
+
+                <div
+                  class="product-price"
+                  *ngIf="authService.loginFlag && !slide?.isQuote"
+                >
+                  <p class="discount-price col-6 text-center">
+                    {{ slide?.MRP | currency: " RM ":"code" }}
+                    <span
+                      class="original-price col-6 text-center"
+                      *ngIf="slide.isSale"
+                    >
+                      <del>
+                        {{ slide?.sellPrice | currency: " RM ":"code" }}
+                      </del></span
+                    >
+                  </p>
+                </div>
+                <p
+                  class="requestfq"
+                  type="button"
+                  *ngIf="authService.loginFlag && slide?.isQuote"
+                >
+                  Request for Quote
+                </p>
+                <div class="viewprice" *ngIf="!authService.loginFlag">
+                  <button
+                    class="btn btn-sm btn-info"
+                    (click)="goToLogin(slide.productName, slide?.id)"
+                  >
+                    View Price
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+
+        <div *ngIf="loadingObj['slides']">
+          <div class="slide bordr-left">
+            <div style="padding: 18px">
+              <div class="material">
+                <ngx-skeleton-loader
+                  appearance="circle"
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '150px',
+                    'border-radius': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+
+              <div class="mt-2">
+                <div>
+                  <ngx-skeleton-loader
+                    count="4"
+                    [theme]="{
+                      width: '250px',
+                      height: '30px',
+                      'border-radius': '10px',
+                      'margin-right': '10px'
+                    }"
+                  >
+                  </ngx-skeleton-loader>
+                </div>
+
+                <ngx-skeleton-loader
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '30px',
+                    'border-radius': '10px',
+                    'margin-right': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discount-absolute-wrapper display-mobile-none">
+          <img src="assets/images/landing-dot.svg" alt="landing dot wrapper" />
+        </div>
+      </div>
+    </div>
+    <div class="triangl-absolute-wrapper display-mobile-none">
+      <img src="assets/images/landing-dot-image.svg" alt=" landing dot image" />
+    </div>
+  </section>
+
+  <!-- newly added for instruments ----------------------------------------------------------------->
+  <section class="getan-equipment">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-wrapper">
+            <h2 class="underline-pay-later">Instruments</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="view-link-wrapper text-right">
+            <a
+              (click)="navigateToViewAll('Instruments', 3)"
+              class="view-link"
+              [routerLink]="['/' + 'my' + '/c/Instruments']"
+              [queryParams]="{ cid: 3 }"
+            >
+              View All
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-slide-block">
+        <div *ngIf="!loadingObj['slides']">
+          <ngx-slick-carousel
+            class="carousel medical-slide-wrapper"
+            [config]="productSlideConfig"
+            #slickModal="slick-carousel"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let slide of instrumentSlides"
+              class="slide bordr-left"
+            >
+              <div>
+                <div
+                  style="cursor: pointer; padding: 18px"
+                  (click)="navigateToMaterial(slide.productName, slide.id)"
+                >
+                  <div
+                    *ngIf="slide?.ribbenText"
+                    class="container-ribbon"
+                    [attr.data-ribbon]="slide?.ribbenText"
+                  ></div>
+                  <div class="material">
+                    <img
+                      src="{{ slide.productImage[0].image }}"
+                      alt="carousel image"
+                    />
+                  </div>
+
+                  <h3 class="product-name">
+                    {{ slide.productName }}
+                  </h3>
+                  <div
+                    class="product-price"
+                    *ngIf="authService.loginFlag && !slide?.isQuote"
+                  >
+                    <p class="discount-price">
+                      {{ slide?.MRP | currency: " RM ":"code" }}
+                    </p>
+                    <p class="original-price" *ngIf="slide.isSale">
+                      <del
+                        >{{ slide?.sellPrice | currency: " RM ":"code" }}
+                      </del>
+                    </p>
+                  </div>
+                  <p
+                    class="requestfq"
+                    type="button"
+                    *ngIf="authService.loginFlag && slide?.isQuote"
+                  >
+                    Request for Quote
+                  </p>
+                  <div class="viewprice" *ngIf="!authService.loginFlag">
+                    <button
+                      class="btn btn-sm btn-info"
+                      (click)="goToLogin(slide.productName, slide?.id)"
+                    >
+                      View Price
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+
+        <div *ngIf="loadingObj['slides']">
+          <div class="slide bordr-left">
+            <div style="padding: 18px">
+              <div class="material">
+                <ngx-skeleton-loader
+                  appearance="circle"
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '150px',
+                    'border-radius': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+
+              <div class="mt-2">
+                <div>
+                  <ngx-skeleton-loader
+                    count="4"
+                    [theme]="{
+                      width: '250px',
+                      height: '30px',
+                      'border-radius': '10px',
+                      'margin-right': '10px'
+                    }"
+                  >
+                  </ngx-skeleton-loader>
+                </div>
+
+                <ngx-skeleton-loader
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '30px',
+                    'border-radius': '10px',
+                    'margin-right': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discount-absolute-wrapper display-mobile-none">
+          <img src="assets/images/landing-dot.svg" alt="landing dot wrapper" />
+        </div>
+      </div>
+    </div>
+    <div class="triangl-absolute-wrapper display-mobile-none">
+      <img src="assets/images/landing-dot-image.svg" alt=" landing dot image" />
+    </div>
+  </section>
+
+  <!-- newly added consumables --------------------------------------------------------------------------->
+  <section class="getan-equipment">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-wrapper">
+            <h2 class="underline-pay-later">Consumables</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="view-link-wrapper text-right">
+            <a
+              (click)="navigateToViewAll('Consumables', 1)"
+              style="cursor: pointer"
+              class="view-link"
+              [routerLink]="['/' + 'my' + '/c/Consumables']"
+              [queryParams]="{ cid: 1 }"
+            >
+              View All
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-slide-block">
+        <div *ngIf="!loadingObj['slides']">
+          <ngx-slick-carousel
+            class="carousel medical-slide-wrapper"
+            [config]="productSlideConfig"
+            #slickModal="slick-carousel"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let slide of consumables"
+              class="slide bordr-left"
+            >
+              <div
+                style="cursor: pointer; padding: 18px"
+                (click)="navigateToMaterial(slide.productName, slide.id)"
+              >
+                <div
+                  *ngIf="slide?.ribbenText"
+                  class="container-ribbon"
+                  [attr.data-ribbon]="slide?.ribbenText"
+                ></div>
+                <div class="material">
+                  <img
+                    src="{{ slide.productImage[0].image }}"
+                    alt="carousel image"
+                  />
+                </div>
+                <h3 class="product-name">
+                  {{ slide.productName }}
+                </h3>
+                <div
+                  class="product-price"
+                  *ngIf="authService.loginFlag && !slide?.isQuote"
+                >
+                  <p class="discount-price">
+                    {{ slide?.MRP | currency: " RM ":"code" }}
+                  </p>
+                  <p class="original-price" *ngIf="slide.isSale">
+                    <del>
+                      {{ slide?.sellPrice | currency: " RM ":"code" }}
+                    </del>
+                  </p>
+                </div>
+                <p
+                  class="requestfq"
+                  type="button"
+                  *ngIf="authService.loginFlag && slide?.isQuote"
+                >
+                  Request for Quote
+                </p>
+                <div class="viewprice" *ngIf="!authService.loginFlag">
+                  <button
+                    class="btn btn-sm btn-info"
+                    (click)="goToLogin(slide.productName, slide?.id)"
+                  >
+                    View Price
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+
+        <div *ngIf="loadingObj['slides']">
+          <div class="slide bordr-left">
+            <div style="padding: 18px">
+              <div class="material">
+                <ngx-skeleton-loader
+                  appearance="circle"
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '150px',
+                    'border-radius': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+
+              <div class="mt-2">
+                <div>
+                  <ngx-skeleton-loader
+                    count="4"
+                    [theme]="{
+                      width: '250px',
+                      height: '30px',
+                      'border-radius': '10px',
+                      'margin-right': '10px'
+                    }"
+                  >
+                  </ngx-skeleton-loader>
+                </div>
+
+                <ngx-skeleton-loader
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '30px',
+                    'border-radius': '10px',
+                    'margin-right': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="triangl-absolute-wrapper display-mobile-none">
+      <img src="assets/images/landing-dot-image.svg" alt=" landing dot image" />
+    </div>
+  </section>
+
+  <!-- newly added shop by brand -->
+  <section class="deel-of-week">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading-wrapper deals">
+            <h3 class="underline-text-medical ml-0">Shop By Brand</h3>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="view-link-wrapper text-right">
+            <a
+              style="cursor: pointer"
+              (click)="navigateToBrands()"
+              class="view-link"
+              [routerLink]="['/my/brands']"
+            >
+              View All
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="shop-slide-block">
+        <div *ngIf="!loadingObj['brandSlides']">
+          <ngx-slick-carousel
+            class="carousel shop-slide-wrapper"
+            [config]="shopSlideConfig"
+            #slickModal="slick-carousel"
+            style="width: auto"
+          >
+            <div ngxSlickItem *ngFor="let slide of shopslides" class="slide">
+              <div class="discountpercent cursor-pointer" style="height: auto">
+                <div class="card" style="width: 10rem; border: none">
+                  <img
+                    src="{{ slide.logo }}"
+                    class="card-img-top branding"
+                    alt="carousel image"
+                    (click)="
+                      navigateToCategiry(slide.id, slide.manufacturerName)
+                    "
+                  />
+                  <div class="card-body">
+                    <p
+                      class="card-text brandTxt"
+                      (click)="
+                        navigateToCategiry(slide.id, slide.manufacturerName)
+                      "
+                    >
+                      {{ slide.manufacturerName | titlecase }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+
+        <div *ngIf="loadingObj['brandSlides']">
+          <div class="slide bordr-left">
+            <div style="padding: 18px">
+              <div class="material">
+                <ngx-skeleton-loader
+                  appearance="circle"
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '150px',
+                    'border-radius': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+
+              <div class="mt-2">
+                <div>
+                  <ngx-skeleton-loader
+                    count="4"
+                    [theme]="{
+                      width: '250px',
+                      height: '30px',
+                      'border-radius': '10px',
+                      'margin-right': '10px'
+                    }"
+                  >
+                  </ngx-skeleton-loader>
+                </div>
+
+                <ngx-skeleton-loader
+                  count="4"
+                  [theme]="{
+                    width: '250px',
+                    height: '30px',
+                    'border-radius': '10px',
+                    'margin-right': '10px'
+                  }"
+                >
+                </ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="supplier-wrapper">
+    <div class="dot-absolute-wrapper display-mobile-none">
+      <img
+        src="assets/images/supplier-absolute-image.svg"
+        alt="supplier absolute image"
+      />
+    </div>
+
+    <div class="container">
+     
+      <div class="supplier-row-block">
+        
+        <div class="row supplier-row-wrapper">
+          <div class="col-lg-4 col-sm-12">
+            <a (click)="dental()" style="cursor: pointer">
+              <div
+                class="card2-hover supplier-card shadow-lg"
+                style="
+                  text-align: center;
+                  border-radius: 8px;
+                  background: #63c7db !important;
+                  width: 100%;
+                  height: auto;
+                  object-fit: cover;
+                "
+              >
+                <div class="supplier-heading-wrapper">
+                  <h3 class="text-uppercase text-white font-weight-600">
+                    Dental Supplies
+                  </h3>
+                </div>
+                <div class="supplier-image-wrapper">
+                  <img
+                    src="assets/images/supplier-image.svg"
+                    alt="supplier image"
+                  />
+                </div>
+                <div>
+                  <a
+                    (click)="dental()"
+                    class="
+                      text-uppercase text-center text-underline text-white
+                      cursor-pointer
+                    "
+                  >
+                    Shop Now
+                  </a>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-12">
+            <div class="card2-hover shadow-lg">
+              <img
+                src="assets/images/dental_1.png"
+                style="
+                  cursor: pointer;
+                  border-radius: 2% !important;
+                  width: 100%;
+                  height: auto;
+                  object-fit: cover;
+                "
+                (click)="navigateToDental1()"
+                class="media-object"
+              />
+              
+            </div>
+          </div>
+         
+          <div class="col-lg-4 col-sm-12">
+            <div class="card2-hover shadow-lg">
+              <img
+                src="assets/images/dental_2_2.png"
+                style="
+                  cursor: pointer;
+                  border-radius: 2% !important;
+                  width: 100%;
+                  height: auto;
+                  object-fit: cover;
+                "
+                (click)="navigateToDental2()"
+                class="media-object"
+              />
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </section> -->
+  <!-- <section class="surgical-card">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div
+            class="surgical-eq-card"
+            style="
+              background-image: url(assets/images/shop01.png);
+              max-height: 280px;
+              cursor: pointer;
+            "
+            (click)="routePay32()"
+          >
+            <h2>&nbsp;</h2>
+            <p>&nbsp;</p>
+            <h1>&nbsp;</h1>
+            <h5>&nbsp;</h5>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            &nbsp; &nbsp; &nbsp;
+            
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div
+            class="surgical-eq-card"
+            style="
+              background-image: url(assets/images/shop2.png);
+              max-height: 280px;
+            "
+          >
+            <h2>&nbsp;</h2>
+            <p>&nbsp;</p>
+            <h1>&nbsp;</h1>
+            <h5>&nbsp;</h5>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            &nbsp; &nbsp; &nbsp;
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section> -->
+  <!-- trending categories starts -->
+  <!-- <section class="trending-category-wrapper">
+    
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <div class="heading-wrapper">
+            <h3 class="underline-text-wrapper">Trending Categories</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <ngx-slick-carousel
+            class="carousel"
+            [config]="slideTrendingConfig"
+            #slickModal="slick-carousel"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let slide of trendingSlides"
+              class="slide"
+            >
+              <div
+                class="col-lg-3 col-md-6 col-sm-12 max-full-width"
+                (click)="naviagateToMainPage(slide.text, slide.id)"
+                style="cursor: pointer"
+              >
+                <div class="card trending-card">
+                  <div class="trending-absolute-wrapper">
+                    <img src="{{ slide.img }}" alt="dentist image wrapper" />
+                  </div>
+                  <div [ngClass]="['trending-card-small', slide.class]"></div>
+                  <div
+                    class="
+                      trending-para-text
+                      d-flex
+                      justify-content-center
+                      align-items-center
+                    "
+                  >
+                    <p>
+                      <span>{{ slide.text }}</span>
+                      <span class="trending-icon"
+                        ><i class="fa fa-chevron-right"></i
+                      ></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- trending categories ends -->
+  <!-- <section class="medical-wrapper">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div>
+                        <img src="assets/images/medical-image.svg" alt="medical image" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <div class="medical-mobile-equip">
+                        <div>
+                            <h3 class="text-white">Worried about Vendor Invoices?
+
+                                </h3>
+                        </div>
+                        <div class="medical-para-text">
+                            <h6 class="text-white">Use Pay32 – Pay Later</h6>
+                        </div>
+                        <div class="medical-list-block">
+                            <div class="medical-list-wrapper d-flex align-items-center">
+                                <span class="medical-tick-icon">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span class="medical-text text-white">
+                                    No Monthly Instalments
+
+                                </span>
+                            </div>
+                            <div class="medical-list-wrapper d-flex align-items-center">
+                                <span class="medical-tick-icon">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span class="medical-text text-white">
+                                    Extend the Payments Up to 90 Days
+
+                                </span>
+                            </div>
+                            <div class="medical-list-wrapper d-flex align-items-center">
+                                <span class="medical-tick-icon">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span class="medical-text text-white">
+                                    0% Interest
+
+                                </span>
+                            </div>
+                            <div class="medical-list-wrapper d-flex align-items-center">
+                                <span class="medical-tick-icon">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span class="medical-text text-white">
+                                    Get {{service.curr}} 100,000 Pay32 value
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+  <!-- digital solution wrapper starts -->
+
+  <section class="digital-solution-wrapper">
+    <div class="digital-absolute-wrapper display-mobile-none">
+      <img src="assets/images/half-circle.svg" alt="half image wrapper" />
+    </div>
+    <div class="digital-detector-wrapper display-mobile-none">
+      <img
+        src="assets/images/digital-solution-image.svg"
+        alt="digital solution image"
+      />
+    </div>
+
+    <div class="landing-dot-wrapper display-mobile-none">
+      <img src="assets/images/landing-dot.svg" alt="digital solution image" />
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <div class="heading-wrapper">
+            <h3 class="underline-text-wrapper">Innovative Digital Solutions</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row digital-solution-row">
+        <div class="col-lg-3 col-sm-12">
+          <div class="card digital-solution-card">
+            <div>
+              <img src="assets/images/digital-image.svg" alt="digital image" />
+            </div>
+            <div class="digital-solution-text">
+              <h5>Digital Wallet</h5>
+              <p>
+                <strong>Get instant cashback up to 10%</strong> & enjoy
+                <strong>lowest pricing </strong>every time and everyday.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+          <div class="card digital-solution-card">
+            <div>
+              <img src="assets/images/pay-yellow-image.svg" alt="Pay image" />
+            </div>
+            <div class="digital-solution-text">
+              <h5>Pay32 Clinic</h5>
+              <p>Freemium inventory analytics tool.</p>
+              <p>
+                <span
+                  class="yellow-text font-size-14"
+                  (click)="navigateToPay32()"
+                  style="cursor: pointer"
+                  >Learn More</span
+                >
+                <span class="yellow-text digital-icon"
+                  ><i class="fa fa-chevron-right"></i
+                ></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="top-selling-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="heading-wrapper">
+                        <h3 class="underline-text-wrapper small-pading">
+                            Top Selling Products
+                        </h3>
+                        <div _ngcontent-rva-c327="" class="view-link-wrapper">
+                            <a _ngcontent-rva-c327="" href="javasctipt:void(0)" class="view-link"> View All </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="top-product">
+                        <div class="top-single-product">
+                            <div class="prod-img">
+                                <img src="assets/images/top-product-1.png" alt="digital image" />
+                            </div>
+                            <p>
+                                Renfert Vacuum Mixing Unit Twister Evolution Venturi
+                            </p>
+                            <h3>{{service.curr}} 98</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="top-product">
+                        <div class="top-single-product">
+                            <div class="prod-img">
+                                <img src="assets/images/top-product-2.png" alt="digital image" />
+                            </div>
+                            <p>
+                                Renfert Vacuum Mixing Unit Twister Evolution Venturi
+                            </p>
+                            <h3>{{service.curr}} 98</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="top-product">
+                        <div class="top-single-product">
+                            <div class="prod-img">
+                                <img src="assets/images/top-product-1.png" alt="digital image" />
+                            </div>
+                            <p>
+                                Renfert Vacuum Mixing Unit Twister Evolution Venturi
+                            </p>
+                            <h3>{{service.curr}} 98</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="top-product">
+                        <div class="top-single-product">
+                            <div class="prod-img">
+                                <img src="assets/images/top-product-1.png" alt="digital image" />
+                            </div>
+                            <p>
+                                Renfert Vacuum Mixing Unit Twister Evolution Venturi
+                            </p>
+                            <h3>{{service.curr}} 98</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+  <!-- <section class="otherservice">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="heading-wrapper">
+                        <h3 class="underline-text-wrapper small-pading">
+                            Other Services
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="all-other-services row justify-content-between">
+                <div class="col-lg-3 col-sm-12 one-service">
+                    <div class="other-services-one">
+                        <div class="image">
+                            <img src="assets/images/other-service-1.png" alt="otherservice image" />
+                        </div>
+                        <div>
+                            <span>
+                                <h3>Classified Ads</h3>
+                            </span>
+                            <span>
+                                <p>At Lumiere32 we envision it to bridge the distribution gap between</p>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="other-services-one">
+                        <div class="image">
+                            <img src="assets/images/other-service-2.png" alt="otherservice image" />
+                        </div>
+                        <div>
+                            <span>
+                                <h3>Disinfection and Cleaning</h3>
+                            </span>
+                            <span>
+                                <p>At Lumiere32 we envision it to bridge the distribution gap between</p>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="other-services-one">
+                        <div class="image">
+                            <img src="assets/images/other-service-3.png" alt="otherservice image" />
+                        </div>
+                        <div>
+                            <span>
+                                <h3>Renovation</h3>
+                            </span>
+                            <span>
+                                <p>At Lumiere32 we envision it to bridge the distribution gap between</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+  <!-- <section class="freequot">
+
+        <div class="landing-dot-wrapper display-mobile-none">
+            <img src="assets/images/landing-dot.svg" alt="landing dot wrapper" />
+        </div>
+
+        <div class="container">
+            <div class="row">
+                 <div class="dot-absolute-wrapper">
+                    <img src="assets/images/home-dot-image.svg" alt="dot image wrapper" />
+                </div> -->
+  <!-- <div class="col-md-12">
+                    <div class="freequotes-hedng">
+                        <p>Get Free Quotes From Multiple Sellers</p>
+                    </div>
+                </div>
+                <div class="col-md-6 freequote-card-inone">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="freequotes-hedng">
+                                <p>Get Free Quotes From Multiple Sellers</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row freequote-row-wrapper">
+                        <div class="col-md-3 col-sm-12">
+                            <div class="freequote-card text-center one">
+                                <div>
+                                    <img src="assets/images/quote-email.png" alt="freequote image" />
+                                </div>
+                                <h3>Tell us What</h3>
+                                <p>You Need</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="freequote-card text-center two">
+                                <div>
+                                    <img src="assets/images/quote-deal.png" alt="freequote image" />
+                                </div>
+                                <h3>Seal the</h3>
+                                <p>Deal</p>
+                            </div>
+                            <div class="freequote-card text-center three">
+                                <div>
+                                    <img src="assets/images/quote-form.png" alt="freequote image" />
+                                </div>
+                                <h3>Receive free quotes from</h3>
+                                <p>Sellers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="quote-form-card">
+                        <div>
+                            <h2>Tell us what you need</h2>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="form-group">
+                                    <div class="field-quote">
+                                        <input type="test" class="form-control" id="enter-product" name="enter-product"
+                                            placeholder="Enter product / service name">
+                                    </div>
+                                </div>
+                                <div class="form-group d-featureflex">
+                                    <div class="col-lg-3 select-padding">
+                                        <select class="form-control p-0 full-height">
+                                            <option value="+91">+91</option>
+                                            <option value="+91">+91
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-9 p-0">
+                                        <div class="field-quote">
+                                            <input type="test" class="form-control" id="enter-product"
+                                                name="enter-product" placeholder="Enter product / service name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="field-quote">
+                                        <input type="test" class="form-control" id="enter-name" name="enter-name"
+                                            placeholder="Enter Name">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-quote">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+  <section class="top-selling-product">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+          <div class="heading-wrapper featured-heading">
+            <h3 class="underline-text-wrapper small-pading">Featured In</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-slide-block">
+        <ngx-slick-carousel
+          class="carousel feature-slide-wrapper"
+          [config]="featureSlideConfig"
+          #slickModal="slick-carousel"
+        >
+          <div ngxSlickItem *ngFor="let slide of featureSlides" class="slide">
+            <div>
+              <img
+                src="{{ slide.img }}"
+                alt="carousel image"
+                width="152px"
+                (click)="navigateToFeatureURL(slide.url_val)"
+                style="cursor: pointer"
+              />
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+  </section>
+
+  <section class="customer-wrapper">
+    <div class="landing-dot-wrapper display-mobile-none">
+      <img src="assets/images/landing-dot.svg" alt="landing dot image" />
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div>
+            <h3 class="underline-text-wrapper">
+              What our customers
+              <span class="display-block">are saying</span>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="customer-slider-block">
+            <ngx-slick-carousel
+              class="carousel customer-slide-wrapper"
+              [config]="customerSlideConfig"
+              #slickModal="slick-carousel"
+            >
+              <div
+                ngxSlickItem
+                *ngFor="let slide of customerSlides"
+                class="slide"
+              >
+                <div class="card customer-slider-width customer-slide-card">
+                  <div class="comma-image-wrapper">
+                    <img
+                      src="assets/images/sign-01.png"
+                      alt="carousel image"
+                      class="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <p>
+                      {{ slide.text }}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="customer-slider-width text-center slide-image-block"
+                >
+                  <div class="slide-image-wrapper">
+                    <img
+                      src="{{ slide.img }}"
+                      style="width: 50px; height: 50px"
+                      alt="slide image"
+                      class="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <p>{{ slide.name }}</p>
+                  </div>
+                </div>
+              </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- customer wrapper ends -->
+  <br /><br /><br />
+  <!-- <app-footer></app-footer> -->
+</div>

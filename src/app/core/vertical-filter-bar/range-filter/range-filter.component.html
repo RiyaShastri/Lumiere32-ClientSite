@@ -1,0 +1,15 @@
+<!-- (change)="onSliderChanged($event)" -->
+<!-- <app-range-slider [showValues]="true" [min]="model.min" [max]="model.max" (change)="rangeChanged($event)"></app-range-slider> -->
+<!-- <nouislider [connect]="true" [min]="0" [max]="15" [(ngModel)]="someRange" (change)="rangeChanged($event)"></nouislider> -->
+<!-- <div>
+    <span *ngIf="!model.currencyRange" style="float: left;">From {{model.filterValue[0]}}</span>
+    <span *ngIf="model.currencyRange" style="float: left;">From {{model.filterValue[0] | currency}}</span>
+    <span *ngIf="!model.currencyRange" style="float: right;">To {{model.filterValue[1] === model.max ? 'max' : model.filterValue[1]}}</span>
+    <span *ngIf="model.currencyRange" style="float: right;">To {{model.filterValue[1] | currency}}</span>
+</div> -->
+<p-slider [(ngModel)]="model.filterValue" [range]="true" [min]="model.min" [max]="model.max" (onSlideEnd)="rangeChanged($event)"></p-slider>
+<div class="price-slider-input d-flex justify-content-between align-items-center">
+    <input type="text" placeholder="Min" [(ngModel)]="minValue" class="form-control" (change)="valueChange('min')">
+    <span>To</span>
+    <input type="text" placeholder="Max" [(ngModel)]="maxValue" class="form-control" (change)="valueChange('max')">
+</div>

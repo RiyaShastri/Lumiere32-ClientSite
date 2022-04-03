@@ -1,0 +1,60 @@
+.summary-container {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+
+    table {
+        padding: 0px;
+        font-size: 14px;
+        .product-section {
+            width: 100%;
+        }
+        .price-section {
+            padding-top: 20px;
+        }
+        td {
+            font-size: 14px;
+            font-weight: 600;
+            // text-align: right;
+            // padding-bottom: 0;
+        }
+        tr {
+            border-bottom: 1px solid #ccc;
+        }
+    }
+
+    .total-section {
+        border: none;
+        th {
+            padding: 10px 0;
+        }
+        td {
+            padding: 10px 0;
+            text-align: right;
+        }
+    }
+}
+
+.checkout{
+    justify-content: space-evenly !important;
+    margin: 0 auto !important;
+}
+
+@media only screen and (max-width: 360px){
+    ng-star-inserted {
+        width: 100%;
+    }  
+}
+
+@media only screen and (max-width : 1024px){
+    .summary-container {
+        // margin-left: 3vh;
+        padding: 0;
+        max-width: 384px;
+    }
+}
+
+.final-amount{
+    font-size: large!important;
+    font-weight: 600!important;
+}

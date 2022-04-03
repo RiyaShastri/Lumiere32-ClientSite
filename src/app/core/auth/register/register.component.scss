@@ -1,0 +1,165 @@
+.last-name-wrapper {
+  flex-basis: 60%;
+}
+
+.padding-right-20 {
+  padding-right: 20px;
+}
+
+.email-wrapper {
+  .form-email-wrapper input {
+    max-width: 354px;
+  }
+  .register-button-wrapper {
+    button {
+      max-width: 354px;
+    }
+  }
+}
+.custom-button {
+  width: 70%;
+}
+.eye {
+  position: relative;
+  float: right;
+  margin-top: -31px;
+  right: 1vh;
+}
+.inp {
+  position: absolute;
+  width: 46%;
+}
+
+.register-button-wrapper {
+  padding-top: 40px;
+}
+
+.verify-email-wrapper {
+  padding-top: 60px;
+  .heading-wrapper {
+    h3 {
+      font-size: 30px;
+    }
+  }
+  .verify-email-form {
+    padding-top: 42px;
+    max-width: 75%;
+  }
+}
+
+.verify-mobile-input-wrapper {
+  display: flex;
+  padding-top: 22px;
+  max-width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+
+  // min-width: 100%;
+  @media only screen and (max-width: 600px) {
+    max-width: 100%;
+  }
+  input {
+    height: 54px;
+    text-align: center;
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+}
+
+.verify-email-text {
+  padding-top: 18px;
+}
+
+/*This will work for firefox*/
+
+@-moz-document url-prefix() {
+  .verify-mobile-input-wrapper {
+    display: flex;
+    max-width: 100% !important;
+    min-width: auto !important;
+  }
+}
+button.verifyBtn {
+  width: 65% !important;
+  // float: left !important;
+}
+.disable {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+.mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: #63c7db !important;
+}
+.paragraph-wrapper {
+  padding-top: 7%;
+}
+button.paddingLeft {
+  padding-left: 15%;
+  cursor: pointer;
+}
+.paragraph-wrapper {
+  padding-top: 7%;
+}
+.dis {
+  display: contents;
+  cursor: pointer;
+}
+.paddingLeft {
+  // padding-left: 15%;
+  cursor: pointer;
+}
+
+::ng-deep.select-speciality {
+
+  .ui-dropdown-label-container {
+    overflow: hidden;
+  }
+}
+
+.ng-tns-c128-5.ui-dropdown.ui-widget.ui-state-default.ui-corner-all {
+  min-width: 0 !important;
+  min-height: 38px !important;
+  color: red !important;
+}
+::-webkit-input-placeholder {
+  text-transform: initial;
+}
+
+:-moz-placeholder {
+  text-transform: initial;
+}
+
+::-moz-placeholder {
+  text-transform: initial;
+}
+
+:-ms-input-placeholder {
+  text-transform: initial;
+}
+.centremail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 5%;
+}
+@media screen and (max-width: 420px) {
+  ::ng-deep .otp-input {
+    width: 26px !important;
+    font-size: 14px !important;
+    height: 30px !important;
+    padding: 2px !important;
+  }
+}
+@media screen and (max-width: 280px) {
+  ::ng-deep .otp-input {
+    width: 26px !important;
+    font-size: 14px !important;
+    height: 30px !important;
+    padding: 2px !important;
+  }
+}

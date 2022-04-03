@@ -1,0 +1,51 @@
+.box {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 6.5px 5px rgba(0, 0, 0, 0.06),
+        0 6px 5px rgba(0, 0, 0, 0.034), 0 3px 3px rgba(0, 0, 0, 0.006), 0 6px 5px rgba(0, 0, 0, 0.12);
+}
+.common-address {
+    .form-group {
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        select input {
+            height: 35px;
+            border: 2px solid #ccc;
+        }
+    }
+    .btn-primary {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: #63c7db;
+        border: none;
+    }
+}
+
+.pointerCursor {
+    cursor: pointer;
+}
+
+@media only screen and (max-width : 768px) {
+    button.btn.btn-primary {
+        width: 100%;
+    }
+}
+// .btn-primary {
+//     width: 40%;
+//     font-size: 16px;
+//     font-weight: 500;
+//     background-color: #63c7db;
+//     border: none;
+// }
+// @media only screen and (max-width : 414px){
+//     .container.common-address {
+//         width: 110%;
+//         padding-left: 0px;
+//     }
+// }
+::ng-deep .row.container-fluid.ng-star-inserted {
+    margin: 0px;
+    padding: 0px;
+}

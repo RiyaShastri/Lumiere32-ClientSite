@@ -1,0 +1,319 @@
+<div class="sell" *ngIf="!isFormSubmitted">
+  <div>
+    <img
+      src="/assets/images/sell-on-lumiere-banner.jpg"
+      alt="123"
+      height="100%"
+      width="100%"
+      style="margin-top: 5px"
+    />
+  </div>
+</div>
+<div class="container" *ngIf="!isFormSubmitted">
+  <div class="info mb-5">
+    <div class="info-header">
+      <h3 class="mt-5 mb-3">Sell On Lumiere32</h3>
+    </div>
+    <div class="info-description text-justify">
+      <p>
+        Either you are an established manufacturer or supplier of a medical
+        devices company or a new start-up in Malaysia, we are happy to feature
+        your products on our marketplace, Lumiere32.
+      </p>
+      <br />
+      <p>
+        We aspire to provide world-class customer service to our clients, and
+        are constantly seeking new products to enhance our portfolio of
+        products, that we offer to our clients. We ensure that your products
+        will have superior visibility and your customer interactions will be
+        seamless, using our best-of-breed IT infrastructure.
+        <strong
+          >Launch your online presence with us, and reach customers at the click
+          of a button.</strong
+        >
+      </p>
+      <br />
+      <p>
+        If you would like to partner with us in your journey of brand
+        recognition and brand preference, please fill the below Contact Form and
+        we will soon get in touch with you, at a time convenient for you.
+      </p>
+      <br />
+      <p>
+        <strong>Our Partners Onboarding Experts</strong> are eager to hear from
+        you.
+      </p>
+    </div>
+  </div>
+</div>
+<div
+  class="container-fluid text-center"
+  style="background-color: #ffffff; color: #1c5d9e"
+  *ngIf="!isFormSubmitted"
+>
+  <div class="youtube-header pt-5 mb-5">
+    <h4>We know exactly what your customers are looking for</h4>
+  </div>
+  <div class="container pb-5">
+    <iframe
+      src="https://www.youtube.com/embed/LOSIEdIcESg"
+      title="YouTube video player"
+      frameborder="0"
+      class="w-100 vh-100"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
+<div class="container mt-5 mb-5" *ngIf="!isFormSubmitted">
+  <form [formGroup]="signUpForm">
+    <div class="form">
+      <div class="form-header">
+        <h4>Create Account</h4>
+      </div>
+      <div class="row pt-5">
+        <div class="col-md-4">
+          <input
+            required
+            type="text"
+            placeholder="Name"
+            formControlName="sellerName"
+          />
+          <div
+            *ngIf="
+              signUpFormControl.sellerName.errors &&
+              !formValid &&
+              submitButtonClicked
+            "
+            class="validation"
+          >
+            <small *ngIf="signUpFormControl.sellerName.errors"
+              >Name is required</small
+            >
+          </div>
+        </div>
+        <div class="col-md-4">
+          <input
+            required
+            type="text"
+            placeholder="E-mail"
+            formControlName="sellerEmail"
+          />
+          <div
+            *ngIf="
+              signUpFormControl.sellerEmail.errors &&
+              !formValid &&
+              submitButtonClicked
+            "
+            class="validation"
+          >
+            <small *ngIf="signUpFormControl.sellerEmail.errors.required"
+              >Email is required</small
+            >
+            <small *ngIf="signUpFormControl.sellerEmail.errors.pattern">
+              Please provide valid email id
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <input
+            required
+            type="text"
+            placeholder="Mobile No"
+            formControlName="mobileNo"
+          />
+          <div
+            *ngIf="
+              signUpFormControl.mobileNo.errors &&
+              !formValid &&
+              submitButtonClicked
+            "
+            class="validation"
+          >
+            <small *ngIf="signUpFormControl.mobileNo.errors.required"
+              >Mobile No. is required</small
+            >
+            <small *ngIf="signUpFormControl.mobileNo.errors.pattern">
+              Mobile No. must be between 5 to 18 digits (Alphabets not allowed)
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <input
+            type="text"
+            placeholder="Block/House No"
+            formControlName="houseNo"
+            id="houseNo"
+          />
+        </div>
+        <div class="col-md-4">
+          <input type="text" placeholder="Floor No" formControlName="floorNo" />
+        </div>
+        <div class="col-md-4">
+          <input type="text" placeholder="Unit No" formControlName="unitNo" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <input
+            type="text"
+            placeholder="Street Name"
+            formControlName="streetName"
+          />
+        </div>
+        <div class="col-md-4">
+          <input
+            type="text"
+            placeholder="Zip/Postal"
+            formControlName="pincode"
+          />
+        </div>
+        <div class="col-md-4">
+          <input
+            type="text"
+            placeholder="Building Name"
+            formControlName="buildingName"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <input
+            type="text"
+            placeholder="City"
+            formControlName="city"
+          />
+        </div>
+        <div class="col-md-4">
+          <input
+            type="text"
+            placeholder="State"
+            formControlName="state"
+          />
+        </div>
+      </div>
+      <!-- <div class="row ml-4">
+        <div class="col-md-4">
+          <input type="checkbox" class="form-check-input" />
+          <h6 class="text-small text-muted ml-2 mt-1">
+            Sign Up to the Newsletter
+          </h6>
+        </div>
+      </div> -->
+      <!-- <div>
+        <re-captcha
+          (resolved)="resolved($event)"
+          (error)="onError($event)"
+          errorMode="handled"
+          siteKey="6LdDh3IaAAAAAHJ-drZTLx5cH2oJzkNXW24GaOeL"
+        ></re-captcha>
+      </div> -->
+      <div>
+        <small style="color: gray;">This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </small>
+      </div>
+      <div class="row mt-4">
+        <div class="row ml-4">
+          <button
+            type="submit"
+            (click)="onSubmit()"
+            class="btn btn-primary btn-lg"
+          >
+            Create Account
+          </button>
+        </div>
+      </div>
+      <div class="login mt-5 mb-4">
+        <h4>Seller Login</h4>
+      </div>
+      <div class="row text-dark">
+        <div class="col-md-4">
+          <h6 class="text-small">Click on sign in button to Login.</h6>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="row ml-4">
+          <button
+            [disabled]="authService.loginFlag"
+            type="button"
+            class="btn btn-primary btn-lg"
+            (click)="signIn()"
+            [ngStyle]="
+              authService.loginFlag
+                ? { cursor: 'not-allowed' }
+                : { cursor: 'pointer' }
+            "
+          >
+            Sign In
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <hr />
+  <div class="facts mt-5">
+    <div class="facts-header text-center">
+      <h3>Dental Supplies Industry Facts</h3>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-4 my-2">
+        <img
+          src="/assets/images/sell-on-lumiere2.png"
+          width="100%"
+          height="100%"
+          alt="%"
+        />
+      </div>
+      <div class="col-md-4 my-2">
+        <img
+          src="/assets/images/did-you-know.png"
+          width="100%"
+          height="100%"
+          alt="?"
+        />
+      </div>
+      <!-- <div class="col-md-4 my-2">
+        <img
+          src="/assets/images/sell-on-lumiere1.png"
+          width="100%"
+          height="100%"
+          alt="%"
+        />
+      </div> -->
+    </div>
+  </div>
+  <div class="advertize text-center mt-5">
+    <div class="advertize-header">
+      <h3>Why Choose Lumiere32?</h3>
+    </div>
+  </div>
+  <div class="advertize-body">
+    <div class="row mt-5" style="justify-content: center">
+      <div
+        class="card m-3"
+        style="width: 12rem"
+        *ngFor="let image of imagesList"
+      >
+        <img class="card-img-top" src="{{ image.imageUrl }}" alt="Card" />
+        <div class="card-body">
+          <p class="card-text text-center">{{ image.text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="isFormSubmitted && sellerRegistered">
+  <div class="welcome">
+    <i class="fas fa-check-circle" style="color: mediumseagreen;font-size: 100px;"></i>
+    <h1 class="display-3">Thank You!</h1>
+    <p>
+       You are just few steps away from starting your online journey. Our team
+      will contact you within 24 - 48 hours.
+    </p>
+  </div>
+</div>

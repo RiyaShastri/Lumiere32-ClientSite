@@ -1,0 +1,317 @@
+<!-- <app-header></app-header> -->
+<div>
+  <section class="get-equipment">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-8 equipment">
+          <div class="equipment-inner">
+            <div class="product-list-header">
+              <div class="main">
+                <p class="Show-product filter"> My Cart
+                  <span *ngIf="CartDetails && CartDetails.length">
+                    ({{CartDetails.length}})
+                  </span>
+                <p class="Show-product filter">
+                  <app-loader></app-loader>
+                </p>
+
+                <div class="listing-name clearr_all dropdown ml-auto">
+                  <button *ngIf="selectedCartItems && selectedCartItems.length > 0" style="font-size: 15px; 
+                                       width: 90px;color: #fff; height: 34px;
+                                       background-color: #ed2814b3!important; font-size: 12px;
+                                       border: 2px solid #bd2130;
+                                       border-radius: 4px;" (click)="removeProduct()">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Remove
+                  </button>
+                  <span id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    *ngIf="CartDetails && CartDetails.length > 0">
+                    <span style="font-size: 25px;" class="ml-3">...</span>
+                  </span>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="cursor: pointer;">
+                    <a class="dropdown-item" (click)="clickMarkOption('single')">Mark</a>
+                    <a class="dropdown-item" (click)="clickMarkOption('all')">Mark All</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-outer variant-table">
+              <div class="container">
+                <form [formGroup]="cartForm">
+                  <p-table [value]="CartDetails" [responsive]="false" *ngIf="!loadingObj['isProductDataLoading']">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th *ngIf="allConditions['clickMark'] || allConditions['clickMarkAll']">
+                        </th>
+                        <th></th>
+                        <th class="text-center" style="width: 30%;">Product Name</th>
+                        <th class="text-center">Price ({{userService.curr}})</th>
+                        <th class="text-center">Quantity</th>
+                        <th style="text-align: center;">Total ({{userService.curr}})</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-cart let-index="rowIndex">
+
+                      <ng-container formArrayName="quantities">
+                        <tr [formGroupName]="index">
+
+                          <td *ngIf="allConditions['clickMark'] || allConditions['clickMarkAll']">
+                            <input type="checkbox" [value]="cart.id" [(ngModel)]="cart.isSelected"
+                              [ngModelOptions]="{standalone: true}"
+                              (change)="markClickEvent(cart.id , $event , index)" />
+                          </td>
+                          <!-- <td class="text-center" *ngIf="checkbox">
+                                                      <input type="checkbox" [(ngModel)]="cart.isSelected"
+                                                          [ngModelOptions]="{standalone: true}" name="test"
+                                                          value="{{cart.id}}" (change)="isAllSelected()" />
+                                                  </td>
+                                                  <td class="text-center" style="width: 3em;" *ngIf="checkboxselect">
+                                                      <input type="checkbox" name="deletecheck" value="{{cart.id}}"
+                                                          (click)="selectID(cart.id,$event)" />
+                                                  </td> -->
+
+                          <td class="product-detail">
+                            <img [src]="cart['product']['productImage'][0]['image']" alt="product image" width="60%"
+                              height="60px"> <i class="fa fa-bookmark" aria-hidden="true"></i>
+                          </td>
+                          <td class="text-center">
+                            <div class="card-product-list">
+                              <a [href]="openProductDetail(cart.product)">
+                                {{cart['product']['productName']}} </a>
+                            </div>
+                          </td>
+                          <td class="text-center">
+                            <p class="discount-price">{{userService.curr}}
+                              {{cart['product']['MRP'] | number : '1.2-2'}}</p>
+                            <p class="origin-price" *ngIf="cart['product']['isSale']">
+                              <del>{{userService.curr}}
+                                {{cart['product']['sellPrice'] | number : '1.2-2'}}</del>
+                            </p>
+                          </td>
+                          <td class="text-center">
+                            <div *ngIf="cart['quantityDisplay']">
+                              <div class="add-cart-input add-cart">
+                                <button type="button"
+                                  [disabled]="quantities()['controls'][0]['value']['quantity'] == 0 "
+                                  (click)="removeQty(cart['id'],index)"><i class="fas fa-minus"></i></button>
+                                <input type="number" formControlName="quantity" (input)="changeQuantity(index)">
+                                <button type="button"
+                                  (click)="addQty(index,cart.product.sellerProducts[0]['quantity'])"><i
+                                    class="fas fa-plus"></i></button>
+                              </div>
+                              <div *ngIf="cart['quantityDisplay']">
+                                <button type="button" class="btn-blue custom-button add-cart-btn cart-btn"
+                                  *ngIf="quantities().controls[index]['value']['quantity'] != 0"
+                                  (click)="addToCartBtnClick(index)">
+                                  Add to cart
+                                </button>
+                              </div>
+                            </div>
+                            <div *ngIf="!cart['quantityDisplay']">
+                              <span class="text-danger">Out of Stock</span>
+                              <button type="button" class="custom-button add-cart-btn" style="background-color: #ed2814b3!important;
+                                                              border: 2px solid #bd2130;
+                                                              border-radius: 4px;"
+                                (click)="outOfStockRemoveBtn(cart['id'])">
+                                Remove
+                              </button>
+                            </div>
+                          </td>
+                          <td class="crttotal" style="text-align: center;">{{cart['total'] |number : '1.2-2'}}
+                            <h6 class="discount-amt" *ngIf="cart['savingAmount']">You saved
+                              {{userService.curr}} {{cart['savingAmount'] | number : '1.2-2'}}</h6>
+                            <h6 class="discount">{{ cart['orderQtyDiscText']}}</h6>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </ng-template>
+                  </p-table>
+                  <p-table [value]="CartDetails" [responsive]="false" *ngIf="loadingObj['isProductDataLoading']">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th *ngIf="allConditions['checkbox']"></th>
+                        <th *ngIf="allConditions['checkboxselect']"></th>
+                        <th></th>
+                        <th class="text-center" style="width: 30%;">Product Name</th>
+                        <th class="text-center">Price </th>
+                        <th class="text-center">Quantity</th>
+                        <th style="text-align: center;">Total</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body">
+                      <tr>
+                        <ngx-skeleton-loader [theme]="{ width: '700px',
+                          height: '50px', 'border-radius': '10px' , 'margin-top': '10px'}">
+                        </ngx-skeleton-loader>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                  <div *ngIf="CartDetails && CartDetails.length == 0" class="text-center mt-3 mb-2">
+                    <p>No Items in the cart</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 equipment" *ngIf="allConditions['isPriceDetailDisplay']">
+          <div class="equipment-inner">
+            <div class="product-list-header-PRICE">
+              <div class="main">
+                <p class="Show-product" style="font-weight: 600;">PRICE DETAILS</p>
+              </div>
+            </div>
+
+            <div class="product-list-header outer-header">
+              <div class="main">
+                <p class="Show-product">
+                  <span *ngIf="!loadingObj['isProductDataLoading']" style="cursor: default;">
+                    Price &nbsp;
+                    ({{ (CartDetails && CartDetails.length) ? CartDetails.length : 0 }} items)
+                  </span>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <ngx-skeleton-loader [theme]="{width: '120px', height: '20px','border-radius': '10px' }">
+                    </ngx-skeleton-loader>
+                  </span>
+                </p>
+                <p class="listing-name  ml-auto" style="font-weight: 400;">
+                  <span *ngIf="!loadingObj['isProductDataLoading']" style="cursor: default;">
+                    {{userService.curr}} {{totalAmount | number : '1.2-2'}}
+                  </span>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <ngx-skeleton-loader [theme]="{ width: '120px', height: '20px', 'border-radius': '10px' }">
+                    </ngx-skeleton-loader>
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="product-list-header outer-header">
+              <div class="main">
+                <p class="Show-product">
+                  <span *ngIf="!loadingObj['isProductDataLoading']">
+                    Discount&nbsp;
+                  </span>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <ngx-skeleton-loader [theme]="{width: '120px', height: '20px',   'border-radius': '10px'}">
+                    </ngx-skeleton-loader>
+                  </span>
+                </p>
+                <p class="listing-name  ml-auto" style="font-weight: 400; ">
+                  <span *ngIf="!loadingObj['isProductDataLoading']" style="cursor: default;">
+                    {{userService.curr}} {{checkService.promoDiscount | number : '1.2-2'}}
+                  </span>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <ngx-skeleton-loader [theme]="{
+                                              width: '120px',
+                                              height: '20px',
+                                              'border-radius': '10px' }">
+                    </ngx-skeleton-loader>
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="product-list-header outer-header">
+              <div class="main">
+                <p class="Show-product">
+                  <span *ngIf="!loadingObj['isProductDataLoading']">
+                    Total Amount
+                  </span>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <ngx-skeleton-loader [theme]="{width: '120px', height: '20px',
+                      'border-radius': '10px' }"> </ngx-skeleton-loader>
+                  </span>
+                </p>
+                <p class="listing-name  ml-auto">
+                  <span *ngIf="!loadingObj['isProductDataLoading']" style="cursor: default;">
+                    {{userService.curr}} {{totalAmountAfterDiscount | number : '1.2-2'}}
+                  </span>
+                  <span *ngIf="loadingObj['isProductDataLoading']">
+                    <ngx-skeleton-loader [theme]="{
+                      width: '120px', height: '20px', 'border-radius': '10px' }"> </ngx-skeleton-loader>
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="product-list-header">
+              <div class="btns">
+                <input type="text" class="custom-button secondary" (keyup.enter)="applyOffer()" [(ngModel)]="couponCode"
+                  placeholder="Enter Coupon Code" [disabled]="!allConditions['codeDisplay']"
+                  *ngIf="!loadingObj['isProductDataLoading']">
+
+                <ngx-skeleton-loader *ngIf="loadingObj['isProductDataLoading']" [theme]="{
+                    width: '210px',  height: '45px','border-radius': '10px' }"> </ngx-skeleton-loader>
+
+                <div class="row" style="margin-right: 0;">
+                  <div *ngIf="!loadingObj['isProductDataLoading']">
+
+                    <button *ngIf="allConditions['codeDisplay']" class="custom-button ml-4 apply-code"
+                      style="width: 102px;" [disabled]="!couponCode" (click)="applyOffer()">Apply</button>
+
+                    <button *ngIf="!allConditions['codeDisplay']" type="button" (click)="removeOffer()"
+                      class="btn btn-danger ml-4"
+                      style="background-color: #ed2814b3!important; width: 105px!important;">Remove</button>
+
+                  </div>
+                  <ngx-skeleton-loader *ngIf="loadingObj['isProductDataLoading']" [theme]="{
+                      width: '120px',  height: '45px', 'border-radius': '10px',  'margin-left':'15px' }">
+                  </ngx-skeleton-loader>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-list-header "
+              *ngIf="!loadingObj['isProductDataLoading'] && !allConditions['codeDisplay']">
+              <p class="save_order">You will save {{userService.curr}} {{checkService.promoDiscount | number : '1.2-2'}}
+                on this order</p>
+            </div>
+            <div *ngIf="loadingObj['isProductDataLoading']">
+              <ngx-skeleton-loader *ngIf="loadingObj['isProductDataLoading']" [theme]="{
+                width: '350px', height: '20px', 'border-radius': '10px'}"> </ngx-skeleton-loader>
+            </div>
+            <div class="product-list-header" *ngIf="outStockArray && outStockArray.length > 0">
+              <p class="save_order text-danger" style="font-size: 13px;"> Kindly, Remove Out of Stock items from your
+                cart. </p>
+            </div>
+
+            <div class="product-list-header text-danger"
+              *ngIf="!loadingObj['isProductDataLoading'] && !allConditions['isClickedAddToCart']">
+              <button type="button" class="submit-button process-pay-btn custom-button" (click)="proceedPayment()"
+                [disabled]="outStockArray && outStockArray.length > 0 ?  true :  false">
+                Proceed to Checkout
+              </button>
+            </div>
+            <div class="product-list-header " *ngIf="loadingObj['isProductDataLoading']
+                      &&  allConditions['isClickedAddToCart']">
+              <ngx-skeleton-loader *ngIf="loadingObj['isProductDataLoading']" [theme]="{
+                width: '350px', height: '45px', 'border-radius': '10px' }"> </ngx-skeleton-loader>
+            </div>
+
+            <br>
+            <div class="product-list-header " *ngIf="!loadingObj['isProductDataLoading']">
+              <button *ngIf="allConditions['quoteDisplay']" class="submit-quote-button" (click)="getQuote()">Request For
+                Quote</button>
+            </div>
+            <div class="product-list-header " *ngIf="loadingObj['isProductDataLoading']">
+              <ngx-skeleton-loader *ngIf="loadingObj['isProductDataLoading']" [theme]="{
+                width: '350px', height: '45px','border-radius': '10px'}"> </ngx-skeleton-loader>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="confirm-box" style="width: auto;">
+      <p-confirmDialog key="confirm-drop-database" header="Delete" acceptLabel="Yes" rejectLabel="No">
+      </p-confirmDialog>
+    </div>
+
+  </section>
+</div>

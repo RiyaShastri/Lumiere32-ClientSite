@@ -1,0 +1,269 @@
+.box {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 6.5px 5px rgba(0, 0, 0, 0.06),
+        0 6px 5px rgba(0, 0, 0, 0.034), 0 3px 3px rgba(0, 0, 0, 0.006), 0 6px 5px rgba(0, 0, 0, 0.12);
+}
+.ptb {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    cursor: pointer;
+}
+.brdr {
+    border: 1px solid !important;
+    font-size: 18px;
+    padding: 0 7px !important;
+    cursor: pointer;
+}
+.addIcon {
+    padding-right: 5px;
+    padding-bottom: 2px;
+    font-size: 23px;
+}
+input.searchInp {
+    // font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    border-radius: 0;
+    font-size: 14px;
+}
+.btnSearch {
+    background: #63c7db;
+    color: white;
+    border-radius: 0;
+}
+.payall-btn {
+    position: relative;
+    .btnPayAll {
+        background: #63c7db;
+        color: white;
+        border-radius: 0;
+        font-size: 14px;
+        position: absolute;
+        right: 0;
+        top: -140px;
+    }
+}
+
+.orderType {
+    border: 1px solid #aab7c9;
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.ordertype-select {
+    margin-left: 10px;
+    .border-primary {
+        font-size: 14px;
+    }
+}
+.downArrow {
+    padding-left: 10px;
+}
+.mright {
+    margin-right: 30px;
+}
+.orderHeader {
+    height: 60px;
+    background: #63c7db26;
+    padding: 20px 0px;
+    justify-content: space-around;
+    font-size: 15px;
+    font-weight: 600;
+    span {
+        color: #637e94;
+        font-weight: 500;
+    }
+}
+.orderList {
+    padding: 20px 30px;
+}
+
+.listing {
+    border-bottom: 1px solid lightgrey;
+    padding: 15px 0 !important;
+}
+.orderTypeDropdown {
+    padding-right: 20px;
+}
+.lastDaysDropdown {
+    padding-right: 20px;
+}
+.dotYellow {
+    height: 12px;
+    width: 12px;
+    background-color: #ffca01;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 7px;
+}
+.dotRed {
+    height: 12px;
+    width: 12px;
+    background-color: #f4566f;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 7px;
+}
+.dotGreen {
+    height: 12px;
+    width: 12px;
+    background-color: #23c377;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 7px;
+}
+.orderHeader1 {
+    height: 100px;
+    background: #63c7db26;
+    padding: 20px 30px;
+    font-weight: 600;
+}
+.brder {
+    border: 1px solid !important;
+    padding: 0 7px !important;
+    cursor: pointer;
+    height: 26px;
+    line-height: 25px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+.itemsBtn {
+    padding-top: 15px;
+    margin-top: -3px;
+    // background: #fff;
+}
+.pr {
+    padding-right: 1.5rem !important;
+}
+
+.dropdown {
+    .btnSearch {
+        margin-top: -8px;
+        color: #fff;
+        font-weight: 600;
+        span {
+            color: #fff;
+        }
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .searchInputdiv {
+        padding-left: 10px;
+    }
+    .orderTypeDropdown {
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    .lastDaysDropdown {
+        padding-right: 35px;
+        padding-top: 10px;
+    }
+    .orderHeader {
+        height: 190px;
+        background: #63c7db26;
+        padding: 10px;
+        justify-content: center;
+        padding-left: 29px;
+        align-items: center;
+    }
+    .mP {
+        margin-left: -9px;
+        /* margin-right: 32px; */
+        padding-right: 0px;
+    }
+    .orderImg {
+        text-align: center;
+    }
+    .pr {
+        padding-right: 0 !important;
+    }
+    .alignMent {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .orderHeader1 {
+        height: 190px;
+        background: #63c7db26;
+        padding: 12px 10px;
+        //justify-content: center;
+        //padding-left: 29px;
+    }
+    .dropdown.lastDaysDropdown {
+        left: 0px;
+    }
+    .searchButton.payll-butt.mobl {
+        margin-top: 11px;
+        margin-left: 20px;
+    }
+    .orderHeader1 p {
+        text-align: left;
+    }
+    .itemsBtn {
+        justify-content: center;
+        display: flex;
+    }
+    .orderHeader {
+        align-items: center;
+        height: 190px;
+        background: #63c7db26;
+        padding: 10px;
+        justify-content: center;
+        padding-left: 29px;
+    }
+}
+
+@media (max-width: 991px) {
+    .orderHeader {
+        align-items: center;
+        height: 190px;
+        background: #63c7db26;
+        padding: 10px;
+        justify-content: center;
+        padding-left: 29px;
+    }
+
+    .searchInputdiv {
+        width: 98vw;
+        margin-top: -24px;
+    }
+
+    .ordertype-select {
+        max-width: 30%;
+        margin-top: 10px;
+    }
+    .btnPayAll {
+        right: -5px !important;
+        top: -56px !important;
+        padding: 6px;
+        margin-top: 10px;
+    }
+}
+
+.order-card {
+    box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 20%), 0px 0px 3px 0px rgb(0 0 0 / 14%), 0px 9px 4px -10px rgb(0 0 0 / 12%);
+    border: none;
+    margin-bottom: 15px;
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .card-body {
+        span {
+            color: #637e94;
+            font-weight: 500;
+        }
+    }
+}
+
+.dropdown-menu{
+    cursor: pointer;
+    position: absolute;
+    transform: translate3d(-94px, 37px, 0px)!important;
+    top: 0px;
+    left: -120px;
+    will-change: transform;
+}

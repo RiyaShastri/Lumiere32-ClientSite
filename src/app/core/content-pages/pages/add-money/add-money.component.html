@@ -1,0 +1,195 @@
+<!-- <app-header></app-header> -->
+<br>
+
+<div class="container">
+    <p-table [value]="promoData">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="background-color: #63C7DB;">Country</th>
+                <th style="background-color: #63C7DB;">Top-up Name</th>
+                <th style="background-color: #63C7DB;">Top-up Amount</th>
+                <th style="background-color: #63C7DB;">Cashback Amount</th>
+                <th style="background-color: #63C7DB;">Status</th>
+                <th style="background-color: #63C7DB;">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-index="rowIndex">
+            <tr>
+                <td>{{item.country.countryName}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.cashbackAmount}}</td>
+                <td>{{ item.status ? 'Active' : 'In Active' }}</td>
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" name="radio-buy"
+                        value="{{item.id}}"
+                        [(ngModel)]="purchaseTopUp"
+                            (ngModelChange)="buy(item)"
+                        />
+                        Buy
+                    </label>
+
+                    <!-- <button type="button"
+                    (click)="buy(item)"
+                    class="btn btn-info">Buy</button> -->
+                        <!-- <li><a (click)="delete(item.id)">Delete</a></li> -->
+
+
+
+
+                  <!-- <i class="fa fa-eye" aria-hidden="true" (click)="edit(item.id)" ></i>
+
+                  <i class="fa fa-trash" aria-hidden="true" (click)="delete(item.id)" style="margin: 10px;"></i> -->
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+</div>
+<br>
+<!-- <app-card-details></app-card-details> -->
+<form #cardForm="ngForm">
+<div class="container" *ngIf="cardDisplay">
+  <div  style="margin-top: 15px;">
+      <div class="row">
+        <div class="form-group col-md-6"
+          [class.has-error]="namecardControl.invalid &&  namecardControl.touched"
+                  [class.has-success]="namecardControl.valid">
+          <label for="exampleInputEmail1" class="control-label">Card Holder Name</label>
+          <input type="text" class="form-control" id="name"
+            required   name="month" #namecardControl="ngModel"
+            [(ngModel)]="checkout.card.name"
+            aria-describedby="nameHelp">
+
+              <span class="help-block" style="color: red;" *ngIf="namecardControl.invalid &&  namecardControl.touched">
+              Name is required
+            </span>
+        </div>
+
+        <div class="form-group col-md-6"
+            [class.has-error]="cardNumberControl.invalid &&  cardNumberControl.touched"
+            [class.has-success]="cardNumberControl.valid">
+          <label for="exampleInputEmail1" >Card Number</label>
+          <input type="text" class="form-control" id="name"
+            required   name="cardnumber" #cardNumberControl="ngModel"
+            [(ngModel)]="checkout.card.cardNumber" minlength="16"
+            (ngModelChange)="checkNumberValidation($event)"
+            maxlength="16" (ngModelChange)="verifyCard($event)" aria-describedby="nameHelp">
+          <span class="help-block" style="color: red;" *ngIf="cardNumberControl.invalid &&  cardNumberControl.touched">
+              Card Number is required
+          </span>
+
+            <!-- <span *ngIf="cardNumberErrorDisplay && checkout.card.cardNumber.length > 0" style="color: red;">
+              Card Number must include number only.
+            </span> -->
+        </div>
+      </div>
+      <div class="row">
+        <!-- <div class="form-group col-md-3" style="padding-left: 30px;"
+        [class.has-error]="cardMonthControl.invalid &&  cardMonthControl.touched"
+        [class.has-success]="cardMonthControl.valid"
+        >
+          <label for="clinicname" class="control-label">Month</label>
+          <input type="text" class="form-control" id="clinicname"
+          required   name="cardname" #cardMonthControl="ngModel"
+          [(ngModel)]="checkout.card.expirationMonth"
+            minlength="2" maxlength="2" aria-describedby="clinicnameHelp">
+            <span class="help-block" style="color: red;" *ngIf="cardMonthControl.invalid &&  cardMonthControl.touched">
+              Month is required
+            </span>
+        </div> -->
+        <div class="form-group col-md-3"
+            [class.has-error]="cardMonthControl.invalid &&  cardMonthControl.touched"
+            [class.has-success]="cardMonthControl.valid"
+            >
+            <label for="monthname" class="control-label">Month</label>
+            <br>
+            <select name="cars" id="cars"  class="form-control"
+            [(ngModel)]="checkout.card.expirationMonth"
+            required   name="cardname" #cardMonthControl="ngModel">
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+        </div>
+
+        <!-- <div class="form-group col-md-3" style="padding-left: 30px;"
+        [class.has-error]="cardYearControl.invalid &&  cardYearControl.touched"
+        [class.has-success]="cardYearControl.valid"
+        >
+          <label for="clinicname">Expiry Year</label>
+          <input type="text" class="form-control" id="clinicname"
+          required   name="year" #cardYearControl="ngModel"
+          [(ngModel)]="checkout.card.expirationYear"
+            minlength="2" maxlength="2" aria-describedby="clinicnameHelp">
+
+            <span class="help-block" style="color: red;" *ngIf="cardYearControl.invalid &&  cardYearControl.touched">
+              Year is required
+            </span>
+        </div> -->
+
+
+        <div class="form-group col-md-3"
+          [class.has-error]="cardYearControl.invalid &&  cardYearControl.touched"
+          [class.has-success]="cardYearControl.valid">
+          <label for="yearname" class="control-label">Expiry Year</label>
+          <br>
+          <select name="year" id="year"  class="form-control"
+          required   name="year"
+          #cardYearControl="ngModel"
+          [(ngModel)]="checkout.card.expirationYear"
+
+          >
+          <option></option>
+          <option *ngFor='let item of expireYears' value="{{item}}">{{item}}</option>
+
+          </select>
+        </div>
+        <div class="form-group col-md-6"
+          [class.has-error]="cardcvvControl.invalid &&  cardcvvControl.touched"
+          [class.has-success]="cardcvvControl.valid">
+          <label for="exampleInputEmail1">CVV</label>
+          <input type="password" class="form-control" id="cvv"
+
+          minlength="3"
+          maxlength="3"
+          (ngModelChange)="checkChar($event,'cvv')"
+          required   name="cvv" #cardcvvControl="ngModel"
+          [(ngModel)]="checkout.card.cvv"
+            aria-describedby="cvvhelp"/>
+
+            <span class="help-block" style="color: red;"
+            *ngIf="cardcvvControl.errors?.pattern && cardcvvControl.invalid &&  cardcvvControl.touched">
+              CVV is required
+            </span>
+            <span *ngIf="cardErrorDisplay && checkout.card.cvv.length > 0" style="color: red;">
+              Characters are not allowed
+              </span>
+        </div>
+        <div class="form-group col-md-6">
+          <button type="button"
+          (click)="submit()"
+          [disabled]="cardForm.invalid && cardErrorDisplay == true" class="btn btn-info">Submit</button>
+        </div>
+
+      </div>
+      <!-- <div style="padding: 10px;">
+        <input type="checkbox" style="padding: 10px;" name="saveCard" [(ngModel)]="checkout.saveCardForUser"
+          (ngModelChange)="cardChecked($event)" />Save Card Details
+      </div> -->
+
+  </div>
+</div>
+</form>
+<br>
+
+<!-- <app-footer></app-footer> -->

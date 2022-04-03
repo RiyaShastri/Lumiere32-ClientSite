@@ -1,0 +1,237 @@
+<section class="footer-wrapper">
+  <!-- footer absolute wrapper -->
+  <!-- <div class="footer-absolute-wrapper">
+          <img src="assets/images/footer-dot-image.svg" alt="footer dot image">
+      </div> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 col-xs-12">
+        <div>
+          <img
+            src="assets/images/lumiere-white-logo.svg"
+            style="cursor: pointer"
+            alt="lumeire footer logo"
+            (click)="logoNavigate()"
+          />
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-3 col-xs-6">
+        <div>
+          <p class="footer-blue-text footer-divider">
+            ABOUT
+          </p>
+        </div>
+        <div class="padding-top-20">
+          <ul class="list-unstyled">
+            <li>
+              <a
+                class="text-white"
+                (click)="about()"
+                style="cursor: pointer"
+                [routerLink]="[
+                  '/' + countryISO.getCountryCode() + '/about-us/'
+                ]"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-white"
+                (click)="contact()"
+                style="cursor: pointer"
+                [routerLink]="[
+                  '/' + countryISO.getCountryCode() + '/contact-us/'
+                ]"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-white"
+                (click)="helpCentre()"
+                style="cursor: pointer"
+                href="https://sites.google.com/lumiere32.sg/help-centre/home"
+                target="_blank"
+                >Help Centre</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-3 col-xs-5">
+        <div>
+          <p class="footer-blue-text footer-divider">
+            POLICY
+          </p>
+        </div>
+        <div class="padding-top-20">
+          <ul class="list-unstyled">
+            <li>
+              <a
+                class="text-white"
+                (click)="termofuse()"
+                style="cursor: pointer"
+                [routerLink]="[
+                  '/' + countryISO.getCountryCode() + '/term-of-use/'
+                ]"
+                >Terms of Use</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-white"
+                (click)="privacy()"
+                style="cursor: pointer"
+                [routerLink]="[
+                  '/' + countryISO.getCountryCode() + '/privacy-policy/'
+                ]"
+                >Privacy Policy</a
+              >
+            </li>
+
+            <!-- <li>
+                              <a class="text-white"  style="cursor: pointer;">Help Center</a>
+                          </li> -->
+            <!-- <li>
+                              <a class="text-white"  style="cursor: pointer;"
+                              (click)="sellOnLumiere()"
+                              >Sell on Lumiere32</a>
+                          </li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-2 col-xs-6">
+        <span *ngIf="!authService.loginFlag">
+          <div>
+            <p class="footer-blue-text footer-divider">
+              YOUR ACCOUNT
+            </p>
+          </div>
+          <div class="padding-top-20">
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  class="text-white"
+                  style="cursor: pointer"
+                  (click)="loginPage()"
+                  >Login</a
+                >
+              </li>
+              <li>
+                <a
+                  class="text-white"
+                  style="cursor: pointer"
+                  (click)="registerPage()"
+                  >Sign Up</a
+                >
+              </li>
+            </ul>
+          </div>
+        </span>
+      </div>
+
+      <div class="col-lg-3 col-sm-3 col-xs-5">
+        <form #empForm="ngForm" class="footer-form" style="margin: 0 auto">
+          <div>
+            <p class="text-white">Newsletter</p>
+          </div>
+          <div
+            class="btn-group-vertical padding-top-20"
+            style="width: fit-content"
+            [class.has-error]="email.invalid"
+          >
+            <input
+              type="email"
+              id="email"
+              required
+              [email]="user.email !== ''"
+              name="email"
+              #email="ngModel"
+              class="form-control"
+              [(ngModel)]="user.email"
+              placeholder="Email Address"
+              (keyup)="clearEmailValidation($event)"
+            />
+            <span class="help-block" *ngIf="email.errors?.required && display"
+              >Email is required</span
+            >
+            <span class="help-block" id="emailValidation"></span>
+            <button
+              type="button"
+              (click)="siugnUpForLetter()"
+              class="custom-btns blue-btn"
+            >
+              Sign up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div>
+          <ul class="list-unstyled list-inline footer-list-wrapper">
+            <li>
+              <a
+                class="text-white"
+                target="_blank"
+                href="https://www.facebook.com/Lumiere32my-101108188712974"
+                ><i class="fa fa-facebook"></i
+              ></a>
+            </li>
+
+            <li>
+              <a
+                class="text-white"
+                href="https://twitter.com/lumiere32sg"
+                target="_blank"
+                ><i class="fa fa-twitter"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                class="text-white"
+                href="https://www.linkedin.com/company/lumiere32"
+                target="_blank"
+                ><i class="fa fa-linkedin"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="d-flex justify-content-between footer-copyright">
+          <div>
+            <p class="blue-text font-size-14">
+              Copyrights © Lumiere32 {{ currentYear }} All rights reserved
+            </p>
+          </div>
+          <div>
+            <ul class="list-unstyled footer-logo-wrapper">
+              <li>
+                <img
+                  src="https://lumier32.s3.ap-southeast-1.amazonaws.com/ipay88.png"
+                  alt="footer logo wrapper"
+                />
+              </li>
+              <li>
+                <img src="assets/images/visa.svg" alt="footer logo wrapper" />
+              </li>
+              <li>
+                <img
+                  src="assets/images/mastercard.svg"
+                  alt="footer logo wrapper"
+                />
+              </li>
+              <li>
+                <img src="assets/images/paypal.svg" alt="footer logo wrapper" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

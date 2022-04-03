@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading pointerCursor" (click)="panleExpanded = !panleExpanded" style="background-color: #63c7db">
+      <h6 class="panel-title" style="padding: 10px; color: white">
+        Payment Summary
+      </h6>
+    </div>
+
+
+    <div class="card box payment-method-card"
+      *ngIf="panleExpanded && checkoutService.activeStep4 && !checkoutService.userVerifiedDisplay">
+      <div>
+        <div class="col-md-12 wallet-card">
+          <div class="card-body payment-card-body">
+            <div class="row">
+              <table style="width: 100%; margin: 0 20px">
+                <tr>
+                  <th class="final-amount">Amount to be paid</th>
+                  <td class="final-amount">
+                    {{ userService['curr'] }}
+                    {{ checkoutService['orderTotal'] | number: "1.2-2" }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <button type="button" class="btn btn-primary w-100 mt-3 btn-blue" (click)="proceedToPay()">
+                  Proceed to Payment
+                  <i class="fa fa-spinner fa-spin mr-2 ml-2" aria-hidden="true" *ngIf="isLoading"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

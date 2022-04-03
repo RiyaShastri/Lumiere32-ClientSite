@@ -1,0 +1,111 @@
+<form aria-labelledby="title" [formGroup]="verifyMobileForm">
+    <div class="container">
+        <div class="panel panel-primary mt-3" *ngIf="checkoutService.userVerifiedDisplay">
+            <div class="panel-heading pointerCursor" style="background-color: #63C7DB ;">
+                <h6 class="panel-title" style="padding:10px;color:white">
+                    Mobile Number
+                </h6>
+            </div>
+
+            <div class="card border box">
+                <div class="row" *ngIf="!displayNextStep">
+                    <div class="form-group" style="padding-left: 30px;width: 100%;">
+                        <br>
+                        <label for="clinicname" style="color: black;">Please Enter Mobile Number</label>
+                        <div class="row">
+                            <div class="col-md-3 col code-input">
+                                <select name="contactMethod" class="code-select" formControlName="countryCode">
+                                    <option value="+1">+1</option>
+                                    <option value="+31">+31</option>
+                                    <option value="+44">+44</option>
+                                    <option value="+60">+60</option>
+                                    <option value="+61">+61</option>
+                                    <option value="+65">+65</option>
+                                    <option value="+91">+91</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col">
+                                <input type="number" class="form-control" placeholder="Mobile Number"
+                                    formControlName="mobileNo">
+
+                                <div *ngIf="isVerifyBtnClick" class="error-msg">
+                                    <div *ngIf="f.mobileNo.errors && f.mobileNo.errors.required &&
+                                    !f.countryCode.errors">
+                                        Mobile Number is required.
+                                    </div>
+                                    <div *ngIf="f.countryCode.errors && f.countryCode.errors.required
+                                    && !f.mobileNo.errors">
+                                        Country Code is required.
+                                    </div>
+                                    <div *ngIf="f.mobileNo.errors && f.mobileNo.errors.required &&
+                                    f.countryCode.errors && f.countryCode.errors.required">
+                                        Mobile number and Country code is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col">
+                                <button type="button" class="btn btn-primary btn-blue"
+                                    (click)="submitNumber('Verify')">Verify</button>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+
+                <div class="row" *ngIf="displayNextStep">
+                    <div class="form-group col-md-12" style="padding-left: 30px;">
+                        <div style="float: right;color: #63C7DB;margin: 15px;">
+                            <countdown [config]="{leftTime: 60 , format:'mm:ss'}" (event)="handleEvent($event)">
+                            </countdown>
+                        </div>
+                        <br>
+                        <label for="clinicname" style="color: black;">Please Enter 6 - Digit Auth Code</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="tel" [attr.maxlength]="6" maxlength="6" class="form-control"
+                                    formControlName="authCode">
+
+                                <div *ngIf="isSubmitBtnClick && f.authCode.errors" class="error-msg">
+                                    <div *ngIf="f.authCode.errors.required">
+                                        Auth Code is required.
+                                    </div>
+                                    <div *ngIf="f.authCode.errors.pattern">
+                                        Auth Code must be in number format.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary sbmit btn-blue"
+                                    (click)="submitNumber('Submit')">Submit</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a (click)="changeMobNo()" style="font-size: 12px; cursor: pointer; color: #63C7DB;">
+                                    <u>Change Mobile No.</u></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card user-verified-card w-100" *ngIf="!checkoutService.userVerifiedDisplay">
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="display: flex;">
+                        <div>Mobile Number Verified </div><span class="material-icons">done</span>
+                    </div>
+                    <div class="mobileNumber">{{countryIso.getShippingMobileNo()}}</div>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-blue" (click)="changeMobNo()">Change</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

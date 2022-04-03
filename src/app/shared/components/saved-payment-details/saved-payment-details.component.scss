@@ -1,0 +1,47 @@
+::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 8px !important;
+    position: relative;
+    .saved-dialog-wrapper {
+        padding: 30px 23px 35px;
+
+        .heading-wrapper {
+            padding-bottom: 30px;
+            h3 {
+                font-size: 24px;
+            }
+        }
+        button.custom-button {
+            width: 100% !important;
+            min-width: auto !important;
+        }
+    }
+}
+button.close{
+    padding: 1px 7px 2px !important;  
+}
+.hideCards{
+    
+}
+.savedCards {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 40px);
+    margin-bottom: 0;
+}
+
+.delete-card {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    line-height: 40px;
+}
+@media (min-width: 279.98px) and (max-width: 1000.98px){
+    .hideCards{
+        display: none;
+    }
+    .savedCards{
+        font-size: 14px;
+    }
+
+}

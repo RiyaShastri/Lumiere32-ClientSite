@@ -1,0 +1,172 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<button type="button" class="close pull-right" (click)="dialog.close()">
+  <span class="closeSpan" aria-hidden="true">&times;</span>
+</button>
+<div class="forgot-dialog-wrapper">
+  <div class="heading-wrapper container">
+    <h3>
+      {{ addressTitle }}
+    </h3>
+  </div>
+  <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="ppbx">
+    <div class="row col-sm-12">
+      <div class="col-sm-6">
+        <label for="">Name </label><span class="asterick">*</span>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Name"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.name.errors
+          }"
+        />
+        <div
+          *ngIf="isSubmitted && addressControls.name.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="addressControls.name.errors.required">
+            Name is required
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="">Clinic Name</label><span class="asterick">*</span>
+        <input
+          type="text"
+          formControlName="clinicName"
+          placeholder="Clinic Name"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.clinicName.errors
+          }"
+        />
+        <div
+          *ngIf="isSubmitted && addressControls.clinicName.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="addressControls.clinicName.errors.required">
+            Clinic Name is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-sm-12 justify-content-between padding-top-20">
+      <div class="col-sm-4">
+        <label for="">Block No.</label>
+        <input
+          type="text"
+          formControlName="blockNo"
+          placeholder="Block No."
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.blockNo.errors
+          }"
+        />
+      </div>
+      <div class="col-sm-4 pl">
+        <label for="">Floor No.</label>
+        <input
+          type="text"
+          formControlName="floorNo"
+          placeholder="Floor No."
+          class="form-control"
+        />
+      </div>
+      <div class="col-sm-4">
+        <label for="">Unit No.</label>
+        <input
+          type="text"
+          formControlName="unitNo"
+          placeholder="Unit No."
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.unitNo.errors
+          }"
+        />
+      </div>
+    </div>
+    <div class="row col-sm-12 justify-content-between padding-top-20">
+      <div class="col-sm-6">
+        <label for="">Building Name</label>
+        <input
+          type="text"
+          formControlName="building"
+          placeholder="Building Name"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.building.errors
+          }"
+        />
+      </div>
+      <div class="col-sm-6">
+        <label for="">Street Name</label>
+        <input
+          type="text"
+          formControlName="streetName"
+          placeholder="Street Name"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="row col-sm-12 justify-content-between padding-top-20">
+      <div class="col-sm-6">
+        <label for="">Country</label><span class="asterick">*</span>
+        <p-dropdown
+          [options]="countries"
+          formControlName="country"
+          filter="true"
+          placeholder="Select Country"
+          styleClass="form-control p-0 "
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.country.errors
+          }"
+          (onChange)="onChangeCountry($event)"
+        >
+        </p-dropdown>
+        <div
+          *ngIf="isSubmitted && addressControls.country.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="addressControls.country.errors.required">
+            Country is required
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 pl">
+        <label for="">Zip/Postal</label><span class="asterick">*</span>
+        <input
+          type="text"
+          formControlName="postal"
+          placeholder="Zip/Postal"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': isSubmitted && addressControls.postal.errors
+          }"
+          [attr.maxlength]="addAddressZipMaxLength"
+        />
+        <div
+          *ngIf="isSubmitted && addressControls.postal.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="addressControls.postal.errors.required">
+            Zip/Postal is required
+          </div>
+          <div
+            *ngIf="
+              addressControls.postal.errors.minlength ||
+              addressControls.postal.errors.maxlength ||
+              addressControls.postal.errors.pattern
+            "
+          >
+            Zip/Postal is invalid
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- (click)="onSubmit()" -->
+    <div class="text-center button-wrapper">
+      <button type="submit" class="custom-button">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,108 @@
+::ng-deep app-header {
+    mat-toolbar-row.header2 {
+        background-color: #63c7db !important;
+        width: 100%;
+        height: auto;
+    }
+    .iconCategory {
+        display: unset;
+        padding: 7px;
+        padding-right: 25px !important;
+    }
+    .iconsAll.col-md-4 {
+        justify-content: space-around !important;
+    }
+}
+::ng-deep app-header {
+    mat-toolbar.mat-toolbar.second.mat-toolbar-multiple-rows {
+        background-color: #63c7db !important;
+        font: inherit;
+    }
+    .search-icon.mat-fab.mat-button-base.mat-primary {
+        background-color: #63c7db;
+    }
+}
+
+.dashboard-svg {
+    position: absolute;
+    right: -9px;
+    top: 177px;
+    background-size: cover;
+}
+
+.profile-wrapper {
+    background-color: #00488a;
+    background-image: url("/assets/images/Dashbord.svg");
+    padding: 2em 0 1em;
+    margin-top: 5px;
+
+    .profile-text-wrapper {
+        color: #d1d1d1;
+        font-weight: 400;
+        display: inline-block;
+        padding-right: 30px;
+        font-size: 18px;
+    }
+}
+
+.underline-text-wrapper {
+    color: #fff !important;
+    position: relative;
+}
+
+.underline-text-wrapper:before {
+    content: "";
+    position: absolute;
+    width: 51px;
+    height: 1px;
+    bottom: -8px;
+    left: 0;
+    border-bottom: 3px solid #fff;
+}
+
+.profile-user-wrapper {
+    .profile-user-image {
+        padding-right: 22px;
+    }
+    .media-heading {
+        padding-bottom: 5px;
+    }
+}
+
+.profile-links-wrapper {
+    padding-top: 54px;
+}
+.breadcrum-container {
+    list-style-type: none;
+    color: white;
+}
+
+.row.breadcrum-container ul {
+    list-style: none;
+    margin: -27px 0 48px !important;
+}
+
+.row.breadcrum-container ul {
+    list-style: none;
+    margin: 0px;
+}
+li.fa.fa-angle-right {
+    margin: 4px 6px 0 6px !important;
+}
+.row.breadcrum-container ul li {
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+    .profile-user-wrapper .profile-user-image {
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 991px) {
+    .breadcrum-container {
+        position: absolute;
+        right: 14px;
+    }
+}
+

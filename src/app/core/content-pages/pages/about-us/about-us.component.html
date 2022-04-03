@@ -1,0 +1,255 @@
+<!-- <app-header></app-header> -->
+<div class="aboutus-Container">
+  <div class="container-fluid">
+    <div>
+      <img
+        src="assets/images/aboutus/aboutus.PNG"
+        alt=" landing dot image"
+        style="height: 350px; width: 100%; object-fit: cover"
+      />
+      <div class="mirror-div">About Us</div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row Overview-Container container">
+    <div class="col-md-7 card">
+      <div>
+        <h4 card-title>Company Overview</h4>
+        <hr class="bottom-divider mt-2" style="width: 60px" />
+        <div class="col-md-12">
+          <br />
+          <div class="card-text text-grey">
+            At Lumiere32, we bridge the distribution gap in Malaysia between
+            dealers and clinicians through a robust online platform, taking the
+            lead as a single touchpoint for:
+            <div>
+              ● ​Manufacturers<br />
+              ● Dealers<br />
+              ● Medical &amp; dental professionals
+            </div>
+
+            <div>
+              We strongly believe that our success depends on a commitment to
+              excellence.
+            </div>
+
+            <div>
+              We started our journey in Singapore in the year 2016, with a
+              mission, providing best-in-class dental &amp; medical products at
+              cost-effective prices. Since then, our capabilities have grown,
+              allowing us to expand our product line with a wide range of
+              options.
+            </div>
+
+            <div>
+              Our goal is to ensure a seamless transition between a product, the
+              distribution ecosystem, and the customer.
+            </div>
+
+            <div>
+              We only use the best-of-breed IT infrastructure to guarantee
+              convenience, great prices and complete customer satisfaction.
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-primary">
+        <div
+          class="panel-heading pointerCursor"
+          style="background-color: white"
+        >
+          <div>
+            <img
+              src="assets/images/aboutus/company.jpg"
+              class="overview-image"
+              style="float: right"
+              alt=" landing dot image"
+            />
+          </div>
+          <div class="dot-image">
+            <img fxHide fxShow.gt-xs src="assets/images/landing-dot.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <!--who are we-->
+  <div class="about-we-box">
+    <div class="container title-container">
+      <h2 class="title">Who We Are</h2>
+      <hr class="bottom-divider mt-2" style="margin: auto; width: 105px" />
+    </div>
+    <br />
+    <div class="container item-container">
+      <div class="dot-image2">
+        <img fxHide fxShow.gt-xs src="assets/images/landing-dot.svg" />
+      </div>
+      <div class="row">
+        <div *ngFor="let item of whoWeAre">
+          <div class="card" style="border: none">
+            <div class="card-body">
+              <img src="{{ item.image }}" class="we-box-icon" /><br />
+              <h5 class="card-title font-weight-600">{{ item.heading }}</h5>
+              <p class="card-text text-grey">
+                {{ item.message }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <!-- <div class="about-we-box"> -->
+
+    <div class="container title-container">
+      <h6 class="title">Meet Our Team</h6>
+      <hr class="bottom-divider mt-2" style="margin: auto; width: 105px" />
+    </div>
+    <br />
+
+    <div class="container item-container meet-item-container">
+      <div class="row">
+        <div *ngFor="let item of meetTeam">
+          <div class="card" style="border: none">
+            <!-- <img src="assets/images/aboutus/company.PNG" style="height: 250px;width: 80%;"> -->
+            <img src="{{ item.img }}" style="height: auto; width: 100%" />
+
+            <!-- <div class="text">  {{item.details}}</div> -->
+
+            <div class="card-body">
+              <h5 class="card-title font-weight-600">
+                {{ item.name }}
+                <div class="text-grey" style="font-size: 14px">
+                  {{ item.designation }}
+                </div>
+              </h5>
+              <!-- <p class="card-text text-grey">
+                                {{item.details}}</p> -->
+              <!-- <br> -->
+              <!-- <div class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-linkedin-in"></i>
+                            </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="dot-image3">
+          <img fxHide fxShow.gt-xs src="assets/images/landing-dot.svg" />
+        </div> -->
+      </div>
+    </div>
+
+    <br />
+    <div class="press-container">
+      <div class="dot-image4">
+        <img fxHide fxShow.gt-xs src="assets/images/landing-dot.svg" />
+      </div>
+      <div class="container title-container">
+        <h6 class="title">Press Releases/Media Coverage</h6>
+        <hr class="bottom-divider mt-2" style="margin: auto; width: 89px" />
+        <!-- <h6 style="font-weight: bold;font-size: x-large;">Press Releases/Media Coverage</h6> -->
+      </div>
+      <br />
+      <div class="container">
+        <div class="row">
+          <div
+            *ngFor="let item of press"
+            class="col-md-6"
+            style="margin-bottom: 4vw"
+          >
+            <div class="card media-box">
+              <img
+                src="{{ item.img }}"
+                style="height: auto; width: 100%; max-height: 280px"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ item.info }}</h5>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="goToLink(item.pageLink)"
+                >
+                  Read More
+                </button>
+                <!-- <p class="card-text"><small class="text-muted">{{item.designation}}</small></p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row container support-container">
+        <div class="col-md-6">
+          <div class="card">
+            <h5 class="card-title">
+              Incubated and Supported By
+              <span class="expend-div">
+                <a
+                  href="https://enterprise.nus.edu.sg/startup-story/lumiere32/"
+                  target="_blank"
+                  ><i class="fas fa-caret-right"></i
+                ></a>
+                <!-- <i class="fas fa-caret-down"></i> -->
+              </span>
+            </h5>
+            <div class="card-body">
+              <img
+                src="assets/images/aboutus/nus.png"
+                style="height: 100px; width: auto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h5 class="card-title">Our Financing Partners</h5>
+            <div class="card-body">
+              <div class="row">
+                <!-- <img src="assets/images/aboutus/grab.png" style="height: 100px;width: 34%;"> -->
+                <img
+                  src="assets/images/aboutus/grab1.PNG"
+                  style="height: 100px; width: 40%"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h5 class="card-title">Our Accreditations</h5>
+            <div class="card-body">
+              <div class="row">
+                <!-- <img src="assets/images/aboutus/grab.png" style="height: 100px;width: 34%;"> -->
+                <img
+                  src="assets/images/aboutus/acb.png"
+                  style="height: 100px; width: 40%"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-title">Our Partners</h5>
+                        <div class="card-body ">
+                            <div class="row">
+
+                                <img src="assets/images/aboutus/grab1.PNG" style="height: 100px;width: 40%;">
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <br />
+</div>
+<!-- <app-footer></app-footer> -->

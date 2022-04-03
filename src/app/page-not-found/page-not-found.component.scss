@@ -1,0 +1,23 @@
+.nfp{
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.buttons{
+    background-color: #63c7db; 
+    border: 1px solid #63c7db;
+}
+@media (max-width: 414px) {
+    .nfp img{
+        max-width: 200px;
+    }
+}
+@media (max-width: 280px) {
+    .nfp img{
+        max-width: 180px;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,81 @@
+<app-post-login-header></app-post-login-header>
+<div class="container">
+    <div class="row padding-top-40 alignMent">
+        <div class="searchInputdiv"><input type=" text" [(ngModel)]="searchByInput"
+                (input)="filterByOrderId('&orderNo=')" placeholder="Search by Order No." class="form-control searchInp">
+        </div>
+        <div>
+            <span></span>
+        </div>
+        <div class="ordertype-select">
+            <select name="productStatus" id="productStatus" class="form-control border-primary"
+                (ngModelChange)="orderStatusSelectByUser($event)" [(ngModel)]="searchByOrder">
+                <option [ngValue]="undefined" hidden>Order Type</option>
+                <option *ngFor="let item of orderStatus" [value]="item.name">{{item.name}}</option>
+            </select>
+        </div>
+
+        <div class="dropdown lastDaysDropdown" style="margin-left: 10px;">
+            <button class="btn orderType" type="button" (click)="clearFilter()"> Clear Filter </button>
+        </div>
+    </div>
+    <br>
+
+    <div class="row col-sm-12 padding-top-20 mr-0" *ngFor="let item of customerOrderData">
+        <div class="col-sm-12 box ">
+            <div class="row orderHeader1">
+                <p style="margin-left: 20px;">ORDER NO : &nbsp;<span>{{item.orderNo}}</span> </p>
+                <p style="margin-left: 20px;">ORDER PLACED : &nbsp;<span>{{item.orderDate | date: 'dd/MM/yyyy'}}</span>
+                </p>
+                <p style="margin-left: 20px;">TOTAL : &nbsp;<span *ngIf="item.orderTransactions[0]">{{service.curr}} {{
+                        item.orderTransactions[0].totalAmountWithTax | number:'1.2-2'}}</span> </p>
+                <p style="margin-left: 20px;">ORDER STATUS : &nbsp;{{item.orderStatus}}</p>
+
+                <div class="dropdown ml-auto">
+                    <button class="btn orderType btnSearch" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Action<span class="downArrow"><i class="fa fa-chevron-down"></i></span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="javascript:;" (click)="fetchOrderDetail(item.orderId)">View
+                            Detail</a>
+                        <a class="dropdown-item" href="javascript:;" (click)="downloadInvoice(item.orderId)">Download
+                            Invoice</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 orderList">
+                <div class="row d-flex align-items-center listing" *ngIf="item.orderProducts[0]; else noProduct">
+                    <div class="col-md-2 orderImg">
+                        <img style="max-height: 68px;max-width:-webkit-fill-available;"
+                            [src]="item.orderProducts[0].product.productImage[0]?.image"
+                            onError="this.src = 'https://lumier32.s3.ap-southeast-1.amazonaws.com/product/1602470264516_noimage_336_290.jpg'"
+                            alt="{{item.orderProducts[0].productName}} ">
+                    </div>
+                    <div class="col-md-10 orderImg">
+                        <p class="font-size-16 font-weight-500" *ngIf="item.orderProducts[0]">
+                            {{item.orderProducts[0].productName}}</p>
+                    </div>
+                </div>
+                <ng-template #noProduct>All products in this order has been marked as Cancelled or Out of Stock.
+                </ng-template>
+
+                <div class="col-sm-12 itemsBtn">
+                    <button mat-stroked-button class="text-blue brder" (click)="fetchOrderDetail(item.orderId)">View
+                        Details</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="mt-5" style="text-align: center;padding-bottom: 30px;">
+        <button mat-stroked-button class="text-blue brder"
+            *ngIf="loadDisplay && customerOrderData && customerOrderData.length > 0"
+            (click)="loadMore()">{{message}}</button>
+        <div class="card order-card" *ngIf="customerOrderData && customerOrderData.length == 0">
+            <p><br>NO ORDERS FOUND</p>
+        </div>
+    </div>
+</div>
+<br>
+<app-footer></app-footer>

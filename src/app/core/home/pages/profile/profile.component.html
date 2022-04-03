@@ -1,0 +1,287 @@
+<app-post-login-header></app-post-login-header>
+<form [formGroup]="personalDetailForm">
+  <div class="container">
+    <div class="buttonEdit" *ngIf="!toggleButton">
+      <button type="submit" [disabled]="ButtonDisbaled" class="btn editProfile" (click)="onSubmit()">
+        Save
+      </button>
+    </div>
+    <div class="d-flex pl padding-top-20 ml-0">
+      <div class="col-sm-8 plb pb-3">
+        <div class="personal-detail box">
+          <h5 class="pl-3 headingName edit-between">
+            Personal Details<span (click)="enable()" class="edit edit-clr">
+              <i class="fa fa-edit"></i><span>Edit</span></span>
+          </h5>
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6">
+              <label for="">First Name</label><span class="asterick">*</span>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="name" placeholder="Name"
+                class="form-control" [ngClass]="{'is-invalid': isSubmitted && profileControls.name.errors}" />
+              <div *ngIf="isSubmitted && profileControls.name.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.name.errors.required">
+                  First Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 pl">
+              <label for="">Last Name</label><span class="asterick">*</span>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="lname"
+                placeholder="Last Name" class="form-control" [ngClass]="{
+                  'is-invalid': isSubmitted && profileControls.lname.errors
+                }" />
+              <div *ngIf="isSubmitted && profileControls.lname.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.lname.errors.required">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6">
+              <label for="">E-mail</label><span class="asterick">*</span>
+              <input [attr.disabled]="true" type="email" formControlName="email" placeholder="Email"
+                class="form-control" [ngClass]="{'is-invalid': isSubmitted && profileControls.email.errors}" />
+              <div *ngIf="isSubmitted && profileControls.email.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.email.errors.required">
+                  Email is required
+                </div>
+                <div *ngIf="profileControls.email.errors.pattern">
+                  Please enter valid email (xyz@abc.com)
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 pl">
+              <label for="">Mobile No</label><span class="asterick">*</span>
+              <div class="mobile-code">
+                <div class="code-country">
+                  <p-dropdown [disabled]="toggleButton ? true : null" [options]="codes" (onChange)="onChange($event)"
+                    [(ngModel)]="selected_countryCode" formControlName="code" filter="true"
+                    styleClass="form-control p-0 code codewdt"
+                    [ngClass]="{'is-invalid': isSubmitted && profileControls.code.errors}">
+                  </p-dropdown>
+                  <div *ngIf="isSubmitted && profileControls.code.errors" class="invalid-feedback">
+                    <div *ngIf="profileControls.code.errors.required">
+                      Required
+                    </div>
+                  </div>
+                  <p style="color: red">{{ errorMessage }}</p>
+                </div>
+                <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="mobile"
+                  placeholder="Mobile No" class="form-control"
+                  [ngClass]="{'is-invalid': isSubmitted && profileControls.mobile.errors}" />
+                <div *ngIf="isSubmitted && profileControls.mobile.errors" class="invalid-feedback">
+                  <div *ngIf="profileControls.mobile.errors.required">
+                    Mobile No. is required
+                  </div>
+                  <div *ngIf="profileControls.mobile.errors.pattern">
+                    Mobile No. must be between 5-15 digits
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6">
+              <label for="">Practice Type</label><span class="asterick">*</span>
+              <select [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="practiceType"
+                placeholder="Practice Type" class="form-control" [ngClass]="{
+                  'is-invalid': isSubmitted && profileControls.practiceType.errors}">
+                <option value="">Practice Type</option>
+                <option value="{{ _practise }}" *ngFor="let _practise of practises">
+                  {{ _practise }}
+                </option>
+              </select>
+              <div *ngIf="isSubmitted && profileControls.practiceType.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.practiceType.errors.required">
+                  Practice Type is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 pl assign-group-dropdown">
+              <label for="">Speciality</label><span class="asterick">*</span>
+              <p-dropdown style="width: 90%" [disabled]="toggleButton ? true : null" [options]="specialities"
+                [(ngModel)]="selected_speciality" formControlName="speciality" filter="true" placeholder="Speciality"
+                styleClass="form-control " [ngClass]="{
+                  'is-invalid': isSubmitted && profileControls.speciality.errors}">
+              </p-dropdown>
+              <div *ngIf="isSubmitted && profileControls.speciality.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.speciality.errors.required">
+                  Specialty is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6" *ngIf="dataLoaded">
+              <label for="">Country</label>
+              <input disabled type="text" id="regionName" name="regionName" [value]="regionName" placeholder="Country"
+                class="form-control" />
+            </div>
+            <div class="col-sm-6 pl">
+              <label for="">Clinic Name</label><span class="asterick">*</span>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="clinicName"
+                placeholder="Clinic Name" class="form-control" [ngClass]="{
+                  'is-invalid': isSubmitted && profileControls.clinicName.errors
+                }" />
+              <div *ngIf="isSubmitted && profileControls.clinicName.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.clinicName.errors.required">
+                  Clinic Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="biling-address box">
+          <h5 class="pl-3 headingName">Billing Address</h5>
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-4">
+              <label for="">Block No.</label>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="blockNo"
+                placeholder="Block No." class="form-control"
+                [ngClass]="{'is-invalid': isSubmitted && profileControls.blockNo.errors }" />
+            </div>
+            <div class="col-sm-4 pl">
+              <label for="">Floor No.</label>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="floorNo"
+                placeholder="Floor No." class="form-control"
+                [ngClass]="{'is-invalid': isSubmitted && profileControls.floorNo.errors }" />
+            </div>
+            <div class="col-sm-4">
+              <label for="">Unit No.</label>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="unitNo"
+                placeholder="Unit No." class="form-control"
+                [ngClass]="{'is-invalid': isSubmitted && profileControls.unitNo.errors}" />
+            </div>
+          </div>
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6">
+              <label for="">Building Name</label><span class="asterick">*</span>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="building"
+                placeholder="Building Name" class="form-control"
+                [ngClass]="{ 'is-invalid': isSubmitted && profileControls.building.errors}" />
+              <div *ngIf="isSubmitted && profileControls.building.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.building.errors.required">
+                  Building Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="">Street Name</label>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" formControlName="streetName"
+                placeholder="Street Name" class="form-control"
+                [ngClass]="{'is-invalid': isSubmitted && profileControls.streetName.errors  }" />
+            </div>
+          </div>
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6">
+
+              <label for="">City</label>
+              <input disabled type="text" formControlName="city" placeholder="City Name" class="form-control" />
+
+            </div>
+
+            <div class="col-sm-6 pl">
+              <label for="">Zip/Postal</label><span class="asterick">*</span>
+              <input [attr.disabled]="toggleButton ? '' : null" type="text" id="myTextbox" formControlName="postal"
+                (input)="checkPinCode($event , false)" placeholder="Zip/Postal" class="form-control"
+                [attr.maxlength]="userBillingZipMaxLength"
+                [ngClass]="{ 'is-invalid': isSubmitted && profileControls.postal.errors }" />
+              <div *ngIf="isSubmitted && profileControls.postal.errors" class="invalid-feedback">
+                <div *ngIf="profileControls.postal.errors.required">
+                  Zip/Postal is required
+                </div>
+                <div *ngIf=" profileControls.postal.errors.minlength ||
+                    profileControls.postal.errors.maxlength ||
+                    profileControls.postal.errors.pattern ">
+                  Zip/Postal invalid
+                </div>
+              </div>
+              <p style="color: red">{{ errorMessages }}</p>
+            </div>
+          </div>
+
+
+          <div class="d-flex justify-content-between padding-top-20">
+            <div class="col-sm-6">
+
+              <label for="">State</label>
+              <input disabled type="text" formControlName="state" placeholder="State Name" class="form-control" />
+
+            </div>
+            <div class="col-sm-6">
+
+              <label for="">Country</label>
+              <input disabled type="text" formControlName="country" placeholder="Country Name" class="form-control" />
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="shiping-details box">
+          <h5 class="pl-3 headingName">Shipping Details</h5>
+          <ngx-loading [show]="loading"></ngx-loading>
+
+          <div class="d-flex justify-content-between padding-top-20 pb">
+            <div class="col-sm-12">
+              <button mat-stroked-button class="text-blue float-right brdr" (click)="openDialog3()">
+                <i class="material-icons addIcon">add_circle_outline</i>Add
+                Address
+              </button>
+            </div>
+          </div>
+          <div class="container d-flex justify-content-between padding-top-20" *ngFor="let address of addressDetail">
+            <div class="col-sm-12 card" id="default" [ngClass]="{ blue: address.isDefault != 'No' }">
+              <p class="card-subtitle pb-3 pt-2 text-grey" *ngIf="address.isDefault != 'No'">
+                Default
+              </p>
+              <h6 class="card-subtitle pb-3 pt-3">
+                <span><b>{{ address.name }}</b></span>
+              </h6>
+              <p class="card-subtitle pb-2">
+                {{ address.clinicName }}<span *ngIf="address.blockNo">,</span>
+                {{ address.blockNo }}<span *ngIf="address.floorNo">,</span>{{ address.floorNo }} <span
+                  *ngIf="address.unitNo">,</span>
+                {{ address.unitNo }} <span *ngIf="address.buildingName">,</span>{{ address.buildingName
+                }}<span *ngIf="address.streetName">,</span>
+                {{ address.streetName }}, {{ address.zip }}
+                <span *ngIf="address.state">,</span> {{ address.state }}
+              </p>
+              <div class="col-sm-12 pb-2 pl-0">
+                <span class="text-blue cursor-pointer col-sm-2 pl-0" (click)="openDialog4(address.id)">Edit</span>
+                <span class="text-blue cursor-pointer col-sm-2 pl-0" (click)="removeAddress(address.id)">Remove</span>
+                <span class="text-blue cursor-pointer col-sm-2 pl-0" *ngIf="address.isDefault == 'No'"
+                  (click)="setDefault(address.id)">Set as Default</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 pt">
+        <div class="account-sticky">
+          <div class="box pb-3 scroll-account">
+            <h5 class="pl-3 headingName">Account Settings</h5>
+            <div class="padding-top-20">
+              <div class="col-sm-12 ptb" (click)="openDialog()">
+                <a style="color: black">Change Password</a>
+                <i class="fa fa-chevron-right float-right"></i>
+              </div>
+              <hr />
+              <div class="col-sm-12 ptb" (click)="openDialog2()">
+                <a style="color: black">Saved Payment Details</a>
+                <i class="fa fa-chevron-right float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<br />
+<app-footer></app-footer>

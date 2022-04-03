@@ -1,0 +1,98 @@
+<!-- <app-header></app-header> -->
+<div class="banner-image">
+  <img class="discount-image" src="assets\images\medical-product/equipment-banner.png" alt="Banner image" />
+</div>
+<section class="get-equipment">
+  <div class="container">
+    <div class="row">
+      <ng-container *ngIf="verticalBarFilters.length > 1">
+        <div class="col-md-3 equipment filter" [class.showFilter]="showFilter">
+          <div class="equipment-inner">
+            <div class="text-right close-filter"><span (click)="showFilter = false"><i class="fa fa-times"
+                  aria-hidden="true"></i></span></div>
+            <div class="product-list-header">
+              <div class="main">
+                <p class="Show-product filter"> FILTER </p>
+                <p class="listing-name clearr_all cursor-pointer" (click)='clearAllFilter()'> Clear All</p>
+              </div>
+            </div>
+            <app-vertical-filter-bar (filterResultsChange)="filterResultChange($event)" [filters]="verticalBarFilters">
+            </app-vertical-filter-bar>
+          </div>
+        </div>
+        <div class="col-md-9 equipment">
+          <div class="equipment-inner">
+            <div class="product-list-header" *ngIf="productList.length">
+              <div class="breadcrumb-medical">
+                <p class="Page-name text-capitalize cursor-pointer"
+                  [routerLink]="['/'+counrtyIso.countryName+'/c', breadCrumbData?.parentCategoryName.split(' ').join('-')]"
+                  [queryParams]="{cid: breadCrumbData?.parentCategoryId}">{{breadCrumbData?.parentCategoryName}} <span
+                    class="arrow">></span></p>
+                <p class="Page-name text-capitalize" *ngIf="breadCrumbData?.CategoryName">
+                  {{breadCrumbData?.CategoryName}} <span class="arrow"></span></p>
+                <!-- <p class="listing-name">Products List</p>-->
+              </div>
+
+              <div class="filter-sort text-right">
+                <!-- <span>Sort by :</span> -->
+                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedSorting" (onChange)="sortingChange($event)"
+                  placeholder="Select a filter" [showClear]="false">
+                  <!-- <span>sort</span> -->
+                </p-dropdown>
+              </div>
+              <div class="fitler-icon text-right" (click)="showFilter = true">
+                Filter :
+                <i class="fa fa-filter" aria-hidden="true" style="color: #63C7DB;font-size: 24px;"></i>
+              </div>
+            </div>
+            <div class="all-product">
+              <!-- <app-filter-results></app-filter-results> -->
+              <ng-container *ngIf="!productList.length">
+                <div class="no-data-text">
+                  <p>No Product Found</p>
+                </div>
+              </ng-container>
+              <div class="row" *ngIf="productList.length">
+                <div class="col-lg-3 col-sm-4 col-6" *ngFor="let item of productList">
+                  <div class="product-detail product-outer" (click)="navigateRoutes(item.productName, item?.id)">
+                    <span class="dis-rib" *ngIf="item?.discount">{{item?.discount}}%</span>
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    <img [src]="item?.productImage[0]?.image"
+                      onError="this.src = 'https://lumier32.s3.ap-southeast-1.amazonaws.com/product/1602470264516_noimage_336_290.jpg'"
+                      alt="product image">
+                    <div class="product-material">
+                      <h3 [title]="item?.productName">{{item?.productName}}</h3>
+                      <div class="product-price" *ngIf="authService.showPrice">
+                        <p class="discount-price" *ngIf="item?.discount != 0">{{service.curr}} {{item?.sellPrice}}</p>
+                        <p class="discount-price" *ngIf="item?.discount == 0">{{service.curr}} {{item?.MRP}}</p>
+                        <p class="original-price"><del *ngIf="item?.discount != 0">{{service.curr}} {{item?.MRP}}</del>
+                        </p>
+                      </div>
+                      <!-- <div class="wallet-price" *ngIf="authService.showPrice">
+                                <p>
+                                  <img  src="assets/images/medical-product/wallet.png" alt="carousel image">$ {{item?.walletPrice}}
+                                </p>
+                              </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="paginator paginator-product mb-5">
+            <p-paginator [rows]="10" pageLinkSize="10" [alwaysShow]="false" [showCurrentPageReport]="true"
+              [totalRecords]="totalRecords" (onPageChange)="onPageChange($event)"></p-paginator>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="verticalBarFilters.length < 2">
+        <div class="col-12">
+          <div class="no-data-text">
+            <p>No Detail Found</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
+<!-- <app-footer></app-footer> -->

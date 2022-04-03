@@ -1,0 +1,71 @@
+::ng-deep app-header {
+    mat-toolbar-row.header2 {
+        background-color: #63c7db !important;
+    }
+}
+
+.profile-wrapper {
+    background-color: #1b4791;
+    padding: 2em 0 1em;
+    margin-top: 5px;
+    .underline-text-wrapper {
+        color: #fff;
+        font-size: 18px;
+        position: relative;
+        font-weight: 400;
+        display: inline-block;
+        padding-right: 30px;
+    }
+    .underline-text-wrapper:before {
+        content: "";
+        position: absolute;
+        width: 51px;
+        height: 1px;
+        bottom: -8px;
+        left: 0;
+        border-bottom: 3px solid #fff;
+    }
+}
+
+.profile-user-wrapper {
+    .profile-user-image {
+        padding-right: 22px;
+    }
+    .media-heading {
+        padding-bottom: 5px;
+    }
+}
+
+.profile-links-wrapper {
+    padding-top: 54px;
+}
+
+.wishlist-card-wrapper {
+    margin-top: 18px;
+    .wishlist-heading-text {
+        padding: 16px 14px;
+    }
+}
+
+.wishlist-flex-wrapper {
+    .wishlist-flex-heading {
+        padding: 16px 21px;
+        &>div {
+            flex-basis: 33%;
+            font-weight: 600;
+        }
+    }
+    .wishlist-sub-heading {
+        padding: 16px 0;
+    }
+}
+
+.wishlist-button-wrapper {
+    button {
+        min-width: auto;
+    }
+}
+
+.bg-wishlist {
+    background-color: rgba(99, 199, 219, 0.21);
+}

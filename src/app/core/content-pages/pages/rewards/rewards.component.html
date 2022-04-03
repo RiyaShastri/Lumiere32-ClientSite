@@ -1,0 +1,200 @@
+<!-- <app-header></app-header> -->
+
+<div class="rewards-page">
+
+    <div class="rewards-banner w-100">
+        <img class="img-responsive w-100" src="https://www.staging.lumiere32.sg/media/front/img/earn-redeem.png">
+    </div>
+
+    <div class="rewards-page-inner">
+
+        <div class="rewards-banner-bottom">
+            <div class="container">
+                <div class="rewards-banner-bottom-inner text-center">
+                    <p>By being a valued customer of Lumiere32, you can receive full access to many great deals and
+                        rewards that can help you in your practice.
+                        <span class="blod-text">Lumiere32's Customer Loyalty program</span>
+                        is a rewards program that allows you to
+                        <span class="blod-text">earn points per purchase.</span> You can
+                        <span class="blod-text">use these points across Lumiere32's extensive portal hassle-free.</span>
+                        Take advantage of double and triple points on exclusive and limited offers.
+                        <br><br>
+                        <span class="blod-text">Reap the benefits of belonging; start earning these points now!</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="earn-rewards">
+            <div class="container">
+                <h3 class="widget-title text-center">How to earn rewards?</h3>
+                <div class="row m-2">
+                    <div class="col earn-rewards-img">
+                        <img class="img-responsive"
+                            src="https://www.staging.lumiere32.sg/media/front/img/my-rewards/reward-icon1.png">
+                        <p>Register <br>Now</p>
+                    </div>
+                    <div class="col earn-rewards-seperation p-0"></div>
+                    <div class="col earn-rewards-img">
+                        <img class="img-responsive"
+                            src="https://www.staging.lumiere32.sg/media/front/img/my-rewards/reward-icon2.png">
+                        <p>Earn <br>Points</p>
+                    </div>
+                    <div class="col earn-rewards-seperation p-0"></div>
+                    <div class="col earn-rewards-img">
+                        <img class="img-responsive"
+                            src="https://www.staging.lumiere32.sg/media/front/img/my-rewards/reward-icon3.png">
+                        <p>Redeem <br>Points</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-rewards">
+            <div class="container">
+                <h3 class="widget-title text-center">My Rewards</h3>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 my-rewards-column-outer mb-4" *ngIf="planDetail">
+                        <div class="my-rewards-slider-column yellow-bg">
+                            <p>Active Plan: <strong>{{planDetail['name']}}</strong> <br>
+                                Current Reward Benefits<br>
+                                <strong>RM {{userSpentAmount|| 0}}</strong> Spend =
+                                <strong> {{userRewardPoints || 0}} Pts</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 my-rewards-column-outer mb-4">
+                        <div class="my-rewards-slider-column blue-bg">
+                            <p *ngIf="totalRewardPoint">Reward Points Balance: <strong><br>{{(totalRewardPoint['reward']
+                                    == '0')
+                                    ? 0.00 : totalRewardPoint['reward'] | number:'1.2-2' }} pts
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 my-rewards-column-outer mb-4">
+                        <div class="my-rewards-slider-column purple-bg">
+                            <div class="purple-bx-lft">
+                                <h5>Bring'em Back! </h5>
+                                <p class="p-0">Convert your reward points to Pay32.</p>
+                                <p class="pt-1">Points value be calculated at <strong>{{ convertRewardPoint ||200}} pts
+                                        = RM {{ convertWalletAmount||1}} </strong></p>
+                            </div>
+                            <div class="purple-bx-rt"><span>
+                                    <img class="img-responsive"
+                                        src="https://www.staging.lumiere32.sg/media/front/img/puple-img.png"></span>
+                            </div>
+                            <a target="_self" class="disbaled_cursor" (click)="convertPointToWallet()"
+                                [ngStyle]="totalRewardPoint && totalRewardPoint['reward'] >= convertRewardPoint  ? {'cursor': 'pointer'} :  {'cursor': 'default'}">
+                                <span class="fa btn-glyphicon fa-star img-circle text-warning"></span>
+                                Convert Points to Wallet
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="brand-rewards">
+            <div class="container">
+                <h3 class="widget-title text-center mt-3">Brand Rewards</h3>
+                <div class="p-3" *ngIf="brandRewards && brandRewards.length> 0">
+                    <owl-carousel-o [options]="customOptions">
+                        <ng-container *ngFor="let slide of brandRewards">
+                            <ng-template carouselSlide class="brand-rewards-slider-column p-0 m-3">
+                                <div>
+                                    <p><img [src]="slide.image"> </p>
+                                    <a target="_self" class="disbaled_cursor" style="float:center;position: absolute; 
+                                    bottom: 0; width: 100%;
+                                    text-align: center;left: 0;
+                                    right: 0;  background: rgba(0,0,0,.1);
+                                    color: #fff; font-size: 13px;padding: 7px 0; text-decoration: none;"
+                                        (click)="confirmRedeem(slide.id ,slide.schemeName , slide.pointRequired)"
+                                        [ngStyle]="totalRewardPoint && totalRewardPoint['reward'] >= slide.pointRequired ? {'cursor': 'pointer'} :  {'cursor': 'default'}">
+                                        <span class="fa btn-glyphicon fa-star img-circle text-warning"></span>
+                                        {{slide.pointRequired | number : '1.0-0'}}&nbsp; Points
+                                        <span
+                                            *ngIf="totalRewardPoint && totalRewardPoint['reward'] >= slide.pointRequired"
+                                            class="ml-2">
+                                            (Redeem Now)
+                                        </span>
+                                    </a>
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                    </owl-carousel-o>
+                </div>
+                <div *ngIf="brandRewards && brandRewards.length == 0">
+                    <div class="text-center mb-3">
+                        <p><b> Coming Soon.... </b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="brand-rewards">
+            <div class="container mt-4 mb-4">
+                <h3 class="widget-title text-center mt-3">Summary</h3>
+                <p-panel header="Reward Summary" [toggleable]="true" [transitionOptions]="'1ms'" collapsed="true">
+                    <div class="transaction-table mb-4" style="font-weight: 500;">
+                        <p-table [value]="rewardTable" styleClass="p-datatable-responsive-demo" [scrollable]="true"
+                            scrollHeight="100%" scrollWidth="100%" [globalFilterFields]="['orderNo','txnId']">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 100px;" pSortableColumn="txnId">Transaction ID
+                                        <p-sortIcon field="txnId"> </p-sortIcon>
+                                    </th>
+                                    <th style="width: 100px;">Date</th>
+                                    <th style="width: 150px;" pSortableColumn="orderNo">Order No.
+                                        <p-sortIcon field="orderNo"> </p-sortIcon>
+                                    </th>
+                                    <th style="width: 100px;">Deposit(+)</th>
+                                    <th style="width: 120px;">Withdrawal(-)</th>
+                                    <th style="width: 100px;">Comment</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product>
+                                <tr>
+                                    <td style="width: 100px;">{{product.txnId || '-'}}</td>
+                                    <td style="width: 100px;">{{product.created_at | date:'dd/MM/yyyy' }}</td>
+                                    <td style="width: 150px;">{{(product.order && product.order.orderNo) ?
+                                        product.order.orderNo : '-'}}</td>
+                                    <td style="color: #06B962;width: 100px; ">{{product.rewardCredit | number:'1.2-2' ||
+                                        '-'}}</td>
+                                    <td style="color: #E35C8E; width: 100px;">{{product.rewardDebit | number:'1.2-2' ||
+                                        '-'}}</td>
+                                    <td style="width: 100px;">{{product.message || '-'}}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage" let-product>
+                                <tr>
+                                    <td [attr.colspan]="6" class="text-center">
+                                        No records found
+                                    </td>
+                                </tr>
+                            </ng-template>
+
+                        </p-table>
+                        <div *ngIf="rewardTable && rewardTable.length> 0">
+                            <p-paginator [rows]="10" [totalRecords]="totalrecords" (onPageChange)="paginate($event)"
+                                #paginator>
+                            </p-paginator>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" key="Redeem" [baseZIndex]="10000">
+</p-confirmDialog>
+<p-confirmDialog header="Insufficient balance" icon="pi pi-exclamation-triangle" key="error" [rejectVisible]="false"
+    [baseZIndex]="10000" acceptLabel="Ok">
+</p-confirmDialog>
+
+
+<!-- <app-footer></app-footer> -->

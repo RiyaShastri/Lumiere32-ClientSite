@@ -1,0 +1,113 @@
+<div class="wrapper">
+    <!-- <header class="header-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top flex-column navbar-wrapper">
+            <div class="container">
+
+                <a class="navbar-brand">
+                    <img src="assets/images/Lumiere-Logo.svg" alt="Rxagile logo svg">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                <div class="collapse naavbar-collapse justify-content-end home-navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav navbar-list-wrapper">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                            Sell On Lumiere32
+                                    </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                            About Us
+                                    </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                        Help Center
+                                    </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                         Wish List
+                                    </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+
+                                        Wish List
+                                    </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top flex-column navbar-dark-wrapper">
+            <div class="container">
+
+                <a class="navbar-brand">
+                    <span><i class="fa fa-bars"></i></span>
+                    <span>Categories</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                </button>
+                <div class="collapse navbar-collapse justify-content-end home-navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav navbar-list-wrapper">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                                Sell On Lumiere32
+                                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                        About Us
+                                    </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                                Help Center
+                                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Wish List
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header> -->
+    <!-- <app-header></app-header> -->
+    <section class="auth-card-wrapper">
+        <div class="container">
+            <div class="card auth-layout-card">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <ngx-slick-carousel class="carousel custom-slick-carousel" [config]="slideConfig" #slickModal="slick-carousel" (init)="slickInit($event)">
+                            <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                                <img src="{{ slide.img }}" alt="" width="100%">
+                                <p class="carousel-text-wrapper">
+                                    <span class="text-blue">{{slide.name}}</span>
+                                    <span>{{slide.text}}</span>
+                                </p>
+                            </div>
+                        </ngx-slick-carousel>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                       
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+            <div>
+        </div>
+        </div>
+    </section>
+    <!-- <app-footer></app-footer> -->
+</div>
+<!-- <div class="row">
+</div> -->

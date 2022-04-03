@@ -1,0 +1,26 @@
+<button type="button" class="close pull-right" (click)="dialog.closeAll()">
+  <span class="closeSpan" aria-hidden="true">&times;</span>
+</button>
+<div class="saved-dialog-wrapper">
+  <div class="heading-wrapper">
+    <h3>Saved Payment Details</h3>
+  </div>
+  <form>
+    
+    <div class="col-xs-12 mb-2" *ngFor="let item of savedPaymentsArr">
+
+      <label for="" class="savedCards">**** **** **** {{item.creditCard.last4 }}
+        <img *ngIf="item.creditCard.brand=='Visa'" class="hideCards img-fluid" src="assets/images/visa.png" height="45px" width="40px" alt="">
+        <img *ngIf="item.creditCard.brand === 'MasterCard'" class="hideCards img-fluid" src="assets/images/masterCard.png" height="15px"width="40px"/>
+        <img *ngIf="item.creditCard.brand === 'UnionPay'" class="hideCards img-fluid" src="assets/images/unionPay.png" height="15px"width="40px"/>
+      </label>
+
+      <i 
+        class="material-icons delete-card"
+        (click)="deleteSavedPayment(item)"
+        >delete</i
+      >
+    </div>
+    <h6 *ngIf="savedPaymentsArr.length==0">You have no saved cards</h6>
+  </form>
+</div>

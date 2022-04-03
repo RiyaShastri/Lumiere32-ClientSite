@@ -1,0 +1,471 @@
+<!-- <app-header></app-header> -->
+<div class="banner-image mt-2">
+  <img
+    class="discount-image"
+    src="https://lumier32.s3.ap-southeast-1.amazonaws.com/banner/4_Malaysia-Website-Banners_20OCT2021_R1+(1).png"
+    alt="Banner image"
+  />
+</div>
+
+<div class="row" *ngFor="let prodcategory of categories; let j = index">
+  <div
+    class="col-md-12 col-xs-24 get-equipment product-container mt-5 mb-5 container"
+    style="padding-top: 10px"
+  >
+    <div class="row header-section">
+      <h3>{{ prodcategory }}</h3>
+    </div>
+    <!-- modal starts -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title square" id="modal-basic-title">
+          Please add details to proceed
+        </h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="card card-content">
+        <div class="card-body">
+          <div class="container">
+            <form
+              [formGroup]="contactDetails"
+              id="ngForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="m-2">
+                <label for="name" class="form-group required control-label"
+                  >Full Name
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid': isSubmitted && contactControls.name.errors
+                  }"
+                />
+                <div
+                  *ngIf="isSubmitted && contactControls.name.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="contactControls.name.errors.required">
+                    Full name is required
+                  </div>
+                  <div
+                    *ngIf="
+                      contactControls.name.errors &&
+                      !contactControls.name.errors.required
+                    "
+                  >
+                    Invalid full name
+                  </div>
+                </div>
+              </div>
+
+              <div class="m-2">
+                <label for="email" class="form-group required control-label"
+                  >Email
+                </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid': isSubmitted && contactControls.email.errors
+                  }"
+                />
+                <div
+                  *ngIf="isSubmitted && contactControls.email.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="contactControls.email.errors.required">
+                    Email is required
+                  </div>
+                  <div
+                    *ngIf="
+                      contactControls.email.errors &&
+                      !contactControls.email.errors.required
+                    "
+                  >
+                    Invalid email
+                  </div>
+                </div>
+              </div>
+
+              <div class="m-2">
+                <label for="mobile">Mobile No. </label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="mobile"
+                  name="mobile"
+                  formControlName="mobile"
+                />
+              </div>
+              <div class="m-2">
+                <label for="notes" class="form-group control-label"
+                  >Comments if any
+                </label>
+                <textarea
+                  rows="4"
+                  class="form-control"
+                  id="notes"
+                  name="notes"
+                  formControlName="notes"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" form="ngForm" class="btn btn-success">
+          Submit details
+        </button>
+      </div>
+    </ng-template>
+    <!-- modal ends -->
+    <div
+      class="row product-list"
+      *ngIf="prodcategory === 'Oxygen Concentrator'"
+    >
+      <div
+        class="col-lg-4 col-xs-8 col-sm-6 col-14"
+        *ngFor="let item of oxyConcenArr; let i = index"
+      >
+        <div
+          class="card product-detail product-outer"
+          style="cursor: pointer"
+          *ngIf="item.category === 'Oxygen Concentrator'"
+        >
+          <img
+            style="cursor: pointer"
+            onError="item.image"
+            alt="product image"
+            src="{{ item.image }}"
+          />
+          <div class="product-material">
+            <h3 [title]="item?.name">
+              {{ item.name }}
+            </h3>
+            <div class="product-price">
+              <p class="discount-price" *ngIf="item?.price != 0">
+                RM {{ item?.price | number: "1.2-2" }}
+                <br />
+                <small *ngIf="item?.min_qty > 1"
+                  >Minimum order quantity is {{ item?.min_qty }}</small
+                >
+                <small style="color: white" *ngIf="item?.min_qty <= 1"
+                  >Minimum order quantity is {{ item?.min_qty }}</small
+                >
+              </p>
+              <p class="discount-price" *ngIf="item?.price == 0">
+                <br />
+                <br />
+              </p>
+              <p class="original-price" *ngIf="!item?.request_quote">
+                <del *ngIf="item?.mrp != null && item?.mrp != 0">
+                  RM {{ item?.mrp | number: "1.2-2" }}</del
+                >
+                <br />
+                <small *ngIf="item?.warranty"
+                  >{{ item?.warranty }} years warranty</small
+                >
+                <small
+                  style="color: white"
+                  *ngIf="item?.warranty == null || item?.warranty == 0"
+                  >{{ item?.warranty }} years warranty</small
+                >
+              </p>
+            </div>
+            <br />
+          </div>
+
+          <button
+            class="btn btn-primary m-1 mt-4"
+            *ngIf="item.request_quote == false"
+            (click)="
+              open(
+                content,
+                'modal-basic-title',
+                item.name,
+                item.price,
+                item.image,
+                item.min_qty,
+                item.max_qty,
+                item.qty
+              )
+            "
+          >
+            Checkout
+          </button>
+          <button
+            class="btn btn-info m-1 mt-4"
+            *ngIf="item.request_quote == true"
+            (click)="
+              openForQuote(
+                content,
+
+                'modal-basic-title-quote',
+                item.name
+              )
+            "
+          >
+            Request Quote
+          </button>
+          <ng-container *ngIf="item.brochure != ''">
+            <a
+              class="btn btn-secondary m-1"
+              target="_blank"
+              href="{{ item.brochure }}"
+              ><span
+                class="inline-text"
+                *ngIf="item.brochure != '' && item.brochure != null"
+                >Download Brochure</span
+              ></a
+            >
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row product-list" *ngIf="prodcategory === 'Combo Offers'">
+      <div
+        class="col-lg-4 col-xs-8 col-sm-6 col-14"
+        *ngFor="let item of comboOfferArr; let i = index"
+      >
+        <div
+          class="card product-detail product-outer"
+          style="cursor: pointer"
+          *ngIf="item.category === 'Combo Offers'"
+        >
+          <img
+            style="cursor: pointer"
+            onError="item.image"
+            alt="product image"
+            src="{{ item.image }}"
+          />
+          <div class="product-material">
+            <h3 [title]="item?.name">
+              {{ item.name }}
+            </h3>
+            <div class="product-price">
+              <p class="discount-price" *ngIf="item?.price != 0">
+                RM {{ item?.price | number: "1.2-2" }}
+                <br />
+                <small *ngIf="item?.min_qty > 1"
+                  >Minimum order quantity is {{ item?.min_qty }}</small
+                >
+                <small style="color: white" *ngIf="item?.min_qty <= 1"
+                  >Minimum order quantity is {{ item?.min_qty }}</small
+                >
+              </p>
+              <p class="discount-price" *ngIf="item?.price == 0">
+                <br />
+                <br />
+              </p>
+              <p class="original-price" *ngIf="!item?.request_quote">
+                <del *ngIf="item?.mrp != null && item?.mrp != 0">
+                  RM {{ item?.mrp | number: "1.2-2" }}</del
+                >
+                <br />
+                <small *ngIf="item?.warranty"
+                  >{{ item?.warranty }} years warranty</small
+                >
+                <small
+                  style="color: white"
+                  *ngIf="item?.warranty == null || item?.warranty == 0"
+                  >{{ item?.warranty }} years warranty</small
+                >
+              </p>
+            </div>
+            <br />
+          </div>
+          <button
+            class="btn btn-primary m-1 mt-4"
+            *ngIf="item.request_quote == false"
+            (click)="
+              open(
+                content,
+                'modal-basic-title',
+                item.name,
+                item.price,
+                item.image,
+                item.min_qty,
+                item.max_qty,
+                item.qty
+              )
+            "
+          >
+            Checkout
+          </button>
+          <button
+            class="btn btn-info m-1 mt-4"
+            *ngIf="item.request_quote == true"
+            (click)="
+              openForQuote(content, 'modal-basic-title-quote', item.name)
+            "
+          >
+            Request Quote
+          </button>
+          <ng-container *ngIf="item.brochure != '' && item.brochure != null">
+            <a
+              class="btn btn-secondary m-1"
+              target="_blank"
+              href="{{ item.brochure }}"
+              ><span class="text-white">Download Brochure</span></a
+            >
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row product-list" *ngIf="prodcategory === 'Rapid Testing Kits'">
+      <div
+        class="col-lg-4 col-xs-8 col-sm-6 col-14"
+        *ngFor="let item of rapidTestKitArr; let i = index"
+      >
+        <div
+          class="card product-detail product-outer"
+          style="cursor: pointer"
+          *ngIf="item.category === 'Rapid Testing Kits'"
+        >
+          <img
+            style="cursor: pointer"
+            onError="item.image"
+            alt="product image"
+            src="{{ item.image }}"
+          />
+          <div class="product-material">
+            <h3 [title]="item?.name">
+              {{ item.name }}
+            </h3>
+            <div class="product-price">
+              <p class="discount-price" *ngIf="item?.price != 0">
+                RM {{ item?.price | number: "1.2-2" }}
+                <br />
+                <small *ngIf="item?.min_qty > 1"
+                  >Minimum order quantity is {{ item?.min_qty }}</small
+                >
+                <small style="color: white" *ngIf="item?.min_qty <= 1"
+                  >Minimum order quantity is {{ item?.min_qty }}</small
+                >
+              </p>
+              <p class="discount-price" *ngIf="item?.price == 0">
+                <br />
+                <br />
+              </p>
+              <p class="original-price" *ngIf="!item?.request_quote">
+                <del *ngIf="item?.mrp != null && item?.mrp != 0">
+                  RM {{ item?.mrp | number: "1.2-2" }}</del
+                >
+                <br />
+                <small *ngIf="item?.warranty"
+                  >{{ item?.warranty }} years warranty</small
+                >
+                <small
+                  style="color: white"
+                  *ngIf="item?.warranty == null || item?.warranty == 0"
+                  >{{ item?.warranty }} years warranty</small
+                >
+              </p>
+            </div>
+            <br />
+          </div>
+
+          <button
+            class="btn btn-primary m-1 mt-4"
+            *ngIf="item.request_quote == false"
+            (click)="
+              open(
+                content,
+                'modal-basic-title',
+                item.name,
+                item.price,
+                item.image,
+                item.min_qty,
+                item.max_qty,
+                item.qty
+              )
+            "
+          >
+            Checkout
+          </button>
+          <button
+            class="btn btn-info m-1 mt-4"
+            *ngIf="item.request_quote == true"
+            (click)="
+              openForQuote(content, 'modal-basic-title-quote', item.name)
+            "
+          >
+            Request Quote
+          </button>
+          <ng-container *ngIf="item.brochure != '' && item.brochure != null">
+            <a
+              class="btn btn-secondary m-1"
+              target="_blank"
+              href="{{ item.brochure }}"
+              ><span class="text-white">Download Brochure</span></a
+            >
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card card-content mb-5">
+  <div class="card-body">
+    <div class="container">
+      <h3>Standard Terms:</h3>
+      <ul class="p-4">
+        <li>1-Year Warranty on all Oxygen Concentrators and Ventilators.</li>
+        <li>
+          Shipped in 2-3 Business days from Singapore/China except Yuwell &
+          Phillips after Payment Confirmation.
+        </li>
+        <li>ESTIMATED DELIVERY TIME 5-10 DAYS.</li>
+        <li>
+          Shipping will be managed by FedEx / DHL / other similar logistics
+          partner's (Includes Door to Door delivery).
+        </li>
+        <li>
+          The customer is responsible to pay any import or custom duty directly
+          to Malaysia Customs (If applicable)
+        </li>
+        <li>
+          Refund Policy:&nbsp;Order can be cancelled anytime before shipping. We
+          will refund the payments within 48 hrs.
+        </li>
+        <li>
+          Incase of any query or if you are not able process your order drop us
+          a note here
+          <a href="mailto:sales@lumiere32.my">sales@lumiere32.my</a>.
+        </li>
+        <li>
+          ALL PRODUCT IMAGES SHOWN ARE FOR ILLUSTRATION PURPOSE ONLY. ACTUAL
+          PRODUCT MAY VARY DUE TO PRODUCT ENHANCEMENT OR BRAND CHANGE.
+        </li>
+        <li>
+          All Covid-19 ART kits require special storage conditions, hence once
+          sold cannot be either exchanged or returned. We reserve the right to
+          accept or reject any order placed, without assigning any reasons
+          whatsoever. Once the order is placed, it cannot be cancelled unless
+          acceptance of such cancellation is agreed to by us and confirmed to
+          the customer in writing.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- <app-footer></app-footer> -->

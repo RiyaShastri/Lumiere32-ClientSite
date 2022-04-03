@@ -1,0 +1,873 @@
+<mat-toolbar class="first">
+  <mat-toolbar-row class="container header1 first" *ngIf="!authService.loginFlag">
+    <a id="show-sidebar" fxHide.gt-sm class="btn btn-sm" (click)="openSidebar()"><i class="fas fa-bars"></i></a>
+
+    <div *ngIf="showMenu" class="page-wrapper chiller-theme toggled">
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <div class="acntusr">
+              <a><img src="assets/images/nav-user.svg" alt="truck image" class="icons" /></a>
+            </div>
+            <a> Guest </a>
+            <div id="close-sidebar" (click)="closeSidebar()">
+              <img src="assets/images/icon/close-button.png" />
+            </div>
+          </div>
+          <!-- sidebar-header  -->
+
+          <div class="sidebar-menu">
+            <ul>
+              <div class="ExtraMenu" style="width: 88%">
+                <!--Category Menu starts Here-->
+                <li>
+                  <a (click)="homepage()"><img
+                      src="assets/images/icon/home-icon-silhouette-svgrepo-com.svg" /><span>Home</span></a>
+                </li>
+                <li>
+                  <a style="display: flex; align-items: center"
+                    (click)="showCategory = !showCategory; showHelpMenu = false"><img
+                      src="assets/images/icon/Group 20141.svg" />
+                    <span style="
+                        display: flex;
+                        justify-content: space-between;
+                        width: inherit;
+                      ">Categories
+                      <img src="assets/images/chevron-down.svg" class="downIcon" *ngIf="showCategory == true" />
+                    </span></a>
+                </li>
+                <div *ngIf="showCategory == true" style="margin-left: 2vh">
+                  <li *ngFor="let item of allCategories" class="sidebar-dropdown">
+                    <a style="
+                        padding: 2px;
+                        font-size: 2vh;
+                        display: flex;
+                        justify-content: space-between;
+                      "><span style="border-bottom: none; padding: 2px" fxLayout="row"
+                        fxLayoutAlign="space-between center" [title]="item.categoryName" (click)="closeSidebar()"
+                        [routerLink]="[
+                          '/' + counrtyIso.getCountryCode() + '/c',
+                          counrtyIso.convertToSlug(item?.categoryName)
+                        ]" [queryParams]="{ cid: item?.id }" [title]="item?.categoryName">{{ item?.categoryName
+                        }}</span>
+                      <span>
+                        <img src="assets/images/dash.svg" *ngIf="subMenu === item?.categoryName" style="color: red"
+                          (click)="showSubmenu(null)" />
+                        <img src="assets/images/plus.svg" *ngIf="subMenu != item?.categoryName"
+                          (click)="showSubmenu(item)" />
+                      </span>
+                    </a>
+
+                    <div class="sbmun">
+                      <!-- class="sidebar-submenu"-->
+                      <ng-container *ngFor="let subItem of item.childCategory">
+                        <ul *ngIf="subMenu === item?.categoryName">
+                          <li [routerLink]="[
+                              '/' + counrtyIso.getCountryCode() + '/sc',
+                              counrtyIso.convertToSlug(item?.categoryName),
+                              counrtyIso.convertToSlug(subItem?.categoryName)
+                            ]" [queryParams]="{ cid: subItem?.id }" [title]="subItem?.categoryName"
+                            (click)="isSubMenu(true)">
+                            {{ subItem?.categoryName }}
+                          </li>
+                        </ul>
+                      </ng-container>
+                    </div>
+                  </li>
+                </div>
+                <!-- <li>
+                  <a class="DivideMenu" (click)="dentalSupplies()"><img
+                      src="assets/images/icon/dentist.svg" /><span>Dental Supplies</span></a>
+                </li> -->
+                <!-- <li>
+                  <a (click)="addtocart()"
+                    ><img src="assets/images/supermarket.svg" /><span>
+                      Cart</span
+                    ></a
+                  >
+                </li> -->
+                <li>
+                  <a (click)="commingSoon()"><img src="assets/images/Offers-nav.svg" /><span>Offers</span></a>
+                </li>
+                <li>
+                  <a (click)="pay32()"><img src="../assets/images/top-up-update.svg" /><span>{{
+                      authService.loginFlag ? "Pay32" : "Top-Up Packs"
+                      }}</span></a>
+                </li>
+                <li>
+                  <a  (click)="sellOnLumiere()">
+                  <img src="../assets/images/corporate-icon.jpeg" />
+                  <span>Sell On Lumiere32</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="DivideMenu" (click)="corporatePurchase()">
+                    <img src="../assets/images/corporate-icon.jpeg" />
+                    <span>Corporate Purchase</span>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="loginPage(); closeSidebar()"><img
+                      src="assets/images/icon/login (1).svg" /><span>Login</span></a>
+                </li>
+                <li *ngIf="!authService.loginFlag">
+                  <a class="DivideMenu" (click)="signUpPage(); closeSidebar()"><img
+                      src="assets/images/icon/Sign Up.svg" /><span>Sign Up</span></a>
+                </li>
+                <li>
+                  <a style="display: flex; align-items: center"
+                    (click)="showHelpMenu = !showHelpMenu; showCategory = false"><img
+                      src="assets/images/question (5).svg" />
+                    <span style="
+                        display: flex;
+                        justify-content: space-between;
+                        width: inherit;
+                      ">Help
+                      <img *ngIf="showHelpMenu == true" src="assets/images/chevron-down.svg" class="downIcon" />
+                    </span>
+                  </a>
+                </li>
+                <div *ngIf="showHelpMenu == true" style="margin-left: 2vh">
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh">
+                      <img src="assets/images/icon/Buying.svg" alt="image" /><span>For Buying</span></a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/For Selling.svg"
+                        alt="image" /><span>For Selling</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Feedback.svg" alt="image" />
+                      <span>Share your Feedback </span></a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Complaint.svg"
+                        alt="image" /><span>Raise a</span> Complaint</a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh; color: black" target="_blank"
+                      href="mailto:connect@lumiere32.my"><img src="assets/images/icon/Email.svg"
+                        alt="image" /><span>Email us on connect@lumiere32.my</span></a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Call.svg"
+                        alt="image" /><span> Call us at +65 6592 2415</span></a>
+                  </li>
+                </div>
+                <li>
+                  <a (click)="
+                      privacy(); showCategory = false; showHelpMenu = false
+                    "><img src="assets/images/icon/shield.svg " /><span>Privacy Policy</span></a>
+                </li>
+                <li style="
+                    border-bottom: none;
+                    text-align: -webkit-center;
+                    margin-top: 2vh;
+                  ">
+                  <div style="
+                      text-align: center;
+                      background-color: #63c7db;
+                      width: 50%;
+                      margin-left: 1.5vh;
+                      color: white;
+                    " (click)="
+                      showQuoteDialog();
+                      showCategory = false;
+                      showHelpMenu = false;
+                      closeSidebar()
+                    ">
+                    Get Quotes
+                  </div>
+                </li>
+              </div>
+            </ul>
+          </div>
+          <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+      </nav>
+      <!-- sidebar-wrapper  -->
+
+      <!-- page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <span class="container row">
+      <a (click)="logoNavigate()">
+        <img class="paddingLeft cursor-pointer" src="assets/images/Lumiere-Logo.png" alt="Lumiere-Logo svg" />
+      </a>
+    </span>
+
+    <!-- <div class="cmenu" fxHide fxShow.lt-md>
+      <div class="iconDivCart umenu">
+        <a
+          ><img
+            src="assets/images/icon/supermarket (2).svg"
+            alt="truck image"
+            class="icons"
+        /></a>
+      </div>
+    </div> -->
+
+    <mat-toolbar class="second extra_calss2 headerMenu" id="searchBtnn" fxHide="true" fxShow.xs="true" fxShow.sm="true">
+      <mat-toolbar-row class="header4 container" id="headerClr" fxFlex>
+        <div fxLayout="row" fxHide="true">
+          <mat-menu #profileMenu="matMenu" class="udl">
+            <button mat-menu-item [routerLink]="[
+                '/' + counrtyIso.getCountryCode() + '/user/dashboard'
+              ]">
+              User Dashboard
+            </button>
+            <button mat-menu-item [routerLink]="['/' + counrtyIso.getCountryCode() + '/rewards']">
+              My Rewards
+            </button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+          <a class="userDiv" [matMenuTriggerFor]="profileMenu" *ngIf="authService.loginFlag">
+            <div class="iconUserDiv">
+              <img src="assets/images/User.svg" alt="truck image" class="iconUser" />
+            </div>
+            {{`<button mat-menu-item [routerLink]="[
+                '/' + counrtyIso.getCountryCode() + '/user/dashboard'
+              ]">
+              User Dashboard</button>`}}
+          </a>
+          <a class="userDiv ml-2" (click)="loginPage()" *ngIf="!authService.loginFlag">
+            <div class="iconUserDiv">
+              <img src="assets/images/User.svg" alt="truck image" class="iconUser" />
+            </div>
+            Login / Signup
+          </a>
+
+          <div class="iconDivCart">
+            <a [routerLink]="[
+                '/' + counrtyIso.getCountryCode() + '/cart'
+              ]">
+              <img src="assets/images/Card.svg" alt="truck image" class="icons" />Cart
+            </a>
+            <span class="cartCount" *ngIf="cartCount">{{ cartCount }}</span>
+          </div>
+          <div class="iconDivOffer">
+            <a (click)="commingSoon()"><img src="assets/images/Offers.svg" alt="truck image" class="icon" />Offers</a>
+          </div>
+          <div class="iconDivPay">
+            <a (click)="pay32()"><img src="assets/images/Pay32.svg" alt="truck image" class="icon" />{{
+              authService.loginFlag ? "Pay32" : "Top-Up" }}</a>
+          </div>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <div class="buttonQ">
+        <button class="btn quotes" (click)="showQuoteDialog()">
+          Get Quotes
+        </button>
+      </div>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <a
+        class="link-header"
+        mat-button
+        [routerLink]="['/' + counrtyIso.getCountryCode() + '/sell-on-lumiere32']"
+      >
+      Sell On Lumiere32
+      </a>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <a
+        class="link-header"
+        mat-button
+        [routerLink]="['/' + counrtyIso.getCountryCode() + '/corporate']"
+      >
+        Corporate Purchase
+      </a>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <div class="buttonHelp">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="true">
+          Help<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"
+          style="padding: 10px; border-radius: 15px; border: 5px solid skyblue">
+          <li class="help_box">
+            <h1>Find answers to your queries</h1>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Buying.svg" alt="image" /></span>
+            <span style="color: gray">For</span><a target="_blank"
+              href="https://sites.google.com/lumiere32.sg/help-centre/home"><span> Buying</span></a>
+            <span style="margin: 20px"><span style="padding-right: 10px"><img src="assets/images/icon/For Selling.svg"
+                  alt="image" />
+              </span>
+              <span style="color: gray">For</span><a target="_blank"
+                href="https://sites.google.com/lumiere32.sg/help-centre/home"><span> Selling</span></a>
+            </span>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Feedback.svg" alt="image" />
+            </span>
+            <span style="color: gray">Share your</span><a target="_blank" href="mailto:connect@lumiere32.my"><span>
+                Feedback</span></a>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Complaint.svg" alt="image" /></span><span
+              style="color: gray">Raise a</span><a target="_blank" href="mailto:connect@lumiere32.my"><span>
+                Complaint</span></a>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Email.svg" alt="image" /></span>
+            <span style="color: gray">Email us on </span>
+            <span class="d-block pl-5"><a target="_blank"
+                href="mailto:connect@lumiere32.my">connect@lumiere32.my</a></span>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Call.svg" alt="image" /></span><span
+              style="color: gray"> Call us at </span> +60 3-2935 9912
+          </li>
+        </ul>
+      </div>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <div style="padding: 0 20px 0 0px"></div>
+      <div class="filter-sort country-select">
+        <p-dropdown [options]="counrtyIso?.allCountries" (onChange)="getUpdatedCountry($event)"
+          [(ngModel)]="selectedCountry" datakey="value" optionLabel="itemName" [filter]="false" [showClear]="false"
+          placeholder="Select a Country">
+          <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value">
+              <div>{{ selectedCountry?.itemName }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country?.value?.itemName }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="container header1" *ngIf="authService.loginFlag">
+    <a id="show-sidebar" fxHide.gt-sm class="btn btn-sm" class="btn btn-sm" (click)="openSidebar()"><i
+        class="fas fa-bars"></i></a>
+
+    <div *ngIf="showMenu" class="page-wrapper chiller-theme toggled">
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <div class="acntusr">
+              <a [routerLink]="[
+                  '/' + counrtyIso.getCountryCode() + '/user/dashboard'
+                ]"><img src="assets/images/nav-user.svg" alt="truck image" class="icons" /></a>
+            </div>
+            <a *ngIf="authService.loginFlag" [routerLink]="[
+                '/' + counrtyIso.getCountryCode() + '/user/dashboard'
+              ]">
+              {{ authService.loggedInCustomerName }}
+            </a>
+            <div id="close-sidebar" (click)="closeSidebar()">
+              <img src="assets/images/icon/close-button.png" />
+            </div>
+          </div>
+          <!-- sidebar-header  -->
+
+          <div class="sidebar-menu">
+            <ul>
+              <div class="ExtraMenu" style="width: 88%">
+                <!--Category Menu starts Here-->
+                <li>
+                  <a (click)="homepage()"><img
+                      src="assets/images/icon/home-icon-silhouette-svgrepo-com.svg" /><span>Home</span></a>
+                </li>
+                <li>
+                  <a style="display: flex; align-items: center"
+                    (click)="showCategory = !showCategory; showHelpMenu = false"><img
+                      src="assets/images/icon/Group 20141.svg" />
+                    <span style="
+                        display: flex;
+                        justify-content: space-between;
+                        width: inherit;
+                      ">Categories
+                      <img src="assets/images/chevron-down.svg" class="downIcon" *ngIf="showCategory == true" />
+                    </span></a>
+                </li>
+                <div *ngIf="showCategory == true" style="margin-left: 2vh">
+                  <li *ngFor="let item of allCategories" class="sidebar-dropdown">
+                    <a style="
+                        padding: 2px;
+                        font-size: 2vh;
+                        display: flex;
+                        justify-content: space-between;
+                      ">
+                      <span style="border-bottom: none; padding: 2px" fxLayout="row"
+                        fxLayoutAlign="space-between center" [title]="item.categoryName" (click)="closeSidebar()"
+                        [routerLink]="[
+                          '/' + counrtyIso.getCountryCode() + '/c',
+                          counrtyIso.convertToSlug(item?.categoryName)
+                        ]" [queryParams]="{ cid: item?.id }" [title]="item?.categoryName">
+                        {{ item?.categoryName }}
+                      </span>
+                      <span>
+                        <img src="assets/images/dash.svg" *ngIf="subMenu === item?.categoryName" style="color: red"
+                          (click)="showSubmenu(null)" />
+                        <img src="assets/images/plus.svg" *ngIf="subMenu != item?.categoryName"
+                          (click)="showSubmenu(item)" />
+                      </span>
+                    </a>
+                    <div class="sbmun">
+                      <!-- class="sidebar-submenu"-->
+                      <ng-container *ngFor="let subItem of item.childCategory">
+                        <ul *ngIf="subMenu === item?.categoryName">
+                          <li [routerLink]="[
+                              '/' + counrtyIso.getCountryCode() + '/sc',
+                              counrtyIso.convertToSlug(item?.categoryName),
+                              counrtyIso.convertToSlug(subItem?.categoryName)
+                            ]" [queryParams]="{ cid: subItem?.id }" [title]="subItem?.categoryName"
+                            (click)="isSubMenu(true)">
+                            {{ subItem?.categoryName }}
+                          </li>
+                        </ul>
+                      </ng-container>
+                    </div>
+                  </li>
+                </div>
+                <!-- <li>
+                  <a class="DivideMenu" (click)="dentalSupplies()"><img
+                      src="../../../../assets/images/icon/dentist.svg" /><span>Dental Supplies</span></a>
+                </li> -->
+                <li (click)="addtocart()">
+                  <a><img src="assets/images/supermarket.svg" /><span>My Cart</span></a>
+                </li>
+                <li (click)="commingSoon()">
+                  <a><img src="assets/images/Offers-nav.svg" /><span>Offers</span></a>
+                </li>
+                <li (click)="myOrder()">
+                  <a><img src="assets/images/icon/My Orders.svg" /><span>My Orders</span></a>
+                </li>
+                <li (click)="dashboard()">
+                  <a><img src="assets/images/icon/My Dashboard.svg" /><span>My Dashboard</span></a>
+                </li>
+                <li (click)="rewards()">
+                  <a><img src="assets/images/icon/gift.svg" /><span>My Rewards</span></a>
+                </li>
+                <li (click)="profile()">
+                  <a><img src="assets/images/icon/My Profile.svg" /><span>My Profile</span></a>
+                </li>
+                <li (click)="
+                    quotation();
+                    showCategory = false;
+                    showHelpMenu = false;
+                    closeSidebar()
+                  ">
+                  <a><img src="assets/images/icon/My Quotation.svg" /><span>My Quotation</span></a>
+                </li>
+                <li>
+                  <a (click)="
+                      pay32(); showCategory = false; showHelpMenu = false
+                    "><img src="assets/images/icon/wallet (2).svg" /><span>{{
+                      authService.loginFlag ? "My Pay32 Wallet" : "Top-Up Packs"
+                      }}</span></a>
+                </li>
+                <li>
+                  <a (click)="topUp()"><img src="../assets/images/top-up-update.svg" /><span>{{
+                      authService.loginFlag ? "Top-Up Packs" : "My Pay32"
+                      }}</span></a>
+                </li>
+                <li>
+                  <a  (click)="sellOnLumiere()">
+                    <img src="../assets/images/corporate-icon.jpeg" />
+                    <span>Sell On Lumiere32</span>
+                    </a>
+                </li>
+                <li>
+                  <a class="DivideMenu" (click)="corporatePurchase()">
+                    <img src="../assets/images/corporate-icon.jpeg" />
+                    <span>Corporate Purchase</span>
+                  </a>
+                </li>
+                <li *ngIf="authService.loginFlag">
+                  <a class="DivideMenu" (click)="
+                      logout(); showCategory = false; showHelpMenu = false
+                    "><img src="assets/images/icon/power-switch-logout.svg" /><span>Logout</span></a>
+                </li>
+                <li>
+                  <a style="display: flex; align-items: center"
+                    (click)="showHelpMenu = !showHelpMenu; showCategory = false"><img
+                      src="assets/images/question (5).svg" />
+                    <span style="
+                        display: flex;
+                        justify-content: space-between;
+                        width: inherit;
+                      ">Help
+                      <img src="assets/images/chevron-down.svg" class="downIcon" *ngIf="showHelpMenu == true" />
+                    </span>
+                  </a>
+                </li>
+                <div *ngIf="showHelpMenu == true" style="margin-left: 2vh">
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Buying.svg"
+                        alt="image" /><span>For Buying</span></a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/For Selling.svg"
+                        alt="image" /><span>For Selling</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Feedback.svg" alt="image" />
+                      <span>Share your Feedback </span></a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Complaint.svg"
+                        alt="image" /><span>Raise a</span> Complaint</a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh; color: black" target="_blank"
+                      href="mailto:connect@lumiere32.my"><img src="assets/images/icon/Email.svg"
+                        alt="image" /><span>Email us on connect@lumiere32.my</span></a>
+                  </li>
+                  <li>
+                    <a style="padding: 2px; font-size: 2.2vh"><img src="assets/images/icon/Call.svg"
+                        alt="image" /><span>Call us at +65 6592 2415</span></a>
+                  </li>
+                </div>
+                <li>
+                  <a (click)="
+                      privacy(); showCategory = false; showHelpMenu = false
+                    "><img src="assets/images/icon/shield.svg " /><span>Privacy Policy</span></a>
+                </li>
+                <li style="
+                    border-bottom: none;
+                    text-align: -webkit-center;
+                    margin-top: 2vh;
+                  ">
+                  <div style="
+                      text-align: center;
+                      background-color: #63c7db;
+                      width: 50%;
+                      margin-left: 1.5vh;
+                      color: white;
+                    " (click)="
+                      showQuoteDialog();
+                      showCategory = false;
+                      showHelpMenu = false;
+                      closeSidebar()
+                    ">
+                    Get Quotes
+                  </div>
+                </li>
+              </div>
+            </ul>
+          </div>
+          <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+      </nav>
+      <!-- sidebar-wrapper  -->
+
+      <!-- page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <span class="container row">
+      <a [routerLink]="['/' + counrtyIso.getCountryCode()]">
+        <img class="paddingLeft cursor-pointer" src="assets/images/Lumiere-Logo.png" alt="Rxagile logo svg" />
+      </a>
+    </span>
+    <div class="cmenu" fxHide fxShow.lt-md>
+      <div class="iconDivCart umenu">
+        <a [routerLink]="['/' + counrtyIso.getCountryCode() + '/cart']"><img
+            src="assets/images/icon/supermarket (2).svg" alt="truck image" class="icons" /></a>
+        <span class="cartCount" *ngIf="cartCount">{{ cartCount }}</span>
+      </div>
+    </div>
+
+    <mat-menu #appMenu1="matMenu">
+      <button mat-menu-item>
+        <img src="assets/images/Malaysia Flag.svg" alt="truck image" class="img-fluid" />Malaysia
+      </button>
+      <button mat-menu-item>
+        <img src="assets/images/singapore  flag.svg" alt="truck image" class="img-fluid" />Singapore
+      </button>
+    </mat-menu>
+
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <div class="buttonQ">
+        <button class="btn quotes" (click)="showQuoteDialog()">
+          Get Quotes
+        </button>
+      </div>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <a
+        class="link-header"
+        mat-button
+        [routerLink]="['/' + counrtyIso.getCountryCode() + '/sell-on-lumiere32']"
+      >
+      Sell On Lumiere32
+      </a>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <a
+        class="link-header"
+        mat-button
+        [routerLink]="['/' + counrtyIso.getCountryCode() + '/corporate']"
+      >
+        Corporate Purchase
+      </a>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <div class="buttonHelp">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="true">
+          Help<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"
+          style="padding: 10px; border-radius: 15px; border: 5px solid skyblue">
+          <li class="help_box">
+            <h1>Find answers to your queries</h1>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Buying.svg" alt="image" /></span>
+            <span style="color: gray">For</span><a target="_blank"
+              href="https://sites.google.com/lumiere32.sg/help-centre/home"><span> Buying</span></a>
+            <span style="margin: 20px"><span style="padding-right: 10px"><img src="assets/images/icon/For Selling.svg"
+                  alt="image" />
+              </span>
+              <span style="color: gray">For</span><a target="_blank"
+                href="https://sites.google.com/lumiere32.sg/help-centre/home"><span> Selling</span></a>
+            </span>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Feedback.svg" alt="image" />
+            </span>
+            <span style="color: gray">Share your</span><a target="_blank" href="mailto:connect@lumiere32.my"><span>
+                Feedback</span></a>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Complaint.svg" alt="image" /></span><span
+              style="color: gray">Raise a</span><a target="_blank" href="mailto:connect@lumiere32.my"><span>
+                Complaint</span></a>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Email.svg" alt="image" /></span>
+            <span style="color: gray">Email us on </span>
+            <span class="d-block pl-5"><a target="_blank"
+                href="mailto:connect@lumiere32.my">connect@lumiere32.my</a></span>
+          </li>
+          <li class="help_box">
+            <span style="padding-right: 10px"><img src="assets/images/icon/Call.svg" alt="image" /></span><span
+              style="color: gray"> Call us at </span> +60 3-2935 9912
+          </li>
+        </ul>
+      </div>
+      <mat-divider class="style-fix" [vertical]="true"></mat-divider>
+      <div style="padding: 0 20px 0 0px"></div>
+      <div class="filter-sort country-select">
+        <p-dropdown [options]="allCountriesFromJSON" (onChange)="getUpdatedCountry($event)"
+          [(ngModel)]="selectedCountry" datakey="value" optionLabel="itemName" [filter]="false" [showClear]="false"
+          placeholder="Select a Country">
+          <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="selectedCountry">
+              <div>{{ selectedCountry?.itemName }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country?.value?.itemName }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-toolbar class="second" id="searchBtnn">
+  <mat-toolbar-row class="header2 container-lg justify-content-lg-between justify-content-center" id="headerClr">
+    <a class="cate">
+      <h4 class="iconCategory d-flex align-items-center" mat-flat-button [matMenuTriggerFor]="categoryMenu">
+        <mat-icon class="menutoggl mr-3" fxShow fxHide.lt-md>menu</mat-icon><a fxHide.xs>Categories</a>
+      </h4>
+      <ng-container>
+        <mat-menu #categoryMenu="matMenu" class="category-list-outer-main">
+          <ul class="category-list-outer" *ngIf="allCategories.length">
+            <li *ngFor="let item of allCategories">
+              <a [routerLink]="[
+                  '/' + counrtyIso.getCountryCode() + '/c',
+                  counrtyIso.convertToSlug(item?.categoryName)
+                ]" [queryParams]="{ cid: item?.id }" [title]="item.categoryName" (click)="isSubMenu(false, item)">
+                {{ item?.categoryName }}</a>
+              <div class="sub-category-outer" style="margin-left: 2.7vh" *ngIf="item?.childCategory?.length">
+                <ul>
+                  <li>{{ item?.categoryName }}</li>
+                  <li *ngFor="let subItem of item?.childCategory">
+                    <a style="font-weight: 400" [routerLink]="[
+                        '/' + counrtyIso.getCountryCode() + '/sc',
+                        counrtyIso.convertToSlug(item?.categoryName),
+                        counrtyIso.convertToSlug(subItem?.categoryName)
+                      ]" [queryParams]="{ cid: subItem?.id }" [title]="subItem?.categoryName"
+                      (click)="isSubMenu(true, item)">{{ subItem?.categoryName }}</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <ul *ngIf="!allCategories.length" class="mb-0 pl-0">
+            <p class="no-data-text py-0">No Category Found</p>
+          </ul>
+        </mat-menu>
+      </ng-container>
+    </a>
+    <div class="row col-xl-7 col-md-6 searchDiv">
+      <app-search style="width: 100%" (searchValue)="searchValue($event)"></app-search>
+      <input type="text" class="inputSearch responsive-search-input" (change)="onSearchProduct($event)"
+        (click)="showDialog()" placeholder="" readonly />
+
+      <div class="searchBtn">
+        <button mat-fab color="#ffffff" class="search-icon" (click)="showDialog()">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm class="iconsAll col-md-4 header-lower-right">
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/' + counrtyIso.getCountryCode() + '/user/dashboard']">
+          User Dashboard
+        </button>
+        <button mat-menu-item [routerLink]="['/' + counrtyIso.getCountryCode() + '/rewards']">
+          My Rewards
+        </button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+
+      <div class="iconUserDiv" [ngStyle]="{ width: authService.loginFlag ? '25%' : '30%' }">
+        <a class="userDiv" [routerLink]="['/' + counrtyIso.getCountryCode() + '/login']" *ngIf="!authService.loginFlag">
+          <img src="assets/images/User.svg" alt="truck image" class="iconUser m-auto" />
+          <span class="mt-1 d-block">Login / Signup</span>
+        </a>
+
+        <a class="userDiv" [matMenuTriggerFor]="profileMenu" *ngIf="authService.loginFlag">
+          <img src="assets/images/User.svg" alt="truck image" class="iconUser m-auto" />
+          <span class="mt-1 d-block">
+            {{ authService.loggedInCustomerName }}</span>
+        </a>
+      </div>
+      <div class="iconDivCart" [ngStyle]="{ width: authService.loginFlag ? '25%' : '23.33%' }"
+        *ngIf="authService.loginFlag">
+        <a [routerLink]="['/' + counrtyIso.getCountryCode() + '/cart']">
+          <span>
+            <img src="assets/images/Card.svg" alt="truck image" class="icons" />
+            <span class="cartCount" *ngIf="cartCount">{{ cartCount }}</span>
+          </span>
+          <span class="mt-1 d-block">Cart</span>
+        </a>
+      </div>
+      <div class="iconDivOffer" [ngStyle]="{ width: authService.loginFlag ? '25%' : '23.33%' }">
+        <a (click)="commingSoon()"><img src="assets/images/Offers.svg" alt="truck image" class="icon" />
+          <span class="mt-1 d-block">Offers</span>
+        </a>
+      </div>
+      <mat-menu #profileMenu1="matMenu">
+        <button mat-menu-item [routerLink]="['/' + counrtyIso.getCountryCode() + '/my-wallet']">
+          Pay32 Dashboard
+        </button>
+        <button mat-menu-item [routerLink]="['/' + counrtyIso.getCountryCode() + '/pay32/top-up']">
+          Top-Up Packs
+        </button>
+      </mat-menu>
+
+      <div class="iconDivPay mx-2" *ngIf="!authService.loginFlag"
+        [ngStyle]="{ width: authService.loginFlag ? '25%' : '23.33%' }"
+        [routerLink]="['/' + counrtyIso.getCountryCode() + '/pay32/top-up']">
+        <a><img src="assets/images/Pay32.svg" alt="truck image" class="icon" />
+          <span class="mt-1 d-block"> {{authService.loginFlag ? "Pay32" : "Top-Up Packs"}} </span>
+        </a>
+      </div>
+
+      <div class="iconDivPay mat-topup mx-2" *ngIf="authService.loginFlag"
+        [ngStyle]="{ width: authService.loginFlag ? '25%' : '23.33%' }">
+        <a [matMenuTriggerFor]="profileMenu1"><img src="assets/images/Pay32.svg" alt="truck image" class="icon" />
+          <span class="mt-1 d-block">{{
+            authService.loginFlag ? "Pay32" : "Top-Up Packs"
+            }}</span>
+        </a>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<p-dialog [(visible)]="displayDialog" [showHeader]="false" styleClass="mydialogQuote">
+  <button class="close-icon" (click)="displayDialog = false" style="top: 1px; right: 1px">
+    <span class="material-icons"> clear </span>
+  </button>
+  <div class="row quote-box">
+    <section class="col-md-6">
+      <img src="assets/images/quote1.png" style="width: 100%; height: auto" />
+    </section>
+
+    <section class="col-md-6">
+      <form #quoteForm="ngForm" (ngSubmit)="submit()" style="width: 100%; padding: 20px 20px 20px 20px">
+        <h5 class="card-title"><strong>Tell us what you need</strong></h5>
+        <div class="form-group" [class.has-error]="fullNameControl.invalid && fullNameControl.touched"
+          [class.has-success]="fullNameControl.valid">
+          <input required id="fullName" name="fullName" [(ngModel)]="dat.name" type="text" class="form-control"
+            #fullNameControl="ngModel" placeholder="Enter your name" />
+          <span class="help-block" style="color: red" *ngIf="fullNameControl.invalid && fullNameControl.touched">
+            Full Name is required
+          </span>
+        </div>
+
+        <div class="form-group" [class.has-error]="
+            fullProductControl.invalid && fullProductControl.touched
+          " [class.has-success]="fullProductControl.valid">
+          <input required id="fullProduct" name="fullProduct" [(ngModel)]="dat.productName" type="text"
+            class="form-control" #fullProductControl="ngModel" placeholder="Enter product/ service name" />
+          <span class="help-block" style="color: red" *ngIf="fullProductControl.invalid && fullProductControl.touched">
+            Product Name is required
+          </span>
+        </div>
+
+        <div class="form-group" [class.has-error]="
+            fullEmailControl.invalid && fullEmailControl.touched
+          " [class.has-success]="fullEmailControl.valid">
+          <input required id="fullEmail" name="fullEmail" [(ngModel)]="dat.emailId" type="email" class="form-control"
+            #fullEmailControl="ngModel" placeholder="Email" />
+          <span class="help-block" style="color: red" *ngIf="fullEmailControl.invalid && fullEmailControl.touched">
+            Email is required
+          </span>
+        </div>
+
+        <div class="form-group" [class.has-error]="
+            fullMobileControl.invalid && fullMobileControl.touched
+          " [class.has-success]="fullMobileControl.valid">
+          <div style="display: flex">
+            <select name="contactMethod" class="code-select" [(ngModel)]="phoneCode">
+              <option value="+1">+1</option>
+              <option value="+31">+31</option>
+              <option value="+44">+44</option>
+              <option value="+60">+60</option>
+              <option value="+61">+61</option>
+              <option value="+65">+65</option>
+              <option value="+91">+91</option>
+            </select>
+
+            <input required id="fullMobile" name="fullMobile" [(ngModel)]="dat.mobileNo" type="number"
+              class="form-control" #fullMobileControl="ngModel" placeholder="Mobile Number" />
+          </div>
+          <span class="help-block" style="color: red" *ngIf="fullMobileControl.invalid && fullMobileControl.touched">
+            Mobile is required
+          </span>
+        </div>
+
+        <div class="recaptcha col-md-12 col-sm-8">
+          <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled"
+            siteKey="6LdDh3IaAAAAAHJ-drZTLx5cH2oJzkNXW24GaOeL"></re-captcha>
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="quoteForm.invalid">
+            Submit
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</p-dialog>

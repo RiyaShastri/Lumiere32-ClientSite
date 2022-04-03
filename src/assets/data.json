@@ -1,0 +1,4 @@
+{
+    "allCountries" : [{"id":1,"itemName":"Malaysia","languages":[{"id":1,"itemName":"Malay","languageType":"Regional"},{"id":2,"itemName":"English","languageType":"Regional"}],"alphaCode":"my","tax":[{"id":1,"taxCode":"SST","taxRate":"0.00","countryId":1}],"deliveryCharge":[{"id":1,"title":"Standary Delivery","noOfdays":"1","minimumOrderAmount":"150.00","deliveryCharge":"9.50","countryId":1,"currency":"Malaysian Ringgit - MYR","instructions":null,"currencyId":1,"adminStatus":1,"isDelete":0,"created_at":"2021-03-09T22:55:19.000Z","updated_at":"2021-03-09T22:55:19.000Z"}],"countryCurrency":{"id":1,"currency":"Malaysian Ringgit","currencyCode":"MYR","symbol":"MYR"},"countries":{"id":1,"sortname":"MY","country":"Malaysia","phoneCode":"60","status":0,"pncodeLength":5}}],
+    "countryRegion" : "my"
+}

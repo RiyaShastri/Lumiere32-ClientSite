@@ -1,0 +1,264 @@
+<!-- <app-header></app-header> -->
+<br />
+<div class="row container contactus-container">
+  <section class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="card box" style="padding-bottom: 8px">
+        <h6 class="panel-title">Contact Us</h6>
+        <hr
+          class="bottom-divider"
+          style="margin-left: 20px; margin-bottom: 45px"
+        />
+        <div class="col-md-12" style="margin-top: 1%">
+          <p class="text-grey card-text">
+            At Lumiere32, we believe that those who challenge the status quo
+            earn remarkable achievements. Contact us to learn more!
+          </p>
+        </div>
+
+        <br />
+
+        <form #playlistForm="ngForm">
+          <div class="col-md-12 form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              [(ngModel)]="enquiry.name"
+              required
+              name="firstname"
+              #firstname="ngModel"
+            />
+
+            <div
+              *ngIf="
+                !firstname?.valid && (firstname?.dirty || firstname?.touched)
+              "
+              style="color: red"
+            >
+              Invalid First Name
+            </div>
+          </div>
+          <br />
+          <div class="col-md-12 form-group">
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              required
+              [(ngModel)]="enquiry.email"
+              #email="ngModel"
+            />
+
+            <div
+              *ngIf="!email?.valid && (email?.dirty || email?.touched)"
+              style="color: red"
+            >
+              Invalid Email
+            </div>
+          </div>
+          <br />
+          <div class="col-md-12 form-group">
+            <label>Mobile Number</label>
+            <div class="row">
+              <div class="col-md-3 col code-input">
+                <select name="contactMethod" class="code-select">
+                  <option value="+60">+60</option>
+                  <option value="+91">+91</option>
+                  <option value="+1">+1</option>
+                  <option value="+65">+65</option>
+                  <option value="+93">+93</option>
+                </select>
+                <!-- <input type="text" class=""  /> -->
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  name="mobile"
+                  class="form-control"
+                  placeholder="Mobile Number"
+                  [(ngModel)]="enquiry.mobile"
+                />
+              </div>
+            </div>
+            <!-- <label>Mobile Number</label>
+                    <input type="number" [(ngModel)]="enquiry.mobile" /> -->
+          </div>
+
+          <br />
+          <div class="col-md-12 form-group">
+            <label>Message</label>
+            <br />
+            <!-- <input
+              type="text"
+              style="height: 150px"
+              [(ngModel)]="enquiry.message"
+              required
+              name="message"
+              #message="ngModel"
+            /> -->
+            <textarea
+              max-width="100%;"
+              style="width: inherit"
+              name="message"
+              [(ngModel)]="enquiry.message"
+              #message="ngModel"
+              class="form-control"
+              rows="6"
+            ></textarea>
+            <div
+              *ngIf="!message?.valid && (message?.dirty || message?.touched)"
+              style="color: red"
+            >
+              Invalid Message
+            </div>
+          </div>
+          <br />
+          <br />
+
+          <div class="recaptcha col-md-12">
+            <re-captcha
+              (resolved)="resolved($event)"
+              (error)="onError($event)"
+              errorMode="handled"
+              siteKey="6LdDh3IaAAAAAHJ-drZTLx5cH2oJzkNXW24GaOeL"
+            ></re-captcha>
+          </div>
+
+          <br />
+          <br />
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              style="background-color: #63c7db"
+              (click)="submit(playlistForm)"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+        <br />
+        <br />
+      </div>
+    </div>
+  </section>
+  <div class="container col-md-6 address-box">
+    <div class="panel panel-primary">
+      <div class="card box">
+        <h6 class="panel-title">Our Offices</h6>
+        <hr class="bottom-divider" style="margin-left: 20px" />
+        <div class="col-md-12" style="margin-top: 1%">
+          <p class="address-title">Singapore (Head Office)</p>
+        </div>
+        <div class="col-md-12">
+          <ul style="list-style-type: none">
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              67 Ayer Rajah Crescent JTC LaunchPad, #03-03 Singapore 139950
+            </li>
+            <li>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span> +65- 6592 2415</span>
+            </li>
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"> </i>
+              <a href="mailto:connect@lumiere32.sg">connect@lumiere32.sg </a>
+              <!-- 
+              <button
+                type="button"
+                class="btn location-btn"
+                (click)="goToUrlSG()"
+              >
+                View Location
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+              </button> -->
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-12">
+          <p class="address-title">Malaysia</p>
+        </div>
+        <div class="col-md-12">
+          <ul style="list-style-type: none">
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+
+              LUMIERE32 SDN. BHD. (Reg. No. 1400582-D)
+              <br />
+              Room No. 4, Found8 KLS, 5, East Wing, Level 3, Jalan Stesen
+              Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur
+            </li>
+            <li>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>+60 3-2935 9912</span>
+            </li>
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:connect@lumiere32.my">connect@lumiere32.my</a>
+            </li>
+            <!-- <li>
+                            <button type="button" class="btn location-btn">View Location <i class="fa fa-map-marker"
+                                    aria-hidden="true"></i></button>
+                        </li> -->
+          </ul>
+        </div>
+        <div class="col-md-12">
+          <p class="address-title">USA</p>
+        </div>
+        <div class="col-md-12">
+          <ul style="list-style-type: none">
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              1151 Walker Rd Ste 100 Dover, DE, Kent, 19904
+              <br />
+            </li>
+            <li>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>+1 - 6092255074 </span>
+            </li>
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:connect@lumiere32.us">connect@lumiere32.us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12">
+          <p class="address-title">UK</p>
+        </div>
+        <div class="col-md-12">
+          <ul style="list-style-type: none">
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              71-75 Shelton Street, Covent Garden, London WC2H 9JQ
+              <br />
+            </li>
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:connect@lumiere32.uk">connect@lumiere32.uk</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12">
+          <p class="address-title">India</p>
+        </div>
+        <div class="col-md-12">
+          <ul style="list-style-type: none">
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              Unit-1007A, Tower- B, Advant Navis Business Park, Sector 142,
+              Noida, Uttar Pradesh 201305
+              <br />
+            </li>
+            <li>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>+91 - 01204115005</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<!-- <app-footer></app-footer> -->

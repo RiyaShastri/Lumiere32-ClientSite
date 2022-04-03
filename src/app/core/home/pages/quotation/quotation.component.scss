@@ -1,0 +1,52 @@
+.container {
+    .col-md-12 {
+        text-align: right;
+        padding: 0;
+    }
+    input {
+        max-width: 160px;
+        margin-left: 10px;
+        background: #f3f7f7;
+        color: #000;
+        height: 40px;
+        font-weight: 500;
+    }
+    .input-box::-webkit-input-placeholder {
+        color: #000;
+        font-size: 14px;
+    }
+}
+.card {
+    box-shadow: 0px 2px 9px -1px rgb(0 0 0 / 20%), 0px 0px 3px 0px rgb(0 0 0 / 14%), 0px 9px 4px -10px rgb(0 0 0 / 12%);
+    border: none;
+    overflow: scroll;
+    border-radius: 8px;
+    tbody {
+        border-top: 1px solid #dee2e6;
+    }
+    th {
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        font-weight: 600;
+    }
+    td {
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        text-align: center;
+    }
+    tr {
+        background: #fff;
+    }
+}
+
+.fa {
+    font-size: 20px;
+}
+
+.print-image {
+    width: 20px;
+    margin-left: 9px;
+    margin-top: -5px;
+}

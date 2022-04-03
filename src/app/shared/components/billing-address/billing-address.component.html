@@ -1,0 +1,114 @@
+<div class="ppbox">
+  <div class="container billing-container">
+    <div class="section-title">
+      {{ checkoutService.editButtonDisplay }}
+      <span>
+        <i (click)="closePopup()" class="bi bi-x"></i>
+      </span>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="exampleInputEmail1">Name</label><span class="asterick">*</span>
+        <input type="text" class="form-control" id="name" [(ngModel)]="checkoutService.newAddress.name"
+          aria-describedby="nameHelp" />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="clinicname">Clinic Name</label><span class="asterick">*</span>
+        <input type="text" class="form-control" id="clinicname" [(ngModel)]="checkoutService.newAddress.clinicName"
+          aria-describedby="clinicnameHelp" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="clinicname">Postal == </label><span class="asterick">*</span>
+        <input type="text" class="form-control" id="postalname" [attr.maxlength]="checkoutService.billingZipMaxLength"
+          #fullPostalControl1="ngModel" required [(ngModel)]="checkoutService.newAddress.zip"
+          aria-describedby="postalnameHelp" (input)="checkPinCode($event , false)" />
+
+        <!-- <span class="help-block" style="color: red"
+          *ngIf="(fullPostalControl1['invalid']) || (fullPostalControl1['invalid'] && fullPostalControl1['touched'])">
+          Postal Code is required
+        </span>
+        <span class="help-block" style="color: red"
+          *ngIf="checkoutService.newAddress.zip && checkoutService.newAddress.zip['length'] > 0">
+          <div
+            *ngIf="checkoutService.newAddress.zip.length > checkoutService['deliveryZipMaxLength'] ||
+                    checkoutService.newAddress.zip.length < checkoutService['deliveryZipMinLength'] ||
+                    (!checkoutService['deliveryZipIsAlpha'] && checkoutService.validateIsAlpha( checkoutService.newAddress.zip))">
+            Postal Code is invalid
+          </div>
+        </span> -->
+
+      </div>
+      <div class="form-group col-md-6">
+        <label for="clinicname">City </label>
+        <input type="text" class="form-control" id="city" name="city" readonly #fullCityControl="ngModel"
+          aria-describedby="citynameHelp" [(ngModel)]="newAreaDetail['city']" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="clinicname" class="control-label">State </label>
+        <input type="text" class="form-control" id="state" name="state" aria-describedby="statenameHelp" readonly
+          #fullStateControl="ngModel" [(ngModel)]="newAreaDetail['state']" />
+
+      </div>
+      <div class="form-group col-md-6">
+        <label for="clinicname" class="control-label">Country </label>
+        <input type="text" class="form-control" id="country" name="country" aria-describedby="countryHelp" readonly
+          #fullCountryControl="ngModel" [(ngModel)]="newAreaDetail['country']" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="clinicname">Block No.</label>
+        <input type="text" class="form-control" id="blockno" [(ngModel)]="checkoutService.newAddress.blockNo"
+          aria-describedby="blocknoHelp" />
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="clinicname">Floor No.</label>
+        <input type="text" class="form-control" id="floorno" [(ngModel)]="checkoutService.newAddress.floorNo"
+          aria-describedby="floornoHelp" />
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="clinicname">Unit No.</label>
+        <input type="text" class="form-control" id="unitno" [(ngModel)]="checkoutService.newAddress.unitNo"
+          aria-describedby="unitnoHelp" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="clinicname">Building Name</label>
+        <input type="text" class="form-control" id="buildingname" [(ngModel)]="checkoutService.newAddress.buildingName"
+          aria-describedby="builidingnameHelp" />
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="clinicname">Street Name</label>
+        <input type="text" class="form-control" id="streetname" [(ngModel)]="checkoutService.newAddress.streetName"
+          aria-describedby="streetnameHelp" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-lg-12 col-md-12">
+        <div class="form-group" style="text-align: end">
+          <button type="button" class="btn btn-primary m-1" (click)="saveAddress()" style="width: 160px">
+            {{ checkoutService.editButtonDisplay }} </button>
+          <button type="button" class="btn btn-primary m-1" style="background-color: #63c7db; width: 160px"
+            (click)="closePopup()">
+            Close Now </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

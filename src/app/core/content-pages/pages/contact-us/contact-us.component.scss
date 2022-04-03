@@ -1,0 +1,122 @@
+.pointerCursor {
+    cursor: pointer;
+}
+
+.box {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 6.5px 5px rgba(0, 0, 0, 0.06),
+        0 6px 5px rgba(0, 0, 0, 0.034), 0 3px 3px rgba(0, 0, 0, 0.006), 0 6px 5px rgba(0, 0, 0, 0.12);
+}
+
+.contactus-container {
+    // margin-left: 10vw;
+    margin: auto;
+    .panel-title {
+        padding: 20px;
+        color: black;
+        font-size: x-large;
+        padding-bottom: 5px;
+    }
+
+    .address-title {
+        color: #63c7db;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 20px;
+    }
+    .bottom-divider {
+        border: 2px solid #63c7db;
+        margin: 0;
+        width: 80px;
+        margin-top: 3px;
+        margin-bottom: 10px;
+    }
+    .card {
+        border: none;
+        .card-text {
+            font-size: 14px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 0;
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        select input {
+            height: 28px;
+            border: 2px solid #ccc;
+            padding: 4px 10px;
+        }
+        .code-input {
+            max-width: 79px;
+            min-width: 50px;
+
+            .code-select {
+                padding: 8px;
+                font-size: 13px;
+                font-weight: 600;
+                padding-bottom: 4px;
+                border: 1px solid #aab7c9;
+                border-radius: 3px;
+                // margin-left: 10px;
+            }
+        }
+    }
+    .messag{
+        width: 100%; 
+        height: 130px; 
+        border: 1px solid #95aebd;
+        border-radius: 4px;
+    }
+    .btn-primary {
+        width: auto;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: #63c7db;
+        border: none;
+        padding: 5px 15px;
+    }
+    li {
+        font-size: 14px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        margin-bottom: 13px;
+        color: #506d85;
+        .fa {
+            margin-right: 15px;
+            font-size: 20px;
+        }
+    }
+    .location-btn {
+        width: auto;
+        font-size: 16px;
+        font-weight: 500;
+        background: transparent;
+        color: #63c7db;
+        border: 2px solid #63c7db;
+        padding: 5px 15px;
+        padding: 5px 7px;
+        .fa {
+            margin-right: 0;
+        }
+        .address-box {
+            margin-left: -10px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .contactus-container {
+        margin: 0;
+        padding: 0;
+    }
+    .address-box {
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,245 @@
+.container-fluid {
+  background-color: #f1f3f6;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-right: 55px;
+  padding-left: 65px;
+}
+
+.images {
+  height: 100px;
+  width: 100px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px #ddd;
+}
+
+.featureBrand {
+  font-weight: 600;
+}
+
+.logohead {
+  text-align: center;
+  margin: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.logohead:hover .images{
+  border: 1px solid orangered;
+  cursor: pointer;
+}
+.logohead:hover .titles{
+  color: orangered;
+  cursor: pointer;
+}
+
+
+
+#logoImg {
+  height: 60px;
+  width: 60px;
+  margin: 19px;
+}
+.alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+  // align-content: space-between;
+  // justify-content: space-between;
+}
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+.alphaHead {
+  border: 1px solid #f0f0f0;
+  border-left: none;
+  border-right: none;
+}
+
+.brandcat {
+  font-size: 12px;
+  font-weight: 500;
+  color: #7e7c7c;
+  width: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.brandcat-parent:hover {
+  background-color: #63c7db;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0px 12px 0px 4px;
+}
+.ms-n5 {
+  margin-left: -40px;
+}
+.alphabets {
+  font-size: 12px;
+  color: #7e7c7c;
+  margin-left: -10px;
+}
+.box:hover .card{
+  border: 1px solid orangered;
+}
+.card {
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  // width: 7rem;
+  border-radius: 0%;
+  height: 100px;
+  width: 100px;
+}
+.card-text {
+  text-decoration: underline;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.box:hover .card-text{
+  color: orangered;
+}
+.brandsList {
+  border-bottom: 1px solid #f0f0f0;
+}
+.innerList {
+  border-right: 1px solid #f0f0f0;
+  text-align: center;
+}
+.leftSideAlpha {
+  width: 35px;
+  height: 35px;
+  margin-top: 15px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #bbb;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 50%;
+  text-decoration: underline;
+  position: sticky;
+  top: 200px;
+}
+input {
+  border: none;
+  // font-size: 18px;
+  width: 100%;
+}
+input::placeholder {
+  color: #c9c9c9;
+  font-size: 10px;
+  font-style: italic;
+  // white-space: nowrap;
+  // overflow: hidden;
+}
+.red-border {
+  display: flex;
+  border: 1px solid rgba(174, 162, 162, 0.87);
+}
+.red-border:hover {
+  border: 1px solid orangered !important;
+}
+.search-btn {
+  border: none;
+  background-color: #fff;
+  border-right: 1px solid rgba(174, 162, 162, 0.87);
+}
+.search-right {
+  border-right: 1px solid #f0f0f0;
+  padding: 9px 4px;
+}
+.bottom {
+  position: sticky;
+  top: 0;
+}
+.brandInfo {
+  font-size: x-small;
+  color: rgba(154, 150, 150, 0.8666666666666667);
+  text-align: center;
+  padding-top: 7px;
+  padding-bottom: 10px;text-overflow: ellipsis;
+  overflow: hidden;
+}
+.search_Text {
+  margin-top: 15px;
+  margin-left: 15px;
+  color: orangered;
+  font-size: small;
+  font-weight: 500;
+}
+.not_found{
+  margin-top: 15px;
+  margin-left: 15px;
+  color: red;
+  font-size: small;
+  font-weight: 500;
+}
+.box {
+  text-align: center;
+}
+.box:hover a .card-text{
+  color: orangered;
+  cursor: pointer;
+}
+
+.card-body{
+  padding: 0;
+}
+.highLight {
+  background-color: #63c7db;
+}
+
+.highLights {
+  background-color: #63c7db;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 14px 1px 5px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+ a:hover{
+  text-decoration: underline;
+  color: orangered;
+  cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width: 640px)  {
+  .container-fluid {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .logohead{
+    max-width: 100px;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+  #logoRow{
+    justify-content: space-around;
+  }
+  #allBrands {
+    justify-content: space-between;
+  }
+  input::placeholder{
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: inherit;
+  }
+}
+

@@ -1,0 +1,77 @@
+<!-- <app-header></app-header> -->
+
+<div class="offer">
+  <div>
+    <img src="https://lumier32.s3.ap-southeast-1.amazonaws.com/banner/best-deals.png" alt="123" height="100%"
+      width="100%" style="margin-top: 5px" />
+  </div>
+</div>
+
+<section class="promotions-offer container-fluid p-0">
+  <div class="row promo-wrapper">
+    <div class="col-xs-12 col-sm-12 col-md-3" id="accordionExample">
+      <div style="background-color: white ; position: sticky; top: 1px;" *ngIf="categories$ | async as categories">
+        <h2 class="" id="headingOne">
+
+          <div id="collapseOne" class="accordion-collapse hideItem collapse accordion-body offer-option"
+            aria-labelledby="headingOne" data-bs-parent="#accordionExample" *ngFor="let item of categories">
+            <li class="p-2 cursor-pointer categoriesitem" style="
+                white-space: nowrap;
+                font-size: 16px;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 3;
+                overflow: hidden;
+                border-bottom: 2px solid #a8acb1;
+              " (click)="showOffer(item.id)">
+              {{ item.name }}
+            </li>
+          </div>
+        </h2>
+
+        <div class="accordian-hide" *ngIf="categories && categories.length > 0">
+          <nav class="navbar">
+            <h3 class="categoriestitle pb-2" id="categoriesDropdown">
+              <span style="padding-left: 10px" (click)="iconClick()">Categories</span>
+              <div class="hamburger" (click)="iconClick()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+            </h3>
+            <hr style="margin-bottom: 0" />
+            <ul class="nav-menu" style="padding: 0px; width: 100%;">
+              <li class="p-2 cursor-pointer nav-item categoriesitem" *ngFor="let item of categories"
+                (click)="showOffer(item.id)">
+                {{ item.name }}
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="promotions-side-rt col-xs-12 col-sm-12 col-md-9 p-0" id="slider"
+      *ngIf="categoriesArr && categoriesArr.length > 0">
+      <div class="col" style="background-color: #fff" *ngFor="let item of categoriesArr">
+        <div *ngIf="item.subscriptionPromotion && item.subscriptionPromotion.length > 0" id="{{ item.id }}">
+          <h3 class="promotions-titles"> {{ item.name }}</h3>
+
+          <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+            <div ngxSlickItem class="p-3" *ngFor="let slide of item.subscriptionPromotion">
+              <div class="card offer-detail" *ngIf="slide.image !== ''">
+                <a [href]="slide.urlLink" target="_blank">
+                  <img src="{{ slide.image }}" alt="" height="auto" width="auto" class="img-fluid cursor-pointer"
+                    (click)="openLink(slide)" />
+                </a>
+                <div class="card-body" [ngStyle]="{ 'background-color': item?.color }">
+                  <h5 class="offer-title" [innerHTML]="convertHTML.bypassSecurityTrustHtml(slide.name)"></h5>
+                </div>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <app-footer></app-footer> -->
